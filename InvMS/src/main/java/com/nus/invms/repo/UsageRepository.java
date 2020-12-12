@@ -1,9 +1,12 @@
 package com.nus.invms.repo;
 
-public class UsageRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-	public UsageRepository() {
-		// TODO Auto-generated constructor stub
-	}
+import com.nus.invms.domain.Usage;
+
+public interface UsageRepository extends JpaRepository<Usage, Integer> {
+
+
+	
 
 }

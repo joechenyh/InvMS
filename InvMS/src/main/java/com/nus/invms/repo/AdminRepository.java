@@ -1,9 +1,12 @@
 package com.nus.invms.repo;
 
-public class AdminRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-	public AdminRepository() {
-		// TODO Auto-generated constructor stub
-	}
+import com.nus.invms.domain.Admin;
+
+public interface AdminRepository extends JpaRepository<Admin, Integer> {
+
+
+	
 
 }

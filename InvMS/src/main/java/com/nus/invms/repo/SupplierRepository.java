@@ -1,9 +1,13 @@
 package com.nus.invms.repo;
 
-public class SupplierRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-	public SupplierRepository() {
-		// TODO Auto-generated constructor stub
-	}
+import com.nus.invms.domain.Supplier;
+
+public interface SupplierRepository extends JpaRepository<Supplier, Integer> {
+
+
+	
 
 }
+

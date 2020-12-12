@@ -1,6 +1,12 @@
 package com.nus.invms.domain;
 
-public class Usage extends Mechanic{
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Usage {
 
 	public Usage() {
 		// TODO Auto-generated constructor stub

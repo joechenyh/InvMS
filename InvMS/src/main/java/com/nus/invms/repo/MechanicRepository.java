@@ -1,9 +1,13 @@
 package com.nus.invms.repo;
 
-public class MechanicRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-	public MechanicRepository() {
-		// TODO Auto-generated constructor stub
-	}
+import com.nus.invms.domain.Mechanic;
+
+public interface MechanicRepository extends JpaRepository<Mechanic, Integer> {
+
+
+	
 
 }
+

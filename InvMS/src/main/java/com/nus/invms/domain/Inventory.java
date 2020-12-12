@@ -5,9 +5,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Product {
+public class Inventory {
 
-	public Product() {
+	public Inventory() {
 		// TODO Auto-generated constructor stub
 	}
 
