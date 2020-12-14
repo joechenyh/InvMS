@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>User List</h1>
+	<!-- Add Hyperlink -->
+	<a href="AddEmployee.html" th:href="@{/admin/add}">New Employee</a>
+
+	<h2 th:if="${not #lists.isEmpty(employeeList)}">Employee List</h2>
+	<table th:if="${not #lists.isEmpty(employeeList)}"  class="table">
+		<tr>
+			<th>User Id</th>
+			<th>Name</th>
+			<th>User Name</th>
+			<th>Password</th>
+			<th>Role</th>
+			<th>Status</th>
+			<th>Edit User</th>
+			<th>Delete User</th>
+
+		</tr>
+		<tr th:each="employee:${employeeList}" >
+			<td th:text=${employee.ID}>Id</td>
+			<td th:text="${employee.name}"> Name</td>
+			<td th:text=${employee.username}>Username</td>
+			<td th:text=${employee.password}>Password</td>
+			<td th:text=${employee.role}>Role</td>
+			<td th:text=${employee.status}>Status</td>
+			<td><a href="EditEmployee.html"
+				th:href="@{/admin/edit/}+${employee.username}">Edit</a></td>
+			<td><a href="DeleteEmployee.html"
+				th:href="@{/admin/delete/}+${employee.username}">Delete</a></td>
+		</tr>
+	</table>
+    <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>
