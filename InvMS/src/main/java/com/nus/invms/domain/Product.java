@@ -6,6 +6,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Product {
+	
+	int partNumber, reorderLevel, minReorderQty; 
+	String productName, description, colour, dimension, manufacturer, shelfLocation;
+	Double unitPrice; 
 
 	public Product() {
 		// TODO Auto-generated constructor stub

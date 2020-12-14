@@ -6,6 +6,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Supplier {
+	
+	int supplierId;
+	String supplierName, status;
 
 	public Supplier() {
 		// TODO Auto-generated constructor stub

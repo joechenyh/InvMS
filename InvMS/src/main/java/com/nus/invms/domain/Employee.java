@@ -5,9 +5,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Mechanic {
+public class Employee{
 	
-	public Mechanic() {
+	int ID;
+	String username;
+	String password;
+	String status;
+	String position;
+	String name;
+	
+
+	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
 
