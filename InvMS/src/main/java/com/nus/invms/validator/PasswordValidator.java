@@ -1,29 +1,33 @@
 package com.nus.invms.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Password;
 import com.nus.invms.service.EmployeeImplementation;
-import com.nus.invms.service.EmployeeInterface;
+
+import net.bytebuddy.implementation.bind.MethodDelegationBinder.BindingResolver.Unique;
 
 
 public class PasswordValidator implements Validator {
 
-	@Autowired
-	EmployeeInterface empservice;
+	//@Autowired
+	//private EmployeeImplementation empservice;
 	
-	@Autowired
-	public void setUserImplementation (EmployeeImplementation empimpl) {
-		this.empservice = empimpl;
-	}
+//	@Autowired
+//	public void setUserImplementation (EmployeeImplementation empimpl) {
+//		this.empservice = empimpl;
+//	}
+
 	
 	@Override
 	public boolean supports(Class<?> clazz) {
 		// TODO Auto-generated method stub
-		return Password.class.isAssignableFrom(clazz);
+		return true;
 	}
 
 	@Override
@@ -34,13 +38,7 @@ public class PasswordValidator implements Validator {
 		{
 			errors.rejectValue("confNewPassword", "password mismatch", "New password is mismatch with confirm new password");
 		}
-		
-		Employee emp = empservice.findByName(ps.getUserName());
-		if (ps.getUserName().equals(emp.getUsername()))
-		{
-			errors.rejectValue("userName", "has existing username", "username is available in the system already");
-		}
-		
+
 	}
 
 	

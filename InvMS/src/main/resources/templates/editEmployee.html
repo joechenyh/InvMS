@@ -12,14 +12,18 @@
 
 	<h1>User Update Form</h1>
 
-	<form action="#" th:object="${password}" th:action="@{/password/updatePassword}"
+	<form action="#" th:object="${employee}" th:action="@{/admin/save}"
 		method="post">
 		
-		<table class="table">
-		<tr>
-			<td >User Name : <span th:text="${session.empsession.username}"></span> </td>
-		</tr>
-		</table>
+		<fieldset>
+			Name <input type="text" th:field="*{name}">
+			<p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Username <input type="text" th:field="*{username}">
+			<p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+		</fieldset>
 		
 		<fieldset>
 			Password <input type="password" th:field="*{password}">
@@ -27,13 +31,17 @@
 		</fieldset>
 		
 		<fieldset>
-			New Password <input type="password" th:field="*{newPassword}">
-			<p style="color:red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></p>
+			Status <select th:field="*{status}">
+				<option th:each="statOpt : ${T(com.nus.invms.domain.Status).values()}" 
+        th:value="${statOpt}" th:text="${statOpt}"></option>
+			</select>
 		</fieldset>
 		
 		<fieldset>
-			Confirm New Password <input type="password" th:field="*{confNewPassword}">
-			<p style="color:red" th:if="${#fields.hasErrors('confNewPassword')}" th:errors="*{confNewPassword}"></p>
+			Role <select th:field="*{role}">
+				<option th:each="roleOpt : ${T(com.nus.invms.domain.RoleType).values()}" 
+        th:value="${roleOpt}" th:text="${roleOpt}"></option>
+			</select>
 		</fieldset>
 
 		<fieldset>

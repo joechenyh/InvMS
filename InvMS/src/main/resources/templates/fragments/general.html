@@ -14,22 +14,23 @@
       <a class="navbar-brand" href="#" >The ISS Mechanic</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#" th:href="@{/}">Home</a></li>
-      <li><a href="#" th:href="@{/admin/add}">Register New User</a></li>
-      <li><a href="#" th:href="@{/admin/update}">Update Details</a></li>
+      <li class="active"><a href="#" th:href="@{/}">Home</a></li>Y
+      <li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/admin/add}">Register New Employee</a></li>
+      <li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/update/}+${session.empsession.username}">Update Password</a></li>
+      <li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/admin/list}">Employees</a></li>
     
-      <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/list}"> User <span class="caret"></span> </a>
-      <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" th:href="@{/admin/add}">Register New User</a></li>
-          <li><a class="dropdown-item" href="#" th:href="@{/admin/update}">Update Details</a></li>
-          </ul>
-      </li>
-      <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock Forms <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#" th:href="@{/product/add}">Stock Entry Form</a></li>
-          <li><a href="#" th:href="@{/inventory/update}">Stock Usage Form</a></li>
-        </ul>
-      </li>
+<!--       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/list}"> Employees <span class="caret"></span> </a> -->
+<!--       <ul class="dropdown-menu"> -->
+<!--           <li><a class="dropdown-item" href="#" th:href="@{/admin/add}">Register New User</a></li> -->
+<!--           <li><a class="dropdown-item" href="#" th:href="@{/update}">Update Details</a></li> -->
+<!--           </ul> -->
+<!--       </li> -->
+<!--       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock Forms <span class="caret"></span></a> -->
+<!--         <ul class="dropdown-menu"> -->
+<!--           <li><a href="#" th:href="@{/product/add}">Stock Entry Form</a></li> -->
+<!--           <li><a href="#" th:href="@{/inventory/update}">Stock Usage Form</a></li> -->
+<!--         </ul> -->
+<!--       </li> -->
       <li><a href="#" th:href="@{/products}">Products Listing</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">

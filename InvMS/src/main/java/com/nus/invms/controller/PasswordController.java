@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,10 +26,10 @@ public class PasswordController {
 	@Autowired
 	EmployeeInterface empservice;
 	
-	@Autowired
-	public void setUserImplementation (EmployeeImplementation empimpl) {
-		this.empservice = empimpl;
-	}
+//	@Autowired
+//	public void setUserImplementation (EmployeeImplementation empimpl) {
+//		this.empservice = empimpl;
+//	}
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -38,16 +39,21 @@ public class PasswordController {
 	@RequestMapping(value = "/updatePassword")
 	public String update(
 			@ModelAttribute("password") @Valid Password password,
-			BindingResult bindingResult, Model model, HttpSession session)
+			BindingResult bindingResult, Model model, HttpSession session, Errors errors)
 	{
+		Employee emp = (Employee) session.getAttribute("empsession");
+		if (!password.getPassword().equals(emp.getPassword()))
+		{
+			errors.rejectValue("password", "password mismatch", "Current password is incorrect");
+		}
 		
-		
+			
 		if (bindingResult.hasErrors()) 
 		{
 			return "update";
 		}
 		
-		Employee emp = empservice.findByName(password.getUserName());
+		
 
 		if (empservice.checkEmployeeNameExist(emp)) 
 		{

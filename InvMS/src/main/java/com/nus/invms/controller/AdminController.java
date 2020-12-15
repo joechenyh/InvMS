@@ -42,18 +42,7 @@ public class AdminController extends MechanicController {
 		return "employee-form";
 	}
 	
-	@RequestMapping(value = "/update")
-	public String update(Model model) 
-	{
-		Employee emp = new Employee();
-		model.addAttribute("employee", emp);
-		
-		Password ps = new Password();
-		model.addAttribute("password", ps);
-		
-		return "update";
-		
-	}
+	
 
 	@RequestMapping(value = "/save")
 	public String saveUser(@ModelAttribute("employee") @Valid Employee employee, 
@@ -94,8 +83,7 @@ public class AdminController extends MechanicController {
 	@RequestMapping(value = "/edit/{name}")
 	public String editForm(@PathVariable("name") String name, Model model) {
 		model.addAttribute("employee", empservice.findByName(name));
-		model.addAttribute("password", new Password());
-		return "update";
+		return "editEmployee";
 	}
 	
 	@RequestMapping(value = "/delete/{name}")
