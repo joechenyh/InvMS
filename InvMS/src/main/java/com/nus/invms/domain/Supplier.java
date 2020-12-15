@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,15 +25,22 @@ public class Supplier {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int supplierId;
-	private String supplierName, status;
 	
-	@ManyToMany (mappedBy="suppliers") 
-	private Collection<Order> orders;
+	@NotEmpty
+	private String supplierName;
+	private Status status;
 	
-	public Supplier(String supplierName, String status) {
+	@NotEmpty
+	private String phoneNumber;
+	@NotEmpty
+	private String address, emailAddress;
+	
+	@ManyToOne
+	private Order order;
+	
+	public Supplier(String supplierName) {
 		super();
 		this.supplierName = supplierName;
-		this.status = status;
 	}
 	
 	

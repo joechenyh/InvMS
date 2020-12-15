@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +70,21 @@ public class AdminController extends MechanicController {
 	}
 	
 	@RequestMapping(value = "/authenticate")
-	public String authenticate (Model model, @ModelAttribute("employee") Employee employee, HttpSession session) {
+	public String authenticate (@ModelAttribute("employee") Employee employee, 
+			BindingResult bindingResult, Model model, HttpSession session, Errors errors) 
+	{
+		if (empservice.findByName(employee.getUsername()) == null)
+		{
+			errors.rejectValue("username", "wrong username", "username not found in system");
+		}
+		else if (!empservice.authenticateEmployee(employee))
+		{
+			errors.rejectValue("password", "wrong password", "username/ password is incorrect");
+		}
+		
+		if (bindingResult.hasErrors()) {
+			return "login";
+		}
 		
 		if (empservice.authenticateEmployee(employee))
 		{
@@ -77,6 +92,8 @@ public class AdminController extends MechanicController {
 			session.setAttribute("empsession", emp);
 			return "index";
 		}
+
+
 		return "forward:/admin/login";
 	}
 	

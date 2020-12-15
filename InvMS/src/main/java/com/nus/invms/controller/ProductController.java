@@ -1,7 +1,5 @@
 package com.nus.invms.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +35,7 @@ public class ProductController {
 	
 	
 	@RequestMapping(value = "/save")
-	public String saveUser(@ModelAttribute("employee") @Valid Product product, 
+	public String saveUser(@ModelAttribute("product") @Valid Product product, 
 			BindingResult bindingResult,  Model model) {
 		
 		if (bindingResult.hasErrors()) {
@@ -69,8 +67,8 @@ public class ProductController {
 	@RequestMapping(value = "/delete/{partNumber}")
 	public String deleteProduct(@PathVariable("partNumber") int number) {
 		Product product = proservice.findById(number).get();
-		
-		proservice.deleteProduct(product);
+		product.setStatus(Status.INACTIVE);
+		proservice.saveProduct(product);
 		return "forward:/product/list";
 	}
 

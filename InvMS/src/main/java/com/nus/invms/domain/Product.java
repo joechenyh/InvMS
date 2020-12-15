@@ -18,10 +18,11 @@ public class Product {
 	private int partNumber;
 	@NotNull
 	private int reorderLevel, minReorderQty; 
-	@NotNull
+	@NotEmpty
 	private String productName, description, colour, dimension, manufacturer, shelfLocation;
 	@NotNull
 	private Double unitPrice;
+	private Status status;
 	
 	public Product(int reorderLevel, int minReorderQty, String productName, String description, String colour,
 			String dimension, String manufacturer, String shelfLocation, Double unitPrice) {

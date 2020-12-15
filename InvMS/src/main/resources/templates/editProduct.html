@@ -16,6 +16,13 @@
 		<fieldset>
 			<input type="hidden" th:field="*{partNumber}">
 		</fieldset>
+		
+		<fieldset>
+			Status <select th:field="*{status}">
+				<option th:each="statOpt : ${T(com.nus.invms.domain.Status).values()}" 
+        th:value="${statOpt}" th:text="${statOpt}"></option>
+			</select>
+		</fieldset>
 
 		<fieldset>
 			Product Name <input type="text" th:field="*{productName}" th:value="*{productName}">

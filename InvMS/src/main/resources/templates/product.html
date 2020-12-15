@@ -18,6 +18,7 @@
 	<table th:if="${not #lists.isEmpty(productList)}"  class="table">
 		<tr>
 			<th>Part Number</th>
+			<th>Status</th>
 			<th>Product Name</th>
 			<th>Description</th>
 			<th>Colour</th>
@@ -31,6 +32,7 @@
 		</tr>
 		<tr th:each="product:${productList}" >
 			<td th:text=${product.partNumber}>Part Number</td>
+			<td th:text=${product.status}>Part Number</td>
 			<td th:text="${product.productName}">Product Name</td>
 			<td th:text=${product.description}>Description</td>
 			<td th:text=${product.colour}>Colour</td>

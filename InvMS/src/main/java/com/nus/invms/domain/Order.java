@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
 
@@ -40,7 +41,7 @@ public class Order {
 	@ManyToOne
 	private Employee employee; 
 	
-	@ManyToMany
+	@OneToMany (mappedBy = "order")
 	private Collection<Supplier> suppliers;
 
 	
