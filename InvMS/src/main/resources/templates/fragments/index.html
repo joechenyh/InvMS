@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Index Page</title>
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"></header>
+
+	<div th:replace="fragments/general.html :: menu"></div>
+	
+	<h1>Search Form</h1>
+	<form action="" th:object="${inventory}" method="GET">
+		<fieldset>
+			<input type="text" th:value="${keyword}" required />
+		</fieldset>
+		<fieldset>
+			<button type="submit">Search</button>
+		</fieldset>
+	</form>
+	
+	<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>
