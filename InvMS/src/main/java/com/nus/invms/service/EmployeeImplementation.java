@@ -32,12 +32,6 @@ public class EmployeeImplementation implements EmployeeInterface {
 	}
 
 	@Override
-	public void deleteEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		emprepo.delete(employee);
-	}
-	
-	@Override
 	public boolean checkEmployeeNameExist(Employee employee) {
 		
 		ArrayList<Employee> ulist = listAllEmployees();

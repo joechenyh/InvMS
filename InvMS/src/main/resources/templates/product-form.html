@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<title>Product Form</title>
+</head>
+<body>
+
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Product Form</h1>
+	<form action="#" th:object="${product}" th:action="@{/product/save}"
+		method="post">
+		<fieldset>
+			<input type="hidden" th:field="*{partNumber}">
+		</fieldset>
+
+		<fieldset>
+			Product Name <input type="text" th:field="*{productName}">
+			<p style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
+		</fieldset>
+
+		<fieldset>
+			Description <input type="text" th:field="*{description}">
+			<p style="color:red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Colour <input type="color" th:field="*{colour}">
+			<p style="color:red" th:if="${#fields.hasErrors('colour')}" th:errors="*{colour}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Dimension <input type="text" th:field="*{dimension}">
+			<p style="color:red" th:if="${#fields.hasErrors('dimension')}" th:errors="*{dimension}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Manufacturer <input type="text" th:field="*{manufacturer}">
+			<p style="color:red" th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Shelf Location <input type="text" th:field="*{shelfLocation}">
+			<p style="color:red" th:if="${#fields.hasErrors('shelfLocation')}" th:errors="*{shelfLocation}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Unit Price <input type="number" step=0.01 th:field="*{unitPrice}">
+			<p style="color:red" th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Reorder Level <input type="number" step=1 th:field="*{reorderLevel}">
+			<p style="color:red" th:if="${#fields.hasErrors('reorderLevel')}" th:errors="*{reorderLevel}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Minimum Reorder Quantity <input type="number" step=1 th:field="*{minReorderQty}">
+			<p style="color:red" th:if="${#fields.hasErrors('minReorderQty')}" th:errors="*{minReorderQty}"></p>
+		</fieldset>
+		
+
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
+		</fieldset>
+
+	</form>
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+
+</body>
+</html>

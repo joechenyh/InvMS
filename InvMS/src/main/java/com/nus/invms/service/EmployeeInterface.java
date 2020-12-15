@@ -8,7 +8,6 @@ public interface EmployeeInterface {
 	
 	public void saveEmployee(Employee employee);
 	public ArrayList<Employee> listAllEmployees();
-	public void deleteEmployee(Employee employee);
 	public boolean checkEmployeeNameExist(Employee employee);
 	public boolean authenticateEmployee(Employee employee);
 	public Employee findByName(String name);

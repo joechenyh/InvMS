@@ -3,6 +3,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,11 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int partNumber;
+	@NotNull
 	private int reorderLevel, minReorderQty; 
+	@NotNull
 	private String productName, description, colour, dimension, manufacturer, shelfLocation;
+	@NotNull
 	private Double unitPrice;
 	
 	public Product(int reorderLevel, int minReorderQty, String productName, String description, String colour,
