@@ -42,10 +42,10 @@
 			<td th:text=${product.unitPrice}>Unit Price</td>
 			<td th:text=${product.reorderLevel}>Reorder Level</td>
 			<td th:text=${product.minReorderQty}>Minimum Reorder Quantity</td>
-			<td><a href="EditProduct.html"
-				th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
-			<td><a href="DeleteProduct.html"
-				th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td>
 		</tr>
 	</table>
     <br/>
