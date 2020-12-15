@@ -7,7 +7,9 @@ import javax.persistence.Id;
 @Entity
 public class Supplier {
 	
+	@Id
 	int supplierId;
+	
 	String supplierName, status;
 
 	public Supplier() {

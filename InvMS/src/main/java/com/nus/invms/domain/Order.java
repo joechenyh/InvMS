@@ -3,13 +3,16 @@ package com.nus.invms.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+
 
 @Entity
+@Table(name = "order")
 public class Order {
 	
+	@Id
 	int orderId;
 	Date orderDate;
 	Date dateReceived;
