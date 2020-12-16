@@ -21,7 +21,7 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 	//2. Find Inventory by ID 
 	
 	 @Query("Select i from Inventory i where i.productId = :productId")
-	 Inventory findInventoryById(@Param("productId") Integer productId);
+	 Inventory findInventoryById(@Param("productId") int productId);
 	
 	 //3. Find Inventory by SupplierName
 	 @Query("Select i from Inventory i where i.supplierName LIKE :suppliername")

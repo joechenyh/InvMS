@@ -26,7 +26,7 @@ public class Inventory {
 	private String itemName;
 
 	@Column
-	private String description;
+	private String invdescription;
 
 	@Column
 	private String invtype;
@@ -43,13 +43,13 @@ public class Inventory {
 	@Override
 	public String toString() {
 		return "Inventory [productId=" + productId + ", supplierName=" + supplierName + ", brandId=" + brandId
-				+ ", brandName=" + brandName + ", itemName=" + itemName + ", description=" + description + ", invtype="
+				+ ", brandName=" + brandName + ", itemName=" + itemName + ", invdescription=" + invdescription + ", invtype="
 				+ invtype + ", category=" + category + ", subCategory=" + subCategory + ", originalPrice=" + originalPrice
 				+ ", wholesalePrice=" + wholesalePrice + ", retailPrice=" + retailPrice + ", partnerPrice="
 				+ partnerPrice + ", units=" + units + "]";
 	}
 
-	public Inventory(String supplierName, int brandId, String brandName, String itemName, String description,
+	public Inventory(String supplierName, int brandId, String brandName, String itemName, String invdescription,
 			String invtype, String category, String subCategory, Double originalPrice, Double wholesalePrice,
 			Double retailPrice, Double partnerPrice, int units) {
 		super();
@@ -57,7 +57,7 @@ public class Inventory {
 		this.brandId = brandId;
 		this.brandName = brandName;
 		this.itemName = itemName;
-		this.description = description;
+		this.invdescription = invdescription;
 		this.invtype = invtype;
 		this.category = category;
 		this.subCategory = subCategory;
@@ -108,12 +108,12 @@ public class Inventory {
 		this.itemName = itemName;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getInvDescription() {
+		return invdescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String invdescription) {
+		this.invdescription = invdescription;
 	}
 
 	public String getInvType() {

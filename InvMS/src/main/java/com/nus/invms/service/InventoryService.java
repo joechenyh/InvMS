@@ -6,10 +6,10 @@ import com.nus.invms.domain.Inventory;
 
 public interface InventoryService {
 
-	public void addInventory(Inventory inventory); //C
-	public boolean checkInventory(Inventory inventory); //R
+	public boolean addInventory(Inventory inventory); //C
+	public Inventory getInventory(int id); //R
 	public void deactivateInventory(Inventory inventory); //D
-	public void editInventory(Inventory inventory); //U
+	public Inventory editInventory(Inventory inventory); //U
 	public List<Inventory> listInventory();
 
 }

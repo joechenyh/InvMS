@@ -54,6 +54,16 @@ public class PartUsage {
 
 
 
+	public PartUsage() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "PartUsage [transactionId=" + transactionId + ", employeeId=" + employeeId + ", partNumber=" + partNumber
@@ -138,8 +148,6 @@ public class PartUsage {
 
 
 
-	public Usage() {
-		// TODO Auto-generated constructor stub
-	}
+
 
 }
