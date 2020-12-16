@@ -19,11 +19,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
 @Entity
 @Data
 @NoArgsConstructor
 @Table(name="usage_list")
 public class Usage {
+	
+	/*
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -31,7 +35,7 @@ public class Usage {
 	
 	@ManyToOne
 	/*(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="employeeId")*/
+	@JoinColumn(name="employeeId")
 	private Employee employee;
 	private int partNumber, quantity;
 	
@@ -50,5 +54,5 @@ public class Usage {
 	}
 	
 	
-	
+	*/
 }
