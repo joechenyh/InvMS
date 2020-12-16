@@ -8,6 +8,7 @@ import javax.persistence.Id;
 public class Supplier {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int supplierId;
 	
 	String supplierName, status;
@@ -15,5 +16,29 @@ public class Supplier {
 	public Supplier() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Supplier(String supplierName, String status) {
+		super();
+		this.supplierName = supplierName;
+		this.status = status;
+	}
+	
+	
 
 }

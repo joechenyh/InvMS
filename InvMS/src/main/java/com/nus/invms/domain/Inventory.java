@@ -29,7 +29,7 @@ public class Inventory {
 	private String description;
 
 	@Column
-	private String type;
+	private String invtype;
 
 	@Column
 	private String category, subCategory;
@@ -43,14 +43,14 @@ public class Inventory {
 	@Override
 	public String toString() {
 		return "Inventory [productId=" + productId + ", supplierName=" + supplierName + ", brandId=" + brandId
-				+ ", brandName=" + brandName + ", itemName=" + itemName + ", description=" + description + ", type="
-				+ type + ", category=" + category + ", subCategory=" + subCategory + ", originalPrice=" + originalPrice
+				+ ", brandName=" + brandName + ", itemName=" + itemName + ", description=" + description + ", invtype="
+				+ invtype + ", category=" + category + ", subCategory=" + subCategory + ", originalPrice=" + originalPrice
 				+ ", wholesalePrice=" + wholesalePrice + ", retailPrice=" + retailPrice + ", partnerPrice="
 				+ partnerPrice + ", units=" + units + "]";
 	}
 
 	public Inventory(String supplierName, int brandId, String brandName, String itemName, String description,
-			String type, String category, String subCategory, Double originalPrice, Double wholesalePrice,
+			String invtype, String category, String subCategory, Double originalPrice, Double wholesalePrice,
 			Double retailPrice, Double partnerPrice, int units) {
 		super();
 		this.supplierName = supplierName;
@@ -58,7 +58,7 @@ public class Inventory {
 		this.brandName = brandName;
 		this.itemName = itemName;
 		this.description = description;
-		this.type = type;
+		this.invtype = invtype;
 		this.category = category;
 		this.subCategory = subCategory;
 		this.originalPrice = originalPrice;
@@ -116,12 +116,12 @@ public class Inventory {
 		this.description = description;
 	}
 
-	public String getType() {
-		return type;
+	public String getInvType() {
+		return invtype;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setInvType(String type) {
+		this.invtype = type;
 	}
 
 	public String getCategory() {

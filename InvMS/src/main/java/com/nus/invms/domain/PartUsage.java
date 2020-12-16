@@ -15,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 //@Table only needed if table different name 
-public class Usage {
+public class PartUsage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int transactionId;
@@ -39,7 +39,7 @@ public class Usage {
 	//@Column(name="carplate", nullable=false)
 	private String carplate;
 
-	public Usage(int employeeId, int partNumber, int quantity, LocalDate usagedate, String carplate) {
+	public PartUsage(int employeeId, int partNumber, int quantity, LocalDate usagedate, String carplate) {
 		super();
 		this.employeeId = employeeId;
 		this.partNumber = partNumber;
@@ -56,7 +56,7 @@ public class Usage {
 
 	@Override
 	public String toString() {
-		return "Usage [transactionId=" + transactionId + ", employeeId=" + employeeId + ", partNumber=" + partNumber
+		return "PartUsage [transactionId=" + transactionId + ", employeeId=" + employeeId + ", partNumber=" + partNumber
 				+ ", quantity=" + quantity + ", usagedate=" + usagedate + ", carplate=" + carplate + "]";
 	}
 

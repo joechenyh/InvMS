@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.nus.invms.domain.Inventory;
+import com.nus.invms.domain.PartUsage;
 import com.nus.invms.domain.Usage;
 
 
@@ -23,7 +24,7 @@ public class InvMsApplication {
 		LocalDate date = LocalDate.now();
 
 		
-		Usage usage1 = new Usage(1, 999, 3, date, "SDM8145A");
+		PartUsage usage1 = new PartUsage(1, 999, 3, date, "SDM8145A");
 		
 		
 		
