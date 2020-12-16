@@ -13,7 +13,7 @@
 
 	<h1>inventory Listing</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddMember.html" th:href="@{/inventory/add1}">Add Inventory</a>
+	<a href="AddMember.html" th:href="@{/inventory/add}">Add Inventory</a>
 
 	<h2 th:if="${not #lists.isEmpty(inventories)}">Inventory List</h2>
 	<table th:if="${not #lists.isEmpty(inventories)}" >
