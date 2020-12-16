@@ -21,7 +21,7 @@ import com.nus.invms.service.ProductServiceImpl;
 
 @Controller
 @RequestMapping("/inventory")
-public class InventoryController {
+public class PartOrderController {
 	
 	@Autowired
 	private InventoryService iservice;

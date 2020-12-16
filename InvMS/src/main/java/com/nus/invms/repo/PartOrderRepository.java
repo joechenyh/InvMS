@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.nus.invms.domain.Inventory;
 
-public interface InventoryRepository extends JpaRepository<Inventory, Integer> {
+public interface PartOrderRepository extends JpaRepository<Inventory, Integer> {
 	
 }

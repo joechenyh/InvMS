@@ -12,7 +12,7 @@ import com.nus.invms.domain.Inventory;
 import com.nus.invms.repo.InventoryRepository;
 
 @Service
-public class InventoryServiceImpl implements InventoryService {
+public class PartOrderServiceImpl implements InventoryService {
 	
 	@Autowired
 	InventoryRepository irepo;

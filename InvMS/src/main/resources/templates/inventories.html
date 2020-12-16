@@ -19,7 +19,7 @@
 	<table th:if="${not #lists.isEmpty(inventories)}" >
 		<tr >
 			<th >inventoryId</th>
-			<th >productId</th>
+			
 			<th >supplierName</th>
 			<th >brandId</th>
 			<th >brandName</th>
@@ -33,13 +33,13 @@
 			<th >retailPrice</th>
 			<th >partnerPrice</th>
 			<th >units</th>
-			<th >product name</th>
+		
 			<th >Edit inventory</th>
 			<!-- <th >Delete inventory</th>  -->
 		</tr>
 		<tr th:each="inventory:${inventories}" class="table-row">
 			<td th:text=${inventory.inventoryId}>Part Num</td>
-			<td th:text=${inventory.productId}>Reorder Level</td>
+		
 			<td th:text=${inventory.supplierName}>Min Qty</td>
 			<td th:text=${inventory.brandId}>Pdt Name</td>
 			<td th:text=${inventory.brandName}>Desc</td>
@@ -53,7 +53,7 @@
 			<td th:text=${inventory.retailPrice}>Manu</td>
 			<td th:text=${inventory.partnerPrice}>Loc</td>
 			<td th:text=${inventory.units}>Unit Price</td>
-			<td th:text=${inventory.productName}>Unit Price</td>
+		
 			<td><a href="Editinventory.html"
 				th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
 			<!--  <td><a href="Deleteinventory.html"

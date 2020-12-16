@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.nus.invms.domain.Inventory;
 
-public interface InventoryService {
+public interface PartOrderService {
 	 public boolean saveInventory(Inventory inventory);
 	 public ArrayList<Inventory> findAllInventories();
 	 public Inventory findInventoryById(Integer id);

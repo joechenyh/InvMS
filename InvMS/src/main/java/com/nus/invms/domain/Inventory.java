@@ -11,7 +11,6 @@ public class Inventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int inventoryId;
-	int productId;
 	String supplierName;
 	int brandId;
 	String brandName;
@@ -20,25 +19,18 @@ public class Inventory {
 	String type;
 	String category, subCategory;
 	Double originalPrice, wholesalePrice,retailPrice,partnerPrice;
-	String productName;
 	int units;
 	@OneToOne
 	Product product;
+	
 	public Inventory() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Product getProduct() {
-		return product;
-	}
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	public Inventory(int productId, String supplierName, int brandId, String brandName, String itemName,
-			String description, String type, String category, String subCategory, Double originalPrice,
-			Double wholesalePrice, Double retailPrice, Double partnerPrice, int units,String productName) {
+	
+	public Inventory(String supplierName, int brandId, String brandName, String itemName, String description,
+			String type, String category, String subCategory, Double originalPrice, Double wholesalePrice,
+			Double retailPrice, Double partnerPrice, int units, Product product) {
 		super();
-		this.productId = productId;
 		this.supplierName = supplierName;
 		this.brandId = brandId;
 		this.brandName = brandName;
@@ -52,26 +44,35 @@ public class Inventory {
 		this.retailPrice = retailPrice;
 		this.partnerPrice = partnerPrice;
 		this.units = units;
-		this.productName = productName;
+		this.product = product;
 	}
-	public String getProductName() {
-		return productName;
+
+	public Product getProduct() {
+		return product;
 	}
-	public void setProductName(String productName) {
-		this.productName = productName;
+	
+	public void setProduct(Product product) {
+		this.product = product;
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Inventory [inventoryId=" + inventoryId + ", supplierName=" + supplierName + ", brandId=" + brandId
+				+ ", brandName=" + brandName + ", itemName=" + itemName + ", description=" + description + ", type="
+				+ type + ", category=" + category + ", subCategory=" + subCategory + ", originalPrice=" + originalPrice
+				+ ", wholesalePrice=" + wholesalePrice + ", retailPrice=" + retailPrice + ", partnerPrice="
+				+ partnerPrice + ", units=" + units + ", product=" + product + "]";
+	}
+
 	public int getInventoryId() {
 		return inventoryId;
 	}
 	public void setInventoryId(int inventoryId) {
 		this.inventoryId = inventoryId;
 	}
-	public int getProductId() {
-		return productId;
-	}
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+	
 	public String getSupplierName() {
 		return supplierName;
 	}
@@ -150,14 +151,7 @@ public class Inventory {
 	public void setUnits(int units) {
 		this.units = units;
 	}
-	@Override
-	public String toString() {
-		return "Inventory [inventoryId=" + inventoryId + ", productId=" + productId + ", supplierName=" + supplierName
-				+ ", brandId=" + brandId + ", brandName=" + brandName + ", itemName=" + itemName + ", description="
-				+ description + ", type=" + type + ", category=" + category + ", subCategory=" + subCategory
-				+ ", originalPrice=" + originalPrice + ", wholesalePrice=" + wholesalePrice + ", retailPrice="
-				+ retailPrice + ", partnerPrice=" + partnerPrice + ", units=" + units + "]";
-	}
+	
 	
 	
 	
