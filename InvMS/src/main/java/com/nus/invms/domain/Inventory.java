@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 public class Inventory {
 	@Id
 	@Column(name = "product_id")
-	@NotNull
 	int productId;
 	@Column(name = "supplier")
 	@NotNull

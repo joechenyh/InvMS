@@ -23,8 +23,8 @@ public class InventoryController {
 		this.iinterface = iimpl;
 	}
 	@GetMapping("/")
-	public String search(Model model, @Param("keyword") String keyword) {
-		List<Inventory> listInventory = iinterface.search(keyword);
+	public String search(Model model, @Param("keyword") Integer keyword) {
+		Inventory listInventory = iinterface.findByInventoryId(keyword);
 		model.addAttribute("listInventory", listInventory);
 		
 		return "search";
