@@ -16,17 +16,17 @@
 		method="post">
 		
 		<fieldset>
-			Name <input type="text" th:field="*{name}">
+			Name <input type="text" th:field="*{name}" th:value="*{name}">
 			<p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 		</fieldset>
 		
 		<fieldset>
-			Username <input type="text" th:field="*{username}">
+			Username <input type="text" th:field="*{username}" th:value="*{username}">
 			<p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
 		</fieldset>
 		
 		<fieldset>
-			Password <input type="password" th:field="*{password}">
+			Password <input type="text" th:field="*{password}" th:value="*{password}">
 			<p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
 		</fieldset>
 		

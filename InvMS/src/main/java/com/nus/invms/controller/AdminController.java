@@ -55,7 +55,14 @@ public class AdminController extends MechanicController {
 
 		if (empservice.checkEmployeeNameExist(employee)) 
 		{
-			return "employee-form";
+			Employee emp = empservice.findByName(employee.getUsername());
+			emp.setStatus(employee.getStatus());
+			emp.setPassword(employee.getPassword());
+			emp.setRole(employee.getRole());
+			emp.setName(employee.getName());
+			empservice.saveEmployee(emp);
+			return "forward:/admin/list";
+			
 		}
 		
 		empservice.saveEmployee(employee);
