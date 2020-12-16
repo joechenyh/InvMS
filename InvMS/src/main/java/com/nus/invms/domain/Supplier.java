@@ -23,7 +23,6 @@ import lombok.NoArgsConstructor;
 public class Supplier {
 	
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int supplierId;
 	
@@ -42,7 +41,9 @@ public class Supplier {
 	public Supplier(String supplierName) {
 		super();
 		this.supplierName = supplierName;
-=======
+
+
+		/*
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int supplierId;
 	
@@ -52,7 +53,7 @@ public class Supplier {
 		// TODO Auto-generated constructor stub
 >>>>>>> refs/heads/joe_branch
 	}
-	
+	*/
 	
 	
 

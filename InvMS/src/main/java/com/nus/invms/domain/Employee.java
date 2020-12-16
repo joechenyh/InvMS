@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 public class Employee{
 	
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int ID;
 	@NotEmpty
@@ -51,7 +50,8 @@ public class Employee{
 		this.status = status;
 		this.role = role;
 	}
-=======
+
+/*
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int ID;
 	String username;
@@ -59,7 +59,7 @@ public class Employee{
 	String status;
 	String position;
 	String name;
->>>>>>> refs/heads/joe_branch
+
 	
 	
 
@@ -72,7 +72,7 @@ public class Employee{
 		this.name = name;
 	}
 
-
+*/
 
 	public String getUsername() {
 		return username;

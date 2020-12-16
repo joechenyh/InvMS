@@ -8,11 +8,14 @@ import javax.persistence.Id;
 
 import lombok.*;
 
+
 @Entity
 @Data
 @NoArgsConstructor
 public class Inventory {
-<<<<<<< HEAD
+
+	/*
+	<<<<<<< HEAD
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -48,7 +51,7 @@ public class Inventory {
 		this.units = units;
 	} 
 	
-=======
+======= */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -224,6 +227,6 @@ public class Inventory {
 	public Inventory() {
 		// TODO Auto-generated constructor stub
 	}
->>>>>>> refs/heads/joe_branch
+
 
 }

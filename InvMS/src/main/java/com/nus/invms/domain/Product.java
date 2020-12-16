@@ -5,26 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-<<<<<<< HEAD
 import javax.validation.constraints.*;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-=======
 import javax.persistence.Table;
->>>>>>> refs/heads/joe_branch
+
 
 @Entity
-<<<<<<< HEAD
 @Data
 @NoArgsConstructor
-=======
 @Table(name = "product")
->>>>>>> refs/heads/joe_branch
+
 public class Product {
+
+	
 	
 	@Id
-<<<<<<< HEAD
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int partNumber;
 	@NotNull
@@ -50,7 +47,7 @@ public class Product {
 	} 
 	
 	
-=======
+/*
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int partNumber;
 	
@@ -73,6 +70,8 @@ public class Product {
 		this.shelfLocation = shelfLocation;
 		this.unitPrice = unitPrice;
 	}
+	
+	*/
 
 	public int getReorderLevel() {
 		return reorderLevel;
@@ -145,7 +144,7 @@ public class Product {
 	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
->>>>>>> refs/heads/joe_branch
+
 
 
 }
