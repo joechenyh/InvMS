@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product Form</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Product Form</h1>
+	<form action="#" th:object="${product}" th:action="@{/product/save}"
+		method="post">
+		<!--  <fieldset>
+			<input type="hidden" th:field="*{memberId}">
+		</fieldset> -->
+		<fieldset>
+			Part Number <input type="text" th:field="*{partNumber}">
+			<p th:if="${#fields.hasErrors('partNumber')}" th:errors="*{partNumber}"></p>
+		</fieldset>
+		<fieldset>
+			Reorder Level <input type="text" th:field="*{reorderLevel}">
+			<p th:if="${#fields.hasErrors('reorderLevel')}"
+				th:errors="*{reorderLevel}"></p>
+		</fieldset>
+		<fieldset>
+			Min Reorder Qty <input type="text" th:field="*{minReorderQty}">
+			<p th:if="${#fields.hasErrors('minReorderQty')}" th:errors="*{minReorderQty}"></p>
+		</fieldset>
+
+		<fieldset>
+			Product Name <input type="text" th:field="*{productName}">
+			<p th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
+		</fieldset>
+		<fieldset>
+			Description <input type="text" th:field="*{description}">
+			<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+		</fieldset>
+		<fieldset>
+			Colour <input type="text" th:field="*{colour}">
+			<p th:if="${#fields.hasErrors('colour')}" th:errors="*{colour}"></p>
+		</fieldset>
+		<fieldset>
+			Dimension <input type="text" th:field="*{dimension}">
+			<p th:if="${#fields.hasErrors('dimension')}" th:errors="*{dimension}"></p>
+		</fieldset>
+		<fieldset>
+			Manufacturer <input type="text" th:field="*{manufacturer}">
+			<p th:if="${#fields.hasErrors('manufacturer')}" th:errors="*{manufacturer}"></p>
+		</fieldset>
+		<fieldset>
+			Shelf Loc <input type="text" th:field="*{shelfLocation}">
+			<p th:if="${#fields.hasErrors('shelfLocation')}" th:errors="*{shelfLocation}"></p>
+		</fieldset>
+		<fieldset>
+			Unit Price <input type="text" th:field="*{unitPrice}">
+			<p th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"></p>
+		</fieldset>
+		
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
+		</fieldset>
+
+	</form>
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>

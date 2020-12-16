@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inventories Listing</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>inventory Listing</h1>
+	<!-- Add Hyperlink -->
+	<a href="AddMember.html" th:href="@{/inventory/add}">Add Inventory</a>
+
+	<h2 th:if="${not #lists.isEmpty(inventories)}">Inventory List</h2>
+	<table th:if="${not #lists.isEmpty(inventories)}" >
+		<tr >
+			<th >inventoryId</th>
+			<th >productId</th>
+			<th >supplierName</th>
+			<th >brandId</th>
+			<th >brandName</th>
+			<th >itemName</th>
+			<th >description</th>
+			<th >type</th>
+			<th >category</th>
+			<th >subCategory</th>
+			<th >originalPrice</th>
+			<th >wholesalePrice</th>
+			<th >retailPrice</th>
+			<th >partnerPrice</th>
+			<th >units</th>
+			<th >Edit inventory</th>
+			<!-- <th >Delete inventory</th>  -->
+		</tr>
+		<tr th:each="inventory:${inventories}" class="table-row">
+			<td th:text=${inventory.inventoryId}>Part Num</td>
+			<td th:text=${inventory.productId}>Reorder Level</td>
+			<td th:text=${inventory.supplierName}>Min Qty</td>
+			<td th:text=${inventory.brandId}>Pdt Name</td>
+			<td th:text=${inventory.brandName}>Desc</td>
+			<td th:text=${inventory.itemName}>Colour</td>
+			<td th:text=${inventory.description}>Dimension</td>
+			<td th:text=${inventory.type}>Manu</td>
+			<td th:text=${inventory.category}>Loc</td>
+			<td th:text=${inventory.subCategory}>Unit Price</td>
+			<td th:text=${inventory.originalPrice}>Colour</td>
+			<td th:text=${inventory.wholesalePrice}>Dimension</td>
+			<td th:text=${inventory.retailPrice}>Manu</td>
+			<td th:text=${inventory.partnerPrice}>Loc</td>
+			<td th:text=${inventory.units}>Unit Price</td>
+			<td><a href="Editinventory.html"
+				th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
+			<!--  <td><a href="Deleteinventory.html"
+				th:href="@{/inventory/delete/}+${inventory.partNumber}">Delete</a></td> -->
+		</tr>
+	</table>
+    <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>
