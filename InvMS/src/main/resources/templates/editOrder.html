@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<title>Order Form</title>
+</head>
+<body>
+
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Order Form</h1>
+	<form action="#" th:object="${order}" th:action="@{/order/save}"
+		method="post">
+		<fieldset>
+			<input type="hidden" th:field="*{orderId}">
+		</fieldset>
+		
+		<fieldset>
+			Employee ID <input type="number" th:field="*{employee.ID}" th:value="*{employee.ID}">
+			<p style="color:red" th:if="${#fields.hasErrors('employee.ID')}" th:errors="*{employee.ID}"></p>
+		</fieldset>
+
+		<fieldset>
+			Order Date <input type="date" th:field="*{orderDate}" th:value="*{orderDate}">
+			<p style="color:red" th:if="${#fields.hasErrors('orderDate')}" th:errors="*{orderDate}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Date Received <input type="date" th:field="*{dateReceived}" th:value="*{dateReceived}">
+			<p style="color:red" th:if="${#fields.hasErrors('dateReceived')}" th:errors="*{dateReceived}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Order Quantity <input type="number" th:field="*{quantityOrdered}" th:value="*{quantityReceived}">
+			<p style="color:red" th:if="${#fields.hasErrors('quantityOrdered')}" th:errors="*{quantityOrdered}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Receive Quantity <input type="number" th:field="*{quantityReceived}" th:value="*{quantityReceived}">
+			<p style="color:red" th:if="${#fields.hasErrors('quantityReceived')}" th:errors="*{quantityReceived}"></p>
+		</fieldset>
+
+		<fieldset>
+			Part Number <input type="text" th:field="*{partNumber}" th:value="*{partNumber}">
+			<p style="color:red" th:if="${#fields.hasErrors('partNumber')}" th:errors="*{partNumber}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Type <select th:field="*{type}" th:value="*{type}">
+				<option th:each="typeOpt : ${T(com.nus.invms.domain.OrderType).values()}" 
+        th:value="${typeOpt}" th:text="${typeOpt}"></option>
+			</select>
+		</fieldset>
+		
+		
+		<fieldset>
+			Status <select th:field="*{status}" th:value="*{status}">
+				<option th:each="statOpt : ${T(com.nus.invms.domain.Status).values()}" 
+        th:value="${statOpt}" th:text="${statOpt}"></option>
+			</select>
+		</fieldset>
+
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
+		</fieldset>
+
+	</form>
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+
+</body>
+</html>

@@ -2,12 +2,17 @@ package com.nus.invms.service;
 
 import java.util.ArrayList;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.nus.invms.domain.Order;
 import com.nus.invms.domain.Status;
 import com.nus.invms.repo.OrderRepository;
 
+@Service
+@Transactional
 public class OrderImplementation implements OrderInterface {
 
 	@Autowired

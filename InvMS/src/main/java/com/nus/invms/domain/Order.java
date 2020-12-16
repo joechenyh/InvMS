@@ -30,18 +30,18 @@ public class Order {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int orderId;
 	@FutureOrPresent
-	@DateTimeFormat (pattern="dd-MM-yyyy")
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate orderDate;
 	@FutureOrPresent
-	@DateTimeFormat (pattern="dd-MM-yyyy")
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate dateReceived;
 	
 	@NotNull
 	private int quantityOrdered, quantityReceived;
 	@NotEmpty
 	private String partNumber; 
-	@NotEmpty
-	private String type;
+
+	private OrderType type;
 	private Status status;
 
 	
@@ -53,7 +53,7 @@ public class Order {
 
 	
 	public Order(LocalDate orderDate, LocalDate dateReceived, int quantityOrdered, int quantityReceived,
-			String partNumber, Status status, String type, Employee employee, Collection<Supplier> suppliers) {
+			String partNumber, Status status, OrderType type, Employee employee, Collection<Supplier> suppliers) {
 		super();
 		this.orderDate = orderDate;
 		this.dateReceived = dateReceived;

@@ -61,4 +61,10 @@ public class EmployeeImplementation implements EmployeeInterface {
 		// TODO Auto-generated method stub
 		return emprepo.findEmployeeByUsername(name);
 	}
+
+	@Override
+	public Employee findById(int id) {
+		// TODO Auto-generated method stub
+		return emprepo.findById(id).get();
+	}
 }

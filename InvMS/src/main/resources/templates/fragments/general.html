@@ -33,9 +33,15 @@
 <!--       </li> -->
       <li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/product/add}">Add New Product</a></li>
       <li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/product/list}">Products List</a></li>
-      <li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/supplier/add}">Add New Supplier</a></li>
-      <li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/supplier/list}">Suppliers List</a></li>
     </ul>
+    
+    <ul class="nav navbar-nav">
+    	<li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/supplier/add}">Add New Supplier</a></li>
+      	<li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/supplier/list}">Suppliers List</a></li>
+    	<li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/order/add}">Add New Order</a></li>
+      	<li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/order/list}">Orders List</a></li>
+	</ul>
+    
     <ul class="nav navbar-nav navbar-right">
       <li th:if="${#lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/login}"> Login </a></li>
       <li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:utext="${session.empsession.username}"> User </a></li>
