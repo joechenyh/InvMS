@@ -55,6 +55,12 @@ public class PartUsageServiceImpl implements PartUsageService {
 		return purepo.findPartUsageByPartNumber(partnumber);
 	}
 
+	@Override
+	public PartUsage findPartUsageById(int id) {
+		// TODO Auto-generated method stub
+		return purepo.findById(id).get();
+	}
+
 
 }
 

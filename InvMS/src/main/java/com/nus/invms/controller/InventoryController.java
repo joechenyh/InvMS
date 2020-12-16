@@ -33,7 +33,7 @@ public class InventoryController {
 	public String Viewdashboard(){
 		return "inventorydashboard";
 	}
-	
+	/*
 	//2. Create Inventory
 	@RequestMapping(value = "/createinv")
 	public String addUsage(Model model) {
@@ -78,6 +78,7 @@ public class InventoryController {
 	//	model.addAttribute("fnames", flist);
 		return "inventory-form";
 	}
+	*/
 	
 	
 	
