@@ -12,5 +12,6 @@ public interface PartUsageService {
 	public PartUsage editPartUsage(PartUsage usage); //U
 	public List<PartUsage> listPartUsage();
 	public List<PartUsage> viewPartUsage(String partnumber);
+	public PartUsage findPartUsageById(int id);
 
 }

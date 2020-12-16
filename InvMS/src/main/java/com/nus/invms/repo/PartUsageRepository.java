@@ -17,8 +17,8 @@ public interface PartUsageRepository extends JpaRepository<PartUsage, Integer>
 //	List<Usage> findUsageByEmployeeName(@Param("employeename") String employeename);
 	
 	//2. Find Usage by Employee Name
-	@Query("Select u from PartUsage u where u.employeeId LIKE :eid")
-	List<PartUsage> findPartUsageByEmployeeId(@Param("eid") int eid);
+//	@Query("Select u from PartUsage u where u.employeeId LIKE :eid")
+//	List<PartUsage> findPartUsageByEmployeeId(@Param("eid") int eid);
 	
 	//3. Find Usage by Part Name
 	@Query("Select u from PartUsage u where u.partNumber Like :partNumber")

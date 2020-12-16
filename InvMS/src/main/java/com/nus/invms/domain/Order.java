@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,14 +30,19 @@ public class Order {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int orderId;
 	@FutureOrPresent
-	@DateTimeFormat (pattern="dd-MM-yyyy")
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate orderDate;
 	@FutureOrPresent
-	@DateTimeFormat (pattern="dd-MM-yyyy")
+	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate dateReceived;
+	
+	@NotNull
 	private int quantityOrdered, quantityReceived;
+	@NotEmpty
 	private String partNumber; 
-	private String status, type;
+
+	private OrderType type;
+	private Status status;
 
 	
 	@ManyToOne
@@ -46,7 +53,7 @@ public class Order {
 
 	
 	public Order(LocalDate orderDate, LocalDate dateReceived, int quantityOrdered, int quantityReceived,
-			String partNumber, String status, String type, Employee employee, Collection<Supplier> suppliers) {
+			String partNumber, Status status, OrderType type, Employee employee, Collection<Supplier> suppliers) {
 		super();
 		this.orderDate = orderDate;
 		this.dateReceived = dateReceived;
@@ -58,6 +65,7 @@ public class Order {
 		this.status = status;
 		this.type = type;
 	}
+
 	
 
 	
