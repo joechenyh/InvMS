@@ -17,9 +17,9 @@
 			<input type="hidden" th:field="*{inventoryId}">
 		</fieldset>
 		<fieldset>
-			Product Number <select th:field="*{product.names}">
-				<option th:each="product:${products}" th:value="${product}"
-					th:text="${product}"></option>
+			Product Number <select th:field="*{product.productName}">
+				<option th:each="product:${products}" th:value="${product.productName}"
+					th:text="${product.productName}"></option>
 			</select>
 		</fieldset> 
 		 <fieldset>

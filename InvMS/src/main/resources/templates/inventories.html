@@ -13,7 +13,7 @@
 
 	<h1>inventory Listing</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddMember.html" th:href="@{/inventory/add}">Add Inventory</a>
+	<a href="AddMember.html" th:href="@{/inventory/add1}">Add Inventory</a>
 
 	<h2 th:if="${not #lists.isEmpty(inventories)}">Inventory List</h2>
 	<table th:if="${not #lists.isEmpty(inventories)}" >
@@ -33,6 +33,7 @@
 			<th >retailPrice</th>
 			<th >partnerPrice</th>
 			<th >units</th>
+			<th >product name</th>
 			<th >Edit inventory</th>
 			<!-- <th >Delete inventory</th>  -->
 		</tr>
@@ -52,6 +53,7 @@
 			<td th:text=${inventory.retailPrice}>Manu</td>
 			<td th:text=${inventory.partnerPrice}>Loc</td>
 			<td th:text=${inventory.units}>Unit Price</td>
+			<td th:text=${inventory.productName}>Unit Price</td>
 			<td><a href="Editinventory.html"
 				th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
 			<!--  <td><a href="Deleteinventory.html"

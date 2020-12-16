@@ -19,6 +19,7 @@ public class Inventory {
 	String type;
 	String category, subCategory;
 	Double originalPrice, wholesalePrice,retailPrice,partnerPrice;
+	String productName;
 	int units;
 	public Inventory() {
 		super();
@@ -26,7 +27,7 @@ public class Inventory {
 	}
 	public Inventory(int productId, String supplierName, int brandId, String brandName, String itemName,
 			String description, String type, String category, String subCategory, Double originalPrice,
-			Double wholesalePrice, Double retailPrice, Double partnerPrice, int units) {
+			Double wholesalePrice, Double retailPrice, Double partnerPrice, int units,String productName) {
 		super();
 		this.productId = productId;
 		this.supplierName = supplierName;
@@ -42,6 +43,13 @@ public class Inventory {
 		this.retailPrice = retailPrice;
 		this.partnerPrice = partnerPrice;
 		this.units = units;
+		this.productName = productName;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	public int getInventoryId() {
 		return inventoryId;
