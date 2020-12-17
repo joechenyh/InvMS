@@ -57,7 +57,7 @@ public class AdminController extends MechanicController {
 		{
 			Employee emp = empservice.findByName(employee.getUsername());
 			emp.setStatus(employee.getStatus());
-			emp.setPassword(employee.getPassword());
+			emp.setEPassword(employee.getEPassword());
 			emp.setRole(employee.getRole());
 			emp.setName(employee.getName());
 			empservice.saveEmployee(emp);

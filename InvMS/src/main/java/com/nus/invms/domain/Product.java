@@ -72,10 +72,17 @@ public class Product {
 	}
 	
 	*/
+	
+	
 
 	public int getReorderLevel() {
 		return reorderLevel;
 	}
+
+	public Product() {
+	super();
+}
+
 
 	public void setReorderLevel(int reorderLevel) {
 		this.reorderLevel = reorderLevel;

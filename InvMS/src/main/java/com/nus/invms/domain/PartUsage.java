@@ -51,10 +51,68 @@ public class PartUsage {
 		this.carplate = carplate;
 	}
 
+	
+	
+	public PartUsage() {
+		super();
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "PartUsage [transactionId=" + transactionId + ", employee=" + employee + ", partNumber=" + partNumber
 				+ ", quantity=" + quantity + ", usagedate=" + usagedate + ", carplate=" + carplate + "]";
 	}
+
+	public int getTransactionId() {
+		return transactionId;
+	}
+
+	public void setTransactionId(int transactionId) {
+		this.transactionId = transactionId;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public int getPartNumber() {
+		return partNumber;
+	}
+
+	public void setPartNumber(int partNumber) {
+		this.partNumber = partNumber;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public LocalDate getUsagedate() {
+		return usagedate;
+	}
+
+	public void setUsagedate(LocalDate usagedate) {
+		this.usagedate = usagedate;
+	}
+
+	public String getCarplate() {
+		return carplate;
+	}
+
+	public void setCarplate(String carplate) {
+		this.carplate = carplate;
+	}
+	
+	
 
 }

@@ -66,6 +66,11 @@ public class Order {
 		this.type = type;
 	}
 
+
+	public Order() {
+		super();
+	}
+
 	
 
 	

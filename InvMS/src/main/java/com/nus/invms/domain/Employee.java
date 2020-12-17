@@ -30,13 +30,13 @@ public class Employee{
 	private String username;
 	@NotEmpty
 	@Size(min=5, max=20)
-	private String password;
+	private String epassword;
 	
 	private Status status;
 	private RoleType role;
 	
 	@OneToMany (mappedBy="employee") 
-	private Collection<Usage> usages;
+	private Collection<PartUsage> usages;
 
 	@OneToMany (mappedBy="employee")
 	private Collection<Order> orders;
@@ -46,7 +46,7 @@ public class Employee{
 		super();
 		this.name = name;
 		this.username = username;
-		this.password = password;
+		this.epassword = password;
 		this.status = status;
 		this.role = role;
 	}
@@ -98,26 +98,26 @@ public class Employee{
 
 
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
 
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
 
 
-	public String getPosition() {
-		return position;
+	public RoleType getRole() {
+		return role;
 	}
 
 
 
-	public void setPosition(String position) {
-		this.position = position;
+	public void setRole(RoleType role) {
+		this.role = role;
 	}
 
 
@@ -130,6 +130,10 @@ public class Employee{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Employee() {
+		super();
 	}
 
 

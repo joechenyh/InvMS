@@ -43,6 +43,11 @@ public class Supplier {
 		this.supplierName = supplierName;
 	}
 
+	public Supplier() {
+		super();
+	}
 
+
+	
 
 }
