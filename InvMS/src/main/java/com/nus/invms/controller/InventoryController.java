@@ -18,6 +18,7 @@ import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Product;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
+import com.nus.invms.service.NotificationService;
 import com.nus.invms.service.ProductService;
 import com.nus.invms.service.ProductServiceImpl;
 
@@ -30,6 +31,9 @@ public class InventoryController {
 	
 	@Autowired
 	private ProductService pservice;
+	
+	@Autowired
+	private NotificationService nservice;
 	
 	@Autowired
 	public void setInventoryService(InventoryServiceImpl iserviceImpl) {
@@ -128,6 +132,7 @@ public class InventoryController {
 		int newUnit = inventorycore.getUnits() - inventory.getUnits();
 		inventorycore.setUnits(newUnit);
 		iservice.saveInventory(inventorycore);
+		nservice.sendNotification();
 		return "forward:/inventory/list";
 //		String msg = checkError(inventory);
 //		if (bindingResult.hasErrors()||msg!=null) 
