@@ -11,7 +11,7 @@ import com.nus.invms.repo.PartUsageRepository;
 
 @Service
 public class PartUsageServiceImpl implements PartUsageService {
-	
+
 	@Autowired
 	PartUsageRepository purepo;
 
@@ -22,14 +22,17 @@ public class PartUsageServiceImpl implements PartUsageService {
 	@Override
 	@Transactional
 	public boolean addPartUsage(PartUsage usage) {
-		if(purepo.save(usage)!=null) return true; else return false;
+		if (purepo.save(usage) != null)
+			return true;
+		else
+			return false;
 	}
 
 	@Override
 	@Transactional
 	public void deletePartUsage(PartUsage usage) {
-		 purepo.delete(usage);
-		
+		purepo.delete(usage);
+
 	}
 
 	@Override
@@ -38,9 +41,8 @@ public class PartUsageServiceImpl implements PartUsageService {
 		PartUsage currentusage = purepo.findById(usage.getTransactionId()).get();
 		currentusage = usage;
 		purepo.save(currentusage);
-		
+
 		return currentusage;
-		
 	}
 
 	@Override
@@ -56,14 +58,17 @@ public class PartUsageServiceImpl implements PartUsageService {
 	}
 
 	@Override
-	public PartUsage findPartUsageById(int id) {
+	@Transactional
+	public List<PartUsage> findPartUsageByCarplate(String carplate) {
 		// TODO Auto-generated method stub
-		return purepo.findById(id).get();
+		return purepo.findUsageByCarPlate(carplate);
 	}
 
+	@Override
+	@Transactional
+	public List<PartUsage> findByUsageDateBetween(String d1, String d2) {
+		// TODO Auto-generated method stub
+		return purepo.findByUsageDateBetween(d1, d2);
+	}
 
 }
-
-
-
-

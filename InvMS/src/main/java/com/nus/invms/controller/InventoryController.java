@@ -1,8 +1,11 @@
 package com.nus.invms.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nus.invms.domain.Inventory;
-import com.nus.invms.domain.PartUsage;
 import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
@@ -53,11 +55,20 @@ public class InventoryController {
 	}*/
 
 
+//	@RequestMapping(value = "/list")
+//	public String list(Model model) {
+//		model.addAttribute("inventories", invservice.listInventory());
+//		return "inventories";
+//	}
+	
 	@RequestMapping(value = "/list")
-	public String list(Model model) {
-		model.addAttribute("inventories", invservice.listInventory());
+	public String search(Model model, @Param("term") String term) {
+		List<Inventory> listInventory = invservice.listInventory(term);
+		model.addAttribute("listInventory", listInventory);
+		model.addAttribute("term", term);
 		return "inventories";
 	}
+	
 	@RequestMapping(value = "/add")
 	public String addForm(Model model) {
 		model.addAttribute("inventory", new Inventory());

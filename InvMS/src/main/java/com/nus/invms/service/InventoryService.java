@@ -10,6 +10,6 @@ public interface InventoryService {
 	public Inventory getInventory(int id); //R
 	public void deactivateInventory(Inventory inventory); //D
 	public Inventory editInventory(Inventory inventory); //U
-	public List<Inventory> listInventory();
+	public List<Inventory> listInventory(String term);
 
 }

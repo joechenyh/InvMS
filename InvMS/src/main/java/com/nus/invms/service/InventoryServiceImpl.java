@@ -53,7 +53,10 @@ public class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	@Transactional
-	public List<Inventory> listInventory() {
+	public List<Inventory> listInventory(String term) {
+		if (term != null) {
+			return irepo.searchInventory(term);
+		}
 		return irepo.findAll();
 	}
 

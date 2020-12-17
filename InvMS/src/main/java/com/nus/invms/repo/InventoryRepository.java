@@ -1,6 +1,5 @@
 package com.nus.invms.repo;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,6 +38,9 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 	 @Query("Select i from Inventory i where i.subCategory LIKE :subCategory")
 		List<Inventory> findInventoryBySubCategory(@Param("subCategory") String subCategory);
 	
+	 @Query(value="SELECT * FROM Inventory i WHERE concat(i.productId, '', i.supplierName, '', i.brandId, '', i.itemName, '', i.invdescription, '', invtype) LIKE '%:term%'",
+				nativeQuery = true)
+		public List<Inventory> searchInventory(@Param("term") String term);
 	
 }
 

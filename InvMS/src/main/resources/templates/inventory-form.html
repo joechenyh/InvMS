@@ -11,24 +11,85 @@
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Inventory Form</h1>
-	<form action="#" th:object="${inventory}" th:action="@{/inventory/save}"
-		method="post">
+	<form action="#" th:object="${inventory}"
+		th:action="@{/inventory/save}" method="post">
 		<fieldset>
 			<input type="hidden" th:field="*{inventoryId}">
 		</fieldset>
 		<fieldset>
-			Inventory Name <input type="text" th:field="*{name}">
-			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+			Part Number <input type="text" th:field="*{product.partNumber}">
+			<p style="color: red"
+				th:if="${#fields.hasErrors('product.partNumber')}"
+				th:errors="*{product.partNumber}"></p>
 		</fieldset>
 		<fieldset>
-			Inventory Description <input type="text" th:field="*{productName}">
-			<p style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
+			Supplier Name <input type="text" th:field="*{supplierName}">
+			<p style="color: red" th:if="${#fields.hasErrors('supplierName')}"
+				th:errors="*{supplierName}"></p>
 		</fieldset>
-
 		<fieldset>
-			<input type="submit" value="Save"/>
-			&nbsp; &nbsp; 	
-			<input type="reset" value="Reset"/>
+			Brand ID <input type="text" th:field="*{brandId}">
+			<p style="color: red" th:if="${#fields.hasErrors('brandId')}"
+				th:errors="*{brandId}"></p>
+		</fieldset>
+		<fieldset>
+			Brand Name <input type="text" th:field="*{brandName}">
+			<p style="color: red" th:if="${#fields.hasErrors('brandName')}"
+				th:errors="*{brandName}"></p>
+		</fieldset>
+		<fieldset>
+			Item Name <input type="text" th:field="*{itemName}">
+			<p style="color: red" th:if="${#fields.hasErrors('itemName')}"
+				th:errors="*{itemName}"></p>
+		</fieldset>
+		<fieldset>
+			Description <input type="text" th:field="*{invdescription}">
+			<p style="color: red" th:if="${#fields.hasErrors('invdescription')}"
+				th:errors="*{invdescription}"></p>
+		</fieldset>
+		<fieldset>
+			Type <input type="text" th:field="*{invtype}">
+			<p style="color: red" th:if="${#fields.hasErrors('invtype')}"
+				th:errors="*{invtype}"></p>
+		</fieldset>
+		<fieldset>
+			Category <input type="text" th:field="*{category}">
+			<p style="color: red" th:if="${#fields.hasErrors('category')}"
+				th:errors="*{category}"></p>
+		</fieldset>
+		<fieldset>
+			Sub-category <input type="text" th:field="*{subCategory}">
+			<p style="color: red" th:if="${#fields.hasErrors('subCategory')}"
+				th:errors="*{subCategory}"></p>
+		</fieldset>
+		<fieldset>
+			Original Price <input type="text" th:field="*{originalPrice}">
+			<p style="color: red" th:if="${#fields.hasErrors('originalPrice')}"
+				th:errors="*{originalPrice}"></p>
+		</fieldset>
+		<fieldset>
+			Wholesale Price <input type="text" th:field="*{wholesalePrice}">
+			<p style="color: red" th:if="${#fields.hasErrors('wholesalePrice')}"
+				th:errors="*{wholesalePrice}"></p>
+		</fieldset>
+		<fieldset>
+			Retail Price <input type="text" th:field="*{retailPrice}">
+			<p style="color: red" th:if="${#fields.hasErrors('retailPrice')}"
+				th:errors="*{retailPrice}"></p>
+		</fieldset>
+		<fieldset>
+			Partner Price <input type="text" th:field="*{partnerPrice}">
+			<p style="color: red" th:if="${#fields.hasErrors('partnerPrice')}"
+				th:errors="*{partnerPrice}"></p>
+		</fieldset>
+		<fieldset>
+			Units <input type="text" th:field="*{units}">
+			<p style="color: red" th:if="${#fields.hasErrors('units')}"
+				th:errors="*{units}"></p>
+		</fieldset>
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
 		</fieldset>
 
 	</form>

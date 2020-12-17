@@ -6,12 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.*;
-
-
 @Entity
-@Data
-@NoArgsConstructor
 public class Inventory {
 
 	@Id
@@ -48,10 +43,10 @@ public class Inventory {
 	@Override
 	public String toString() {
 		return "Inventory [productId=" + productId + ", supplierName=" + supplierName + ", brandId=" + brandId
-				+ ", brandName=" + brandName + ", itemName=" + itemName + ", invdescription=" + invdescription + ", invtype="
-				+ invtype + ", category=" + category + ", subCategory=" + subCategory + ", originalPrice=" + originalPrice
-				+ ", wholesalePrice=" + wholesalePrice + ", retailPrice=" + retailPrice + ", partnerPrice="
-				+ partnerPrice + ", units=" + units + "]";
+				+ ", brandName=" + brandName + ", itemName=" + itemName + ", invdescription=" + invdescription
+				+ ", invtype=" + invtype + ", category=" + category + ", subCategory=" + subCategory
+				+ ", originalPrice=" + originalPrice + ", wholesalePrice=" + wholesalePrice + ", retailPrice="
+				+ retailPrice + ", partnerPrice=" + partnerPrice + ", units=" + units + "]";
 	}
 
 	public Inventory(String supplierName, int brandId, String brandName, String itemName, String invdescription,
@@ -188,7 +183,5 @@ public class Inventory {
 	public void setUnits(int units) {
 		this.units = units;
 	}
-
-	
 
 }

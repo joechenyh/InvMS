@@ -11,35 +11,30 @@ import javax.validation.constraints.FutureOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
-@Data
-@NoArgsConstructor
 //@Table only needed if table different name 
 public class PartUsage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int transactionId;
-	
-	//@Column(name="employeeId", nullable=false)
+
+	// @Column(name="employeeId", nullable=false)
 	@ManyToOne
-	private Employee employee; 
-	
-	//@OneToOne
-	//@Column(name="partNumber", nullable=false)
+	private Employee employee;
+
+	// @OneToOne
+	// @Column(name="partNumber", nullable=false)
 	int partNumber;
-	
-	//@Column(name="quantity", nullable=false)
+
+	// @Column(name="quantity", nullable=false)
 	int quantity;
-	
+
 	@FutureOrPresent
-	@DateTimeFormat (pattern="dd-MM-yyyy")
-	//@Column(name="date", nullable=false)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	// @Column(name="date", nullable=false)
 	private LocalDate usagedate;
-	
-	//@Column(name="carplate", nullable=false)
+
+	// @Column(name="carplate", nullable=false)
 	private String carplate;
 
 	public PartUsage(Employee employee, int partNumber, int quantity, LocalDate usagedate, String carplate) {
@@ -51,13 +46,9 @@ public class PartUsage {
 		this.carplate = carplate;
 	}
 
-	
-	
 	public PartUsage() {
 		super();
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -112,7 +103,5 @@ public class PartUsage {
 	public void setCarplate(String carplate) {
 		this.carplate = carplate;
 	}
-	
-	
 
 }

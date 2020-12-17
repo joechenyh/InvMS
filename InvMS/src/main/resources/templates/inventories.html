@@ -1,43 +1,70 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Inventory Listing</title>
-<link rel="stylesheet" type="text/css" media="all"
-	href="../../css/style.css" th:href="@{/css/style.css}" />
+<title>Inventory</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Inventory Listing</h1>
-	<!-- Add Hyperlink -->
-	<a href="AddInventory.html" th:href="@{/inventory/add}">Add New Inventory</a>
-
-	<h2 th:if="${not #lists.isEmpty(inventories)}">Inventory List</h2>
-	<table th:if="${not #lists.isEmpty(inventories)}">
-		<tr>
-			<th>Inventory Id</th>
-			<th>Item Name</th>
-			<th>Inventory Description</th>
-			<th>Inventory Type</th>
-			<th>Edit Inventory</th>
-			<th>Delete Inventory</th>
-		</tr>
-		<tr th:each="inventory:${inventories}">
-			<td th:text=${inventory.facilityId}>Inventory Id</td>
-			<td th:text=${inventory.name}>Item Name</td>
-			<td th:text=${inventory.description}>Inventory Description</td>
-			<td th:text=${inventory.type}>Inventory Type</td>
-			<td><a href="EditInventory.html"
-				th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
-			<td><a href="DeleteFacility.html"
-				th:href="@{/inventory/delete/}+${facility.inventoryId}">Delete</a></td>
-		</tr>
-	</table>
-
-	 <br/>
+	<div align="center">
+		<div>
+			<h1>Inventory Management</h1>
+		</div>
+		<br />
+		<div>
+			<form th:action="@{/}">
+				Filter: <input type="text" name="keyword" id="keyword" size="50"
+					th:value="${keyword}" required /> &nbsp; <input type="submit"
+					value="Search" /> &nbsp;
+			</form>
+		</div>
+		<a href="AddInventory.html" th:href="@{/inventory/add}">Add New Inventory</a>
+		<br />
+		<div>
+		<h2 th:if="${not #lists.isEmpty(listInventory)}">Inventory</h2>
+			<table th:if="${not #lists.isEmpty(listInventory)}" border="1" cellpadding="5">
+				<tr>
+					<th>Product ID</th>
+					<th>Supplier</th>
+					<th>Brand ID</th>
+					<th>Brand Name</th>
+					<th>Item Name</th>
+					<th>Description</th>
+					<th>Type</th>
+					<th>Category</th>
+					<th>Subcategory</th>
+					<th>Original Price</th>
+					<th>Wholesale Price</th>
+					<th>Retail Price</th>
+					<th>Partner Price</th>
+					<th>Units</th>
+				</tr>
+				<tr th:each="inventory : ${listInventory}">
+					<td th:text="${inventory.productId}">Product ID</td>
+					<td th:text="${inventory.supplierName}">Supplier</td>
+					<td th:text="${inventory.brandId}">Brand ID</td>
+					<td th:text="${inventory.brandName}">Brand Name</td>
+					<td th:text="${inventory.itemName}">Item Name</td>
+					<td th:text="${inventory.invdescription}">Description</td>
+					<td th:text="${inventory.invtype}">Type</td>
+					<td th:text="${inventory.category}">Category</td>
+					<td th:text="${inventory.subCategory}">Subcategory</td>
+					<td th:text="${inventory.originalPrice}">Original Price</td>
+					<td th:text="${inventory.wholesalePrice}">Wholesale Price</td>
+					<td th:text="${inventory.retailPrice}">Retail Price</td>
+					<td th:text="${inventory.partnerPrice}">Partner Price</td>
+					<td th:text="${inventory.units}">Units</td>
+					<td><a href="EditInventory.html"
+						th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
+					<td><a href="DeleteFacility.html"
+						th:href="@{/inventory/delete/}+${facility.inventoryId}">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 	<div th:replace="fragments/general.html :: footer"></div>
 </body>
 </html>
