@@ -46,11 +46,11 @@ public class InventoryController {
 		this.puservice = puserviceimpl;
 	}
 	
-	//1. Manage Inventory
+/*	//1. Manage Inventory
 	@RequestMapping(value = "/inventorydashboard")
 	public String Viewdashboard(){
 		return "inventorydashboard";
-	}
+	}*/
 
 
 	@RequestMapping(value = "/list")

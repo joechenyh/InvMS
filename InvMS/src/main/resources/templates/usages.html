@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Bookings List</title>
+<title>Usages List</title>
 <link rel="stylesheet" type="text/css" media="all"
 	href="../../css/style.css" th:href="@{/css/style.css}" />
 </head>
@@ -11,11 +11,11 @@
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Bookings List</h1>
+	<h1>Usages List</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddBooking.html" th:href="@{/booking/add}">New Booking</a>
+	<a href="AddBooking.html" th:href="@{/partusage/add}">New Part Usage</a>
 
-	<h2 th:if="${not #lists.isEmpty(bookings)}">Bookings List</h2>
+	<h2 th:if="${not #lists.isEmpty(bookings)}">Usages List</h2>
 	<table th:if="${not #lists.isEmpty(bookings)}" >
 		<tr >
 			<th>Booking Id</th>

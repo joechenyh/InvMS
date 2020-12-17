@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Facility Form</title>
+<title>Inventory Form</title>
 <link rel="stylesheet" type="text/css" media="all"
 	href="../../css/style.css" th:href="@{/css/style.css}" />
 </head>
@@ -10,21 +10,19 @@
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Facility Form</h1>
-	<form action="#" th:object="${facility}" th:action="@{/facility/save}"
+	<h1>Inventory Form</h1>
+	<form action="#" th:object="${inventory}" th:action="@{/inventory/save}"
 		method="post">
 		<fieldset>
-			<input type="hidden" th:field="*{facilityId}">
+			<input type="hidden" th:field="*{inventoryId}">
 		</fieldset>
 		<fieldset>
-			Facility Name <input type="text" th:field="*{name}">
+			Inventory Name <input type="text" th:field="*{name}">
 			<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
 		</fieldset>
 		<fieldset>
-			Facility Description
-			<textarea th:field="*{description}" cols="30" rows="10"></textarea>
-			<p th:if="${#fields.hasErrors('description')}"
-				th:errors="*{description}"></p>
+			Inventory Description <input type="text" th:field="*{productName}">
+			<p style="color:red" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></p>
 		</fieldset>
 
 		<fieldset>

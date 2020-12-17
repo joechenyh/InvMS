@@ -27,7 +27,11 @@ public class Product {
 	@NotNull
 	private int reorderLevel, minReorderQty; 
 	@NotEmpty
-	private String productName, description, colour, dimension, manufacturer, shelfLocation;
+	private String productName, description, colour, dimension, shelfLocation;
+	
+	@NotEmpty 
+	private String manufacturer;
+	
 	@NotNull
 	private Double unitPrice;
 	private Status status;
