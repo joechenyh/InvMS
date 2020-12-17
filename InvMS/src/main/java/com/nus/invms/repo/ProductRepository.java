@@ -15,34 +15,30 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	// Product findProductByproductName(String name);
 	// Search by Description? 
 	
-// THIS IS JUST A TESTING SENTENCE 
-	// UPDATED COPY 
-	
-	
 	//1. Find Inventory by Name
 	
-		@Query("Select p from Product p where p.productName LIKE :productName")
-		List<Inventory> findProductByName(@Param("productName") String productName);
+		@Query("Select p FROM Product p WHERE p.productName LIKE :productName")
+		public List<Product> findProductByName(@Param("productName") String productName);
 		
 		//2. Find Inventory by partNumber
-		 @Query("Select p from Product p where p.partNumber = :partNumber")
-		 Inventory findInventoryByPartNumber(@Param("partNumber") int partNumber);
+		 @Query("Select p FROM Product p WHERE p.partNumber = :partNumber")
+	public Product findProductByPartNumber(@Param("partNumber") int partNumber);
 		
 		 //3. Find Inventory by Manufacturer
-		 @Query("Select p from Product p where p.manufactuer LIKE :manufacturer")
-			List<Inventory> findInventoryBySupplierName(@Param("manufacturer") String manufacturer);
+		 @Query("Select p FROM Product p WHERE p.manufacturer = :manufacturer")
+		public List<Product> findProductBySupplierName(@Param("manufacturer") String manufacturer);
 		 
 		//4. Find Inventory by Description 
-		 @Query("Select p from Product p where p.description LIKE :description")
-			List<Inventory> findInventoryByBrandName(@Param("description") String description);
+		 @Query("Select p FROM Product p WHERE p.description LIKE :description")
+			public List<Product> findProductByBrandName(@Param("description") String description);
 		 
 		//5. Find Inventory by Status 
-		 @Query("Select p from Product p where p.status LIKE :status")
-			List<Inventory> findInventoryByCategory(@Param("status") Status status);
+		 @Query("Select p FROM Product p WHERE p.status = :status")
+			public List<Product> findProductByStatus(@Param("status") Status status);
 		 
 		//6. Find Inventory by Shelf Location
-		 @Query("Select p from Product p where p.shelflocation LIKE :shelflocation")
-			List<Inventory> findInventoryBySubCategory(@Param("shelflocation") String shelflocation);
+		 @Query("Select p FROM Product p WHERE p.shelfLocation = :shelfLocation")
+			public List<Product> findProductByShelfLocation(@Param("shelfLocation") String shelfLocation);
 		
 
 }
