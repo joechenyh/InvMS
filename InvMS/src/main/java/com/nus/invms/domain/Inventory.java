@@ -19,7 +19,7 @@ import lombok.*;
 @Table(name = "inventory")
 
 public class Inventory {
-
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -79,4 +79,13 @@ public class Inventory {
 		this.partnerPrice = partnerPrice;
 		this.units = units;
 	}
+
+	public Inventory() {
+		super();
+	}
+	
+	
+	
+	
+	
 }
