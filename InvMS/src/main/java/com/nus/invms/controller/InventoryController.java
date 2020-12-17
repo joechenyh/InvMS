@@ -1,3 +1,4 @@
+
 package com.nus.invms.controller;
 
 import javax.validation.Valid;
@@ -82,10 +83,5 @@ public class InventoryController {
 		invservice.deactivateInventory(invservice.getInventory(id));
 		return "forward:/inventory/list";
 	}
-	
-	
-	
-	
-	
-
 }
+

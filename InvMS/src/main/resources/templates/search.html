@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">>
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/css/styles.css}" rel="stylesheet">
+<title>Search Page</title>
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"></header>
+
+	<div th:replace="fragments/general.html :: menu"></div>
+	<h1>Search results</h1>
+
+	<table>
+		<tr>
+			<th>Product ID</th>
+			<th>Supplier</th>
+			<th>Brand ID</th>
+			<th>Brand Name</th>
+			<th>Item Name</th>
+			<th>Item Description</th>
+			<th>Item Type</th>
+			<th>Category</th>
+			<th>Subcategory</th>
+			<th>Original Price</th>
+			<th>Wholesale Price</th>
+			<th>Retail Price</th>
+			<th>Partner Price</th>
+			<th>Units</th>
+		</tr>
+		<tr th:each="inventory:${listInventory}">
+			<td th:text="${inventory.product_id}">Product ID</td>
+			<td th:text="${inventory.supplier}">Supplier</td>
+			<td th:text="${inventory.brand_id}">Brand ID</td>
+			<td th:text="${inventory.item_name}">Item Name</td>
+			<td th:text="${inventory.item_description}">Item Description</td>
+			<td th:text="${inventory.item_type}">Item Type</td>
+			<td th:text="${inventory.category}">Category</td>
+			<td th:text="${inventory.subcategory}">Subcategory</td>
+			<td th:text="${inventory.original_price}">Original Price</td>
+			<td th:text="${inventory.wholesale_price}">Wholesale Price</td>
+			<td th:text="${inventory.retail_price}">Retail Price</td>
+			<td th:text="${inventory.partner_price}">Partner Price</td>
+			<td th:text="${inventory.units}">Units</td>
+		</tr>
+	</table>
+	<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>

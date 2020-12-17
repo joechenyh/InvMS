@@ -1,3 +1,4 @@
+
 package com.nus.invms.domain;
 import java.util.Collection;
 import java.util.HashSet;
