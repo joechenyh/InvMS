@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Inventory {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int inventoryId;
 	String supplierName;
 	int brandId;
