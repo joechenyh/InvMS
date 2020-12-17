@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inventories Listing</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Inventories Listing</h1>
+	<!-- Add Hyperlink -->
+	<a href="AddInventory.html" th:href="@{/inventory/add}">Add New Inventory</a>
+
+	<h2 th:if="${not #lists.isEmpty(inventories)}">Inventory List</h2>
+	<table th:if="${not #lists.isEmpty(inventories)}">
+		<tr>
+			<th>Inventory Id</th>
+			<th>Item Name</th>
+			<th>Inventory Description</th>
+						<th>Inventory Type</th>
+			<th>Edit Inventory</th>
+			<th>Delete Inventory</th>
+		</tr>
+		<tr th:each="facility:${facilities}">
+			<td th:text=${facility.facilityId}>Facility Id</td>
+			<td th:text=${facility.name}>Facility Name</td>
+			<td th:text=${facility.description}>Facility Description</td>
+			<td><a href="EditFacility.html"
+				th:href="@{/facility/edit/}+${facility.facilityId}">Edit</a></td>
+			<td><a href="DeleteFacility.html"
+				th:href="@{/facility/delete/}+${facility.facilityId}">Delete</a></td>
+		</tr>
+	</table>
+
+	 <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>
