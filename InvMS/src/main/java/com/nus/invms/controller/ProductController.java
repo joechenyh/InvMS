@@ -55,6 +55,7 @@ public class ProductController {
 			return "product-form";
 		}
 		pservice.saveProduct(product);
+		
 		return "forward:/product/list";
 	}
 	@RequestMapping(value = "/delete/{id}")

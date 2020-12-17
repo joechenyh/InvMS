@@ -62,7 +62,7 @@ public class InventoryController {
 		Product result = pservice.findProductById(id);
 		ArrayList<String> productInfo = new ArrayList<String>();
 		productInfo.add(result.getUnitPrice().toString());
-		//System.out.println(productInfo.get(0));
+		//System.out.println(productInfo.get(0));*
 		productInfo.add(result.getProductName().toString());
 		//System.out.println(productInfo.get(1));
 		return productInfo;
