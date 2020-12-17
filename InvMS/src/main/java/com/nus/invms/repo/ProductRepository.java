@@ -16,6 +16,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	// Search by Description? 
 	
 // THIS IS JUST A TESTING SENTENCE 
+	// UPDATED COPY 
+	
 	
 	//1. Find Inventory by Name
 	
