@@ -84,6 +84,26 @@ public class Product {
 		return reorderLevel;
 	}
 
+	public int getPartNumber() {
+		return partNumber;
+	}
+
+
+	public void setPartNumber(int partNumber) {
+		this.partNumber = partNumber;
+	}
+
+
+	public Status getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+
 	public Product() {
 	super();
 }

@@ -81,6 +81,38 @@ public class Employee{
 
 
 
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+	public String getEpassword() {
+		return epassword;
+	}
+
+	public void setEpassword(String epassword) {
+		this.epassword = epassword;
+	}
+
+	public Collection<PartUsage> getUsages() {
+		return usages;
+	}
+
+	public void setUsages(Collection<PartUsage> usages) {
+		this.usages = usages;
+	}
+
+	public Collection<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Collection<Order> orders) {
+		this.orders = orders;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
