@@ -17,6 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 // THIS IS JUST A TESTING SENTENCE 
 	
+	// CHANGES MADE 
+	
 	//1. Find Inventory by Name
 	
 		@Query("Select p from Product p where p.productName LIKE :productName")
