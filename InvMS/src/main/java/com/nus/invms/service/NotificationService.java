@@ -18,13 +18,13 @@ public class NotificationService {
 		this.javaMailSender=javaMailSender;
 	}
 
-	public void sendNotification() throws MailException{
+	public void sendNotification(String msg) throws MailException{
 		
 		SimpleMailMessage mail=new SimpleMailMessage();
 		mail.setTo("wsysteam@gmail.com");
 		mail.setFrom("1400941583a@gmail.com");
 		mail.setSubject("Reminder");
-		mail.setText("This product needs to reorder.");
+		mail.setText("Product Id: " + msg + " need to be replenish.");
 		
 		
 		javaMailSender.send(mail);

@@ -129,10 +129,17 @@ public class InventoryController {
 			BindingResult bindingResult,  Model model) 
 	{
 		Inventory inventorycore = iservice.findInventoryById(inventory.getInventoryId());
+		int pdtId = inventory.getProduct().getPartNumber();
+		System.out.print("TESTTT" + pdtId);
+		Product product = pservice.findProductById(pdtId);
+		int reorderlvl = product.getReorderLevel();
 		int newUnit = inventorycore.getUnits() - inventory.getUnits();
+		if (newUnit<reorderlvl) {
+			String msg = product.getPartNumber() + " " + "Product Name: " + product.getProductName();
+			nservice.sendNotification(msg);
+		}
 		inventorycore.setUnits(newUnit);
 		iservice.saveInventory(inventorycore);
-		nservice.sendNotification();
 		return "forward:/inventory/list";
 //		String msg = checkError(inventory);
 //		if (bindingResult.hasErrors()||msg!=null) 
