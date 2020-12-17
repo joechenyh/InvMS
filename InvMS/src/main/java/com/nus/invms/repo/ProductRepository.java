@@ -17,7 +17,10 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	//1. Find Inventory by Name
 	
 		@Query("Select p FROM Product p WHERE p.productName LIKE :productName")
-		public List<Product> findProductByName(@Param("productName") String productName);
+		public List<Product> findProductByListName(@Param("productName") String productName);
+		
+		@Query("Select p FROM Product p WHERE p.productName = :productName")
+		public Product findProductByName(@Param("productName") String productName);
 		
 		//2. Find Inventory by partNumber
 		 @Query("Select p FROM Product p WHERE p.partNumber = :partNumber")

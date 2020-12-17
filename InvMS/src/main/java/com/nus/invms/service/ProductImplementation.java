@@ -2,6 +2,7 @@ package com.nus.invms.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -51,7 +52,7 @@ public class ProductImplementation implements ProductInterface {
 	@Override
 	public Product findByName(String name) {
 		// TODO Auto-generated method stub
-		Product product = prorepo.findProductByproductName(name);
+		Product product = prorepo.findProductByName(name);
 		return product;
 	}
 
