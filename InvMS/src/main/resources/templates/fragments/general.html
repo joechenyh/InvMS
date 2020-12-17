@@ -9,7 +9,7 @@
 		<table>
 			<tr>
 				<td width="15%"><img th:src="@{/image/club.png}" /></td>
-				<td><h1>Inventory Management System</h1></td>
+				<td><h1>Facility Booking System</h1></td>
 			</tr>
 		</table>
 
@@ -17,13 +17,18 @@
 	<div th:fragment="menu" id="menu">
 		<table>
 			<tr>
-				<td><input type="button" value="Manage Members"
-					onclick="window.location.href='/member/list'; return false"
-					class="button" /> <input type="button" value="Manage Facilities"
-					onclick="window.location.href='/facility/list'; return false"
-					class="button" /> <input type="button" value="Manage Booking"
-					onclick="window.location.href='/booking/list'; return false"
-					class="button" /></td>
+				<td><input type="button" value="Manage Products"
+					onclick="window.location.href='/product/list'; return false"
+					class="button" /> 	
+				</td>
+				<td><input type="button" value="Manage Inventories"
+					onclick="window.location.href='/inventory/list'; return false"
+					class="button" /> 	
+				</td>
+				<td><input type="button" value="Manage Part Order"
+					onclick="window.location.href='/partorder/list'; return false"
+					class="button" /> 	
+				</td>
 			</tr>
 		</table>
 	</div>
@@ -31,7 +36,8 @@
 		<a href="Home" th:href="@{/}">Back to Home</a>
 		<br/>
 		 <small>Now is: <b
-			th:text="${execInfo.now.time}"></b></small> <br /> <small>(c) Inventory Management System , ISS, NUS 2020</small>
+			th:text="${execInfo.now.time}"></b></small> <br /> <small>(c)Facility
+			Booking System , ISS, NUS 2020</small>
 	</footer>
 </body>
 </html>

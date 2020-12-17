@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Part Order Listing</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Part Order Listing</h1>
+	<!-- Add Hyperlink -->
+	<a href="AddMember.html" th:href="@{/partorder/add}">Add Part Order</a>
+
+	<h2 th:if="${not #lists.isEmpty(partorders)}">Part Order List</h2>
+	<table th:if="${not #lists.isEmpty(partorders)}" >
+		<tr >
+			<th >OrderId</th>
+			<th >OrderDate</th>
+			<th >DateReceived</th>
+			<th >EmployeeId</th>
+			<th >QuantityOrdered</th>
+			<th >QuantityReceived</th>
+			<th >Supplier</th>
+			<th >Status</th>
+			<th >Type</th>
+			<th >Edit Part Order</th>
+			<!-- <th >Delete partorder</th>  -->
+		</tr>
+		<tr th:each="partorder:${partorders}" class="table-row">
+			<td th:text=${partorder.orderId}>OrderId</td>
+			<td th:text=${partorder.orderDate}>OrderDate</td>
+			<td th:text=${partorder.dateReceived}>DateReceived</td>
+			<td th:text=${partorder.employeeId}>EmployeeId</td>
+			<td th:text=${partorder.quantityOrdered}>QuantityOrdered</td>
+			<td th:text=${partorder.quantityReceived}>QuantityReceived</td>
+			<td th:text=${partorder.supplier}>Supplier</td>
+			<td th:text=${partorder.status}>Status</td>
+			<td th:text=${partorder.type}>Type</td>
+			<td><a href="Editpartorder.html"
+				th:href="@{/partorder/edit/}+${partorder.partNumber}">Edit</a></td>
+			<!--  <td><a href="Deletepartorder.html"
+				th:href="@{/partorder/delete/}+${partorder.partNumber}">Delete</a></td> -->
+		</tr>
+	</table>
+    <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>
