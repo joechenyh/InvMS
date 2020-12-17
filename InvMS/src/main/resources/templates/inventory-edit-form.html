@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inventory Form</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function () {
+	$("#ddlselect").on("click", function (event) {
+		var product = $("#ddlselect").val();
+		
+		if(product != "0"){	
+		    $.ajax({
+		      type : "POST",
+		      url :  "/inventory/getProduct/" + product,
+		      traditional: true,
+		      data: { text: product },
+		      success: successFunc
+		    });
+		
+		    function successFunc(data){
+	    	  $("#pdt_price").val(data[0]);
+	    	  $("#pdt_name").val(data[1]);
+		    }
+	    }else{
+	    	$("#pdt_price").val("");
+	    	$("#pdt_name").val("");
+	    	return
+	    }
+	  });
+});
+</script>
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Inventory Out Form</h1>
+	
+	
+
+	
+	<form action="#" th:object="${inventory}" th:action="@{/inventory/confirm}"
+		method="post">
+		<fieldset>
+			<input type="hidden" th:field="*{inventoryId}">
+		</fieldset> 
+		<fieldset>
+			Product Name <input type="text" th:field="*{product.partNumber}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('product.partNumber')}"
+				th:errors="*{product.partNumber}"></p>
+		</fieldset>
+		 <fieldset>
+			Supplier Name <input type="text" th:field="*{supplierName}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('supplierName')}"
+				th:errors="*{supplierName}"></p>
+		</fieldset>
+		<fieldset>
+			Brand Id <input type="text" th:field="*{brandId}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}"></p>
+		</fieldset>
+
+		<fieldset>
+			Brand Name <input type="text" th:field="*{brandName}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></p>
+		</fieldset>
+		<!-- <fieldset>
+			Item Name <input type="text" th:field="*{itemName}" >
+			<p th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}"></p>
+		</fieldset> -->
+		<fieldset>
+			Description <input type="text" th:field="*{description}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
+		</fieldset>
+		<fieldset>
+			Type <input type="text" th:field="*{type}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
+		</fieldset>
+		<fieldset>
+			Category <input type="text" th:field="*{category}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
+		</fieldset>
+		<fieldset>
+			Subcategory <input type="text" th:field="*{subCategory}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('subCategory')}" th:errors="*{subCategory}"></p>
+		</fieldset>
+		<fieldset>
+			Original Price <input type="text" th:field="*{originalPrice}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('originalPrice')}" th:errors="*{originalPrice}"></p>
+		</fieldset>
+		<fieldset>
+			Whole Price <input type="text" th:field="*{wholesalePrice}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('wholesalePrice')}" th:errors="*{wholesalePrice}"></p>
+		</fieldset>
+		<fieldset>
+			Retail Price <input type="text" th:field="*{retailPrice}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('retailPrice')}" th:errors="*{retailPrice}"></p>
+		</fieldset>
+		<fieldset>
+			Partner Price <input type="text" th:field="*{partnerPrice}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('partnerPrice')}" th:errors="*{partnerPrice}"></p>
+		</fieldset>
+		<fieldset>
+			Out <input type="text" th:field="*{units}">
+			<p th:if="${#fields.hasErrors('units')}" th:errors="*{units}"></p>
+		</fieldset> 
+		
+		<fieldset>
+			<input type="submit" value="Confirm" /> &nbsp; &nbsp; 
+			
+		</fieldset>
+
+	</form> 
+	<h1 style="color:red" th:text=${message}></h1> 
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>

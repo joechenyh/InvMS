@@ -71,7 +71,9 @@ public class InventoryController {
 	@RequestMapping(value = "/edit/{id}")
 	public String editForm(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("inventory", iservice.findInventoryById(id));
-		return "inventory-form";
+		ArrayList<Product> plist = pservice.findAllProducts();
+		model.addAttribute("products",plist);
+		return "inventory-edit-form";
 	}
 	
 	@RequestMapping(value = "/save")
@@ -116,6 +118,40 @@ public class InventoryController {
 			msg="Negative value unacceptable";
 		}
 		return msg;
+	}
+	
+	@RequestMapping(value = "/confirm")
+	public String outInventory(@ModelAttribute("inventory") @Valid Inventory inventory, 
+			BindingResult bindingResult,  Model model) 
+	{
+		Inventory inventorycore = iservice.findInventoryById(inventory.getInventoryId());
+		int newUnit = inventorycore.getUnits() - inventory.getUnits();
+		inventorycore.setUnits(newUnit);
+		iservice.saveInventory(inventorycore);
+		return "forward:/inventory/list";
+//		String msg = checkError(inventory);
+//		if (bindingResult.hasErrors()||msg!=null) 
+//		{
+//			model.addAttribute("message",msg);
+//			return "inventory-form";
+//		}
+//		else 
+//		{
+//			int partNum = inventory.getProduct().getPartNumber();
+//			ArrayList<Product> flist = new ArrayList<Product>();
+//			flist = (ArrayList<Product>) pservice.findAllProducts();
+//			for (Iterator <Product> iterator = flist.iterator(); iterator.hasNext();) 
+//			{
+//				Product product2 = iterator.next();
+//				if(product2.getPartNumber()==partNum) 
+//				{
+//					inventory.setItemName(product2.getProductName());
+//					break;
+//				}
+//			}
+//			iservice.saveInventory(inventory);
+//			return "forward:/inventory/list";	
+//		}
 	}
 
 }
