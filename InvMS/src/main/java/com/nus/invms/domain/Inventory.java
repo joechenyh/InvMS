@@ -5,12 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Inventory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int inventoryId;
+
+	@Column
 	private int productId; // this is the Product Part Number
 
 //	@OneToMany(mapped by "supplier")
@@ -40,19 +44,15 @@ public class Inventory {
 	@Column
 	private int units;
 
-	@Override
-	public String toString() {
-		return "Inventory [productId=" + productId + ", supplierName=" + supplierName + ", brandId=" + brandId
-				+ ", brandName=" + brandName + ", itemName=" + itemName + ", invdescription=" + invdescription
-				+ ", invtype=" + invtype + ", category=" + category + ", subCategory=" + subCategory
-				+ ", originalPrice=" + originalPrice + ", wholesalePrice=" + wholesalePrice + ", retailPrice="
-				+ retailPrice + ", partnerPrice=" + partnerPrice + ", units=" + units + "]";
+	public Inventory() {
+		super();
 	}
 
-	public Inventory(String supplierName, int brandId, String brandName, String itemName, String invdescription,
-			String invtype, String category, String subCategory, Double originalPrice, Double wholesalePrice,
-			Double retailPrice, Double partnerPrice, int units) {
+	public Inventory(int productId, String supplierName, int brandId, String brandName, String itemName,
+			String invdescription, String invtype, String category, String subCategory, Double originalPrice,
+			Double wholesalePrice, Double retailPrice, Double partnerPrice, int units) {
 		super();
+		this.productId = productId;
 		this.supplierName = supplierName;
 		this.brandId = brandId;
 		this.brandName = brandName;
@@ -68,8 +68,12 @@ public class Inventory {
 		this.units = units;
 	}
 
-	public Inventory() {
-		super();
+	public int getInventoryId() {
+		return inventoryId;
+	}
+
+	public void setInventoryId(int inventoryId) {
+		this.inventoryId = inventoryId;
 	}
 
 	public int getProductId() {
@@ -182,6 +186,15 @@ public class Inventory {
 
 	public void setUnits(int units) {
 		this.units = units;
+	}
+
+	@Override
+	public String toString() {
+		return "Inventory [inventoryId=" + inventoryId + ", productId=" + productId + ", supplierName=" + supplierName
+				+ ", brandId=" + brandId + ", brandName=" + brandName + ", itemName=" + itemName + ", invdescription="
+				+ invdescription + ", invtype=" + invtype + ", category=" + category + ", subCategory=" + subCategory
+				+ ", originalPrice=" + originalPrice + ", wholesalePrice=" + wholesalePrice + ", retailPrice="
+				+ retailPrice + ", partnerPrice=" + partnerPrice + ", units=" + units + "]";
 	}
 
 }

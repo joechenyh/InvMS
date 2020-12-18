@@ -17,10 +17,10 @@
 			<input type="hidden" th:field="*{inventoryId}">
 		</fieldset>
 		<fieldset>
-			Part Number <input type="text" th:field="*{product.partNumber}">
+			Part Number <input type="text" th:field="*{productId}">
 			<p style="color: red"
-				th:if="${#fields.hasErrors('product.partNumber')}"
-				th:errors="*{product.partNumber}"></p>
+				th:if="${#fields.hasErrors('productId')}"
+				th:errors="*{productId}"></p>
 		</fieldset>
 		<fieldset>
 			Supplier Name <input type="text" th:field="*{supplierName}">

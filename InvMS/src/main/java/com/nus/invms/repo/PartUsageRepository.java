@@ -3,8 +3,6 @@ package com.nus.invms.repo;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.nus.invms.domain.PartUsage;
 
@@ -26,10 +24,10 @@ public interface PartUsageRepository extends JpaRepository<PartUsage, Integer> {
 	// 4. Find Usage by CarPlate
 //	@Query("Select u from PartUsage u where u.carplate Like :carplate")
 //	List<PartUsage> findUsageByCarPlate(@Param("carplate") String carplate);
-	List<PartUsage> findUsageByCarPlate(String carplate);
+	List<PartUsage> findUsageByCarplate(String carplate);
 
 	// 5. Find Usage By Date -- see Service: findByUsageDateBetween
-	List<PartUsage> findByUsageDateBetween(String d1, String d2);
+	List<PartUsage> findByUsagedateBetween(String d1, String d2);
 
 	public PartUsage findByTransactionId(Integer tid);
 }

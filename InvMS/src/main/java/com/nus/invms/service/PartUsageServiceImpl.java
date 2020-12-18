@@ -61,14 +61,14 @@ public class PartUsageServiceImpl implements PartUsageService {
 	@Transactional
 	public List<PartUsage> findPartUsageByCarplate(String carplate) {
 		// TODO Auto-generated method stub
-		return purepo.findUsageByCarPlate(carplate);
+		return purepo.findUsageByCarplate(carplate);
 	}
 
 	@Override
 	@Transactional
-	public List<PartUsage> findByUsageDateBetween(String d1, String d2) {
+	public List<PartUsage> findByUsagedateBetween(String d1, String d2) {
 		// TODO Auto-generated method stub
-		return purepo.findByUsageDateBetween(d1, d2);
+		return purepo.findByUsagedateBetween(d1, d2);
 	}
 
 	@Override

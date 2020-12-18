@@ -61,7 +61,7 @@ public class InventoryController {
 //		return "inventories";
 //	}
 	
-	@RequestMapping(value = "/list")
+	@RequestMapping("/")
 	public String search(Model model, @Param("term") String term) {
 		List<Inventory> listInventory = invservice.listInventory(term);
 		model.addAttribute("listInventory", listInventory);
@@ -86,7 +86,7 @@ public class InventoryController {
 			return "inventory-form";
 		}
 		invservice.addInventory(inventory);
-		return "forward:/inventory/list";
+		return "forward:/inventory/";
 	}
 	@RequestMapping(value = "/delete/{id}")
 	public String deleteFacility(@PathVariable("id") Integer id) {

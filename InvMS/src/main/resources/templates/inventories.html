@@ -16,7 +16,7 @@
 		<br />
 		<div>
 			<form th:action="@{/}">
-				Filter: <input type="text" name="keyword" id="keyword" size="50"
+				<input type="text" name="keyword" id="keyword" size="50"
 					th:value="${keyword}" required /> &nbsp; <input type="submit"
 					value="Search" /> &nbsp;
 			</form>
@@ -27,6 +27,7 @@
 		<h2 th:if="${not #lists.isEmpty(listInventory)}">Inventory</h2>
 			<table th:if="${not #lists.isEmpty(listInventory)}" border="1" cellpadding="5">
 				<tr>
+					<th>Inventory ID</th>
 					<th>Product ID</th>
 					<th>Supplier</th>
 					<th>Brand ID</th>
@@ -43,6 +44,7 @@
 					<th>Units</th>
 				</tr>
 				<tr th:each="inventory : ${listInventory}">
+					<td th:text="${inventory.inventoryId}">Inventory ID</td>
 					<td th:text="${inventory.productId}">Product ID</td>
 					<td th:text="${inventory.supplierName}">Supplier</td>
 					<td th:text="${inventory.brandId}">Brand ID</td>
