@@ -39,10 +39,10 @@ $(document).ready(function () {
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Inventory Form</h1>
-	Part Number<select id="ddlselect">
+	Product Name<select id="ddlselect">
 	<option value="0">--Select--</option>
 	<option th:each="product:${products}" th:value="${product.partNumber}"
-					th:text="${product.partNumber}"></option>
+					th:text="${product.productName}"></option>
 	</select>
 	
 	Name<input type="text" readonly="readonly" id="pdt_name"/>
