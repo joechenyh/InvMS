@@ -9,11 +9,11 @@
 		<version>2.3.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>sg.edu.iss</groupId>
-	<artifactId>club</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>club</name>
-	<description>Course Application Tracking System</description>
+	<groupId>com.nus.invms</groupId>
+		<artifactId>inventory</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<name>inventory</name>
+	<description>CA for inventory management system</description>
 
 	<properties>
 		<java.version>11</java.version>
