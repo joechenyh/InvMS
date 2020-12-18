@@ -31,4 +31,5 @@ public interface PartUsageRepository extends JpaRepository<PartUsage, Integer> {
 	// 5. Find Usage By Date -- see Service: findByUsageDateBetween
 	List<PartUsage> findByUsageDateBetween(String d1, String d2);
 
+	public PartUsage findByTransactionId(Integer tid);
 }

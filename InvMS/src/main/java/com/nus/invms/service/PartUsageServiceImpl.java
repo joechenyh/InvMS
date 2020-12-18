@@ -71,4 +71,11 @@ public class PartUsageServiceImpl implements PartUsageService {
 		return purepo.findByUsageDateBetween(d1, d2);
 	}
 
+	@Override
+	@Transactional
+	public PartUsage findByTransactionId(Integer tid) {
+		// TODO Auto-generated method stub
+		return purepo.findByTransactionId(tid);
+	}
+
 }

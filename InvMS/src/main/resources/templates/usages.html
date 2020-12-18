@@ -11,33 +11,30 @@
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Usages List</h1>
+	<h1>Part Usage</h1>
 	<!-- Add Hyperlink -->
 	<a href="AddBooking.html" th:href="@{/partusage/add}">New Part Usage</a>
 
-	<h2 th:if="${not #lists.isEmpty(bookings)}">Usages List</h2>
-	<table th:if="${not #lists.isEmpty(bookings)}" >
+	<h2 th:if="${not #lists.isEmpty(pusages)}">Part Usage History</h2>
+	<table th:if="${not #lists.isEmpty(pusages)}" >
 		<tr >
-			<th>Booking Id</th>
-			<th>Member Name</th>
-			<th>User Name</th>
-			<th>Facility Name</th>
-			<th>From Date</th>
-			<th>To Date</th>
-			<th>Status</th>
-			<th>Cancel Booking</th>
+			<th>Transaction Id</th>
+			<th>Employee Name</th>
+			<th>Part Number</th>
+			<th>Quantity Used</th>
+			<th>Date of Use</th>
 		</tr>
-		<tr th:each="booking:${bookings}" >
-			<td th:text=${booking.bookingId}>Id</td>
-			<td th:text="${booking.member.firstName}+${booking.member.lastName}"> Name</td>
-			<td th:text=${booking.member.username}>User Name</td>
-			<td th:text=${booking.facility.name}>Last Name</td>
-			<td th:text=${booking.startDate}>From Date</td>
-			<td th:text=${booking.endDate}>To Date</td>
-			<td th:text=${booking.status}>status</td>
-			<td ><a href="CancelBooking.html"
-				th:href="@{/booking/cancel/}+${booking.bookingId}" 
-				th:if="${booking.status == T(sg.edu.iss.club.domain.BookingStatus).BOOKED}">Cancel</a></td>
+		<tr th:each="partUsage:${pusages}">
+			<td th:text=${partUsage.transactionId}>Transaction Id</td>
+			<td th:text="${partUsage.employee.name}">Name</td>
+			<td th:text=${partUsage.partNumber}>User Name</td>
+			<td th:text=${partUsage.quantity}>Quantity</td>
+			<td th:text=${partUsage.usagedate}>Date</td>
+			<td th:text=${partUsage.carplate}>Carplate</td>
+			<td><a href="EditPartUsage.html"
+				th:href="@{/partusage/edit/}+${partUsage.transactionId}">Edit</a></td>
+			<td><a href="DeletePartUsage.html"
+				th:href="@{/partUsage/delete/}+${partUsage.transactionId}">Delete</a></td>
 		</tr>
 	</table>
     <br/>

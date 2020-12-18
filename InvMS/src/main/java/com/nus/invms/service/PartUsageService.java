@@ -14,5 +14,6 @@ public interface PartUsageService {
 	public List<PartUsage> viewPartUsage(String partnumber);
 	public List<PartUsage> findPartUsageByCarplate(String carplate);
 	public List<PartUsage> findByUsageDateBetween(String d1, String d2);
+	public PartUsage findByTransactionId(Integer tid);
 
 }

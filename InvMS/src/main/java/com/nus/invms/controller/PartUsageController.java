@@ -1,5 +1,7 @@
 package com.nus.invms.controller;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +29,8 @@ public class PartUsageController {
 	@Autowired
 	private PartUsageService puservice;
 
-	@Autowired
-	EmployeeInterface empservice;
+//	@Autowired
+//	private EmployeeInterface empservice;
 
 	// @Autowired
 	// private EmployeeService eservice;
@@ -52,34 +54,36 @@ public class PartUsageController {
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		model.addAttribute("pusages", puservice.listPartUsage());
-		return "pusages";
+		return "usages";
 	}
 
 	@RequestMapping(value = "/add")
 	public String addForm(Model model) {
 		model.addAttribute("pusage", new PartUsage());
-		return "pusage-form";
+//		ArrayList<String> emplist = empservice.findAllEmployeeNames();
+//		model.addAttribute("enames", emplist);
+		return "usage-form";
 	}
 
 	@RequestMapping(value = "/edit/{id}")
 	public String editForm(@PathVariable("id") String id, Model model) {
 		model.addAttribute("pusage", puservice.viewPartUsage(id));
-		return "pusage-form";
+		return "usage-form";
 	}
 
 	@RequestMapping(value = "/save")
-	public String saveInventory(@ModelAttribute("pusage") @Valid PartUsage pusage, BindingResult bindingResult,
+	public String savePartUsage(@ModelAttribute("pusage") @Valid PartUsage pusage, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			return "pusage-form";
+			return "usage-form";
 		}
 		puservice.addPartUsage(pusage);
 		return "forward:/partusage/list";
 	}
 
 	@RequestMapping(value = "/delete/{id}")
-	public String deletePartUsage(@PathVariable("id") Integer id) {
-		invservice.deactivateInventory(invservice.getInventory(id));
+	public String deletePartUsage(@PathVariable("id") Integer tid) {
+		puservice.deletePartUsage(puservice.findByTransactionId(tid));
 		return "forward:/partusage/list";
 	}
 
