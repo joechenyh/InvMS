@@ -5,39 +5,61 @@
 <link th:href="@{/css/styles.css}" rel="stylesheet">
 </head>
 <body>
-	<div th:fragment="header" id="header">
-		<table>
-			<tr>
-				<td width="15%"><img th:src="@{/image/club.png}" /></td>
-				<td><h1>Facility Booking System</h1></td>
-			</tr>
-		</table>
-
-	</div>
-	<div th:fragment="menu" id="menu">
-		<table>
-			<tr>
-				<td><input type="button" value="Manage Products"
-					onclick="window.location.href='/product/list'; return false"
-					class="button" /> 	
-				</td>
-				<td><input type="button" value="Manage Inventories"
-					onclick="window.location.href='/inventory/list'; return false"
-					class="button" /> 	
-				</td>
-				<td><input type="button" value="Manage Part Order"
-					onclick="window.location.href='/partorder/list'; return false"
-					class="button" /> 	
-				</td>
-			</tr>
-		</table>
-	</div>
-	<footer th:fragment="footer">
+<div th:fragment="header" id="header">
+</div>
+<div th:fragment="menu" id="menu">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" >The ISS Mechanic</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#" th:href="@{/}">Home</a></li>Y
+      <li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/admin/add}">Add New Employee</a></li>
+      <li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/update/}+${session.empsession.username}">Update Password</a></li>
+      <li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/admin/list}">Employee List</a></li>
+    
+<!--       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" th:href="@{/admin/list}"> Employees <span class="caret"></span> </a> -->
+<!--       <ul class="dropdown-menu"> -->
+<!--           <li><a class="dropdown-item" href="#" th:href="@{/admin/add}">Register New User</a></li> -->
+<!--           <li><a class="dropdown-item" href="#" th:href="@{/update}">Update Details</a></li> -->
+<!--           </ul> -->
+<!--       </li> -->
+<!--       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock Forms <span class="caret"></span></a> -->
+<!--         <ul class="dropdown-menu"> -->
+<!--           <li><a href="#" th:href="@{/product/add}">Stock Entry Form</a></li> -->
+<!--           <li><a href="#" th:href="@{/inventory/update}">Stock Usage Form</a></li> -->
+<!--         </ul> -->
+<!--       </li> -->
+      <li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/product/add}">Add New Product</a></li>
+      <li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/product/list}">Products List</a></li>
+    </ul>
+    
+    <ul class="nav navbar-nav">
+    	<li th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}"><a href="#" th:href="@{/supplier/add}">Add New Supplier</a></li>
+      	<li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/supplier/list}">Suppliers List</a></li>
+    	<li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/order/add}">Add New Order</a></li>
+      	<li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/order/list}">Orders List</a></li>
+      	<li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/inventory/list}">Inventory</a></li>
+	</ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+      <li th:if="${#lists.isEmpty(session.empsession)}"><a href="#" th:href="@{/login}"> Login </a></li>
+      <li th:if="${not #lists.isEmpty(session.empsession)}"><a href="#" th:utext="${session.empsession.username}"> User </a></li>
+      <li><a href="#" th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+</div>
+<footer th:fragment="footer">
+<div style="position: fixed; bottom:0; left:0; width:100%; text-align:center ">
 		<a href="Home" th:href="@{/}">Back to Home</a>
 		<br/>
 		 <small>Now is: <b
-			th:text="${execInfo.now.time}"></b></small> <br /> <small>(c)Facility
-			Booking System , ISS, NUS 2020</small>
-	</footer>
+			th:text="${execInfo.now.time}"></b></small> <br /> <small>
+			(c) Inventory Management System, ISS, NUS 2020</small>
+			</div>
+</footer>
+
 </body>
 </html>

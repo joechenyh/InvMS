@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>User List</h1>
+	<!-- Add Hyperlink -->
+	<a href="AddSupplier.html" th:href="@{/supplier/add}">New Supplier</a>
+
+	<h2 th:if="${not #lists.isEmpty(supplierList)}">Supplier List</h2>
+	<table th:if="${not #lists.isEmpty(supplierList)}"  class="table">
+		<tr>
+			<th>Supplier Id</th>
+			<th>Status</th>
+			<th>Supplier Name</th>
+			<th>Phone Number</th>
+			<th>Address</th>
+			<th>Email Address</th>
+
+		</tr>
+		<tr th:each="supplier:${supplierList}" >
+			<td th:text=${supplier.supplierId}>Id</td>
+			<td th:text="${supplier.status}"> Status</td>
+			<td th:text=${supplier.supplierName}> Supplier name</td>
+			<td th:text=${supplier.phoneNumber}>Phone Number</td>
+			<td th:text=${supplier.address}>Address</td>
+			<td th:text=${supplier.emailAddress}>Email Address</td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="EditSupplier.html" th:href="@{/supplier/edit/}+${supplier.supplierId}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="DeleteSupplier.html" th:href="@{/supplier/delete/}+${supplier.supplierId}">Delete</a></td>
+		</tr>
+	</table>
+    <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>

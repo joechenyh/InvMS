@@ -1,25 +1,40 @@
+
 package com.nus.invms.domain;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.Table;
+
 
 @Entity
-public class Product {
-	@Id
-	private int partNumber;
-	private int reorderLevel, minReorderQty;
-	private String productName, description, colour, dimension, manufacturer, shelfLocation;
-	private Double unitPrice;
-		
-	public Product() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+@Table(name = "product")
 
-	public Product(int partNumber, int reorderLevel, int minReorderQty, String productName, String description,
-			String colour, String dimension, String manufacturer, String shelfLocation, Double unitPrice) {
+public class Product {
+
+	@Id
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int partNumber;
+	@NotNull
+	private int reorderLevel, minReorderQty; 
+	@NotEmpty
+	private String productName, description, colour, dimension, shelfLocation;
+	
+	@NotEmpty 
+	private String manufacturer;
+	
+	@NotNull
+	private Double unitPrice;
+	private Status status;    
+	
+	public Product(int partNumber, int reorderLevel, int minReorderQty, String productName, String description, String colour,
+			String dimension, String manufacturer, String shelfLocation, Double unitPrice, Status status) {
 		super();
 		this.partNumber = partNumber;
 		this.reorderLevel = reorderLevel;
@@ -31,19 +46,66 @@ public class Product {
 		this.manufacturer = manufacturer;
 		this.shelfLocation = shelfLocation;
 		this.unitPrice = unitPrice;
+		this.status = status;
+	} 
+	
+	
+/*
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	int partNumber;
+	
+	int reorderLevel, minReorderQty; 
+	String productName, description, colour, dimension, manufacturer, shelfLocation;
+	Double unitPrice; 
+	
+	
+
+	public Product(int reorderLevel, int minReorderQty, String productName, String description, String colour,
+			String dimension, String manufacturer, String shelfLocation, Double unitPrice) {
+		super();
+		this.reorderLevel = reorderLevel;
+		this.minReorderQty = minReorderQty;
+		this.productName = productName;
+		this.description = description;
+		this.colour = colour;
+		this.dimension = dimension;
+		this.manufacturer = manufacturer;
+		this.shelfLocation = shelfLocation;
+		this.unitPrice = unitPrice;
+	}
+	
+	*/
+	
+	
+
+	public int getReorderLevel() {
+		return reorderLevel;
 	}
 
 	public int getPartNumber() {
 		return partNumber;
 	}
 
+
 	public void setPartNumber(int partNumber) {
 		this.partNumber = partNumber;
 	}
 
-	public int getReorderLevel() {
-		return reorderLevel;
+
+	public Status getStatus() {
+		return status;
 	}
+
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+
+	public Product() {
+	super();
+}
+
 
 	public void setReorderLevel(int reorderLevel) {
 		this.reorderLevel = reorderLevel;
@@ -113,17 +175,6 @@ public class Product {
 		this.unitPrice = unitPrice;
 	}
 
-	@Override
-	public String toString() {
-		return "Member [partNumber=" + partNumber + ", reorderLevel=" + reorderLevel + ", minReorderQty="
-				+ minReorderQty + ", productName=" + productName + ", description=" + description + ", colour=" + colour
-				+ ", dimension=" + dimension + ", manufacturer=" + manufacturer + ", shelfLocation=" + shelfLocation
-				+ ", unitPrice=" + unitPrice + "]";
-	}
-	
-	
-	
-	
-	
-	
+
+
 }

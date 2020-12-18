@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<title>Employee Update Form</title>
+</head>
+<body>
+
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>User Update Form</h1>
+
+	<form action="#" th:object="${password}" th:action="@{/password/updatePassword}"
+		method="post">
+		
+		<table class="table">
+		<tr>
+			<td >User Name : <span th:text="${session.empsession.username}"></span> </td>
+		</tr>
+		</table>
+		
+		<fieldset>
+			Password <input type="password" th:field="*{password}">
+			<p style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+		</fieldset>
+		
+		<fieldset>
+			New Password <input type="password" th:field="*{newPassword}">
+			<p style="color:red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Confirm New Password <input type="password" th:field="*{confNewPassword}">
+			<p style="color:red" th:if="${#fields.hasErrors('confNewPassword')}" th:errors="*{confNewPassword}"></p>
+		</fieldset>
+
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
+		</fieldset>
+
+	</form>
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 package com.nus.invms.controller;
 
 import java.util.ArrayList;
@@ -16,35 +17,61 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Product;
+import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
+import com.nus.invms.service.PartUsageService;
+import com.nus.invms.service.PartUsageServiceImpl;
 import com.nus.invms.service.ProductService;
 import com.nus.invms.service.ProductServiceImpl;
+
+
 
 @Controller
 @RequestMapping("/inventory")
 public class InventoryController {
+
+	@Autowired
+	private InventoryService invservice;
 	
 	@Autowired
-	private InventoryService iservice;
+	private PartUsageService puservice;
+	
+	@Autowired 
+	EmployeeInterface empservice;
+	
+	//@Autowired
+	//private EmployeeService eservice; 
+
+	@Autowired
+	public void setInvService(InventoryServiceImpl invserviceimpl) {
+		this.invservice = invserviceimpl;
+	}
+	
+	@Autowired
+	public void setPUService(PartUsageServiceImpl puserviceimpl) {
+		this.puservice = puserviceimpl;
+	}
 	
 	@Autowired
 	private ProductService pservice;
-	
-	@Autowired
-	public void setInventoryService(InventoryServiceImpl iserviceImpl) {
-		this.iservice = iserviceImpl;
-	}
 	
 	@Autowired
 	public void setProductService(ProductServiceImpl pserviceImpl) {
 		this.pservice = pserviceImpl;
 	}
 	
-    
+	
+/*	//1. Manage Inventory
+	@RequestMapping(value = "/inventorydashboard")
+	public String Viewdashboard(){
+		return "inventorydashboard";
+	}*/
+
+
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
-		model.addAttribute("inventories", iservice.findAllInventories());
+		model.addAttribute("inventories", invservice.findAllInventories());
 		return "inventories";
 	}
 	@RequestMapping(value = "/add")
@@ -53,6 +80,49 @@ public class InventoryController {
 		ArrayList<Product> plist = pservice.findAllProducts();
 		model.addAttribute("products",plist);
 		return "inventory-form";
+	}
+	
+	@RequestMapping(value = "/edit/{id}")
+	public String editForm(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("inventory", invservice.getInventory(id));
+		ArrayList<Product> plist = pservice.findAllProducts();
+		model.addAttribute("products",plist);
+		return "editInventory";
+	}
+	
+	
+	@RequestMapping(value = "/save")
+	public String saveInventory(@ModelAttribute("inventory") @Valid Inventory inventory, 
+		BindingResult bindingResult,  Model model) {
+		String msg = checkError(inventory);
+		
+		if (bindingResult.hasErrors()|| msg!=null) 
+		{
+			model.addAttribute("message",msg);
+			ArrayList<Product> plist = pservice.findAllProducts();
+			model.addAttribute("products",plist);
+			//model.addAttribute("inventory", new Inventory());
+			System.out.println("!!!" + msg);
+			return "inventory-form";
+		}
+		else 
+		{
+			int partNum = inventory.getProduct().getPartNumber();
+			Product product = pservice.findProductById(partNum);
+			inventory.setItemName(product.getProductName());
+			invservice.addInventory(inventory);
+			return "forward:/inventory/list";
+		}
+		
+		
+	}
+	
+	
+	
+	@RequestMapping(value = "/delete/{id}")
+	public String deleteFacility(@PathVariable("id") Integer id) {
+		invservice.deactivateInventory(invservice.getInventory(id));
+		return "forward:/inventory/list";
 	}
 	
 	@RequestMapping(value = "/getProduct/{id}")
@@ -68,54 +138,13 @@ public class InventoryController {
 		return productInfo;
 	}
 	
-	@RequestMapping(value = "/edit/{id}")
-	public String editForm(@PathVariable("id") Integer id, Model model) {
-		model.addAttribute("inventory", iservice.findInventoryById(id));
-		return "inventory-form";
-	}
-	
-	@RequestMapping(value = "/save")
-	public String saveInventory(@ModelAttribute("inventory") @Valid Inventory inventory, 
-			BindingResult bindingResult,  Model model) 
-	{
-		String msg = checkError(inventory);
-		if (bindingResult.hasErrors()||msg!=null) 
-		{
-			model.addAttribute("message",msg);
-			return "inventory-form";
-		}
-		else 
-		{
-			int partNum = inventory.getProduct().getPartNumber();
-			ArrayList<Product> flist = new ArrayList<Product>();
-			flist = (ArrayList<Product>) pservice.findAllProducts();
-			for (Iterator <Product> iterator = flist.iterator(); iterator.hasNext();) 
-			{
-				Product product2 = iterator.next();
-				if(product2.getPartNumber()==partNum) 
-				{
-					inventory.setItemName(product2.getProductName());
-					break;
-				}
-			}
-			iservice.saveInventory(inventory);
-			return "forward:/inventory/list";	
-		}
-	}
-	
-	@RequestMapping(value = "/delete/{id}")
-	public String deleteInventory(@PathVariable("id") Integer id) 
-	{
-		iservice.deleteInventory(iservice.findInventoryById(id));
-		return "forward:/inventory/list";
-	}
-	
 	public String checkError(Inventory inventory) {
 		String msg = null;
-		if(inventory.getBrandId()<0||inventory.getOriginalPrice()<0||inventory.getPartnerPrice()<0||inventory.getRetailPrice()<0||inventory.getWholesalePrice()<0||inventory.getUnits()<0) {
+		if(inventory.getBrandId()<0||inventory.getOriginalPrice()<0||inventory.getPartnerPrice()<0||inventory.getRetailPrice()<0||inventory.getWholesalePrice()<0||inventory.getUnits()<0) 
+		{
 			msg="Negative value unacceptable";
 		}
 		return msg;
 	}
-
 }
+

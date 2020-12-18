@@ -2,15 +2,52 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <title>Inventory Form</title>
-<link rel="stylesheet" type="text/css" media="all"
-	href="../../css/style.css" th:href="@{/css/style.css}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function () {
+	$("#ddlselect").on("click", function (event) {
+		var product = $("#ddlselect").val();
+		
+		if(product != "0"){	
+		    $.ajax({
+		      type : "POST",
+		      url :  "/inventory/getProduct/" + product,
+		      traditional: true,
+		      data: { text: product },
+		      success: successFunc
+		    });
+		
+		    function successFunc(data){
+	    	  $("#pdt_price").val(data[0]);
+	    	  $("#pdt_name").val(data[1]);
+		    }
+	    }else{
+	    	$("#pdt_price").val("");
+	    	$("#pdt_name").val("");
+	    	return
+	    }
+	  });
+});
+</script>
 </head>
 <body>
+
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Inventory Form</h1>
+	Part Number<select id="ddlselect">
+	<option value="0">--Select--</option>
+	<option th:each="product:${products}" th:value="${product.partNumber}"
+					th:text="${product.partNumber}"></option>
+	</select>
+	
+	Name<input type="text" readonly="readonly" id="pdt_name"/>
+	Unit Price<input type="text" readonly="readonly" id="pdt_price"/>
+	
 	<form action="#" th:object="${inventory}" th:action="@{/inventory/save}"
 		method="post">
 		<fieldset>
@@ -28,7 +65,7 @@
 				th:errors="*{supplierName}"></p>
 		</fieldset>
 		<fieldset>
-			Brand Id <input type="text" th:field="*{brandId}">
+			Brand Id <input type="number" step=1 th:field="*{brandId}">
 			<p th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}"></p>
 		</fieldset>
 
@@ -36,17 +73,17 @@
 			Brand Name <input type="text" th:field="*{brandName}">
 			<p th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></p>
 		</fieldset>
-		<fieldset>
+		<!-- <fieldset>
 			Item Name <input type="text" th:field="*{itemName}" >
 			<p th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}"></p>
+		</fieldset> -->
+		<fieldset>
+			Description <input type="text" th:field="*{invdescription}">
+			<p th:if="${#fields.hasErrors('invdescription')}" th:errors="*{invdescription}"></p>
 		</fieldset>
 		<fieldset>
-			Description <input type="text" th:field="*{description}">
-			<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
-		</fieldset>
-		<fieldset>
-			Type <input type="text" th:field="*{type}">
-			<p th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
+			Type <input type="text" th:field="*{invtype}">
+			<p th:if="${#fields.hasErrors('invtype')}" th:errors="*{invtype}"></p>
 		</fieldset>
 		<fieldset>
 			Category <input type="text" th:field="*{category}">
@@ -57,33 +94,36 @@
 			<p th:if="${#fields.hasErrors('subCategory')}" th:errors="*{subCategory}"></p>
 		</fieldset>
 		<fieldset>
-			Original Price <input type="text" th:field="*{originalPrice}">
+			Original Price <input type="number" step=0.01 th:field="*{originalPrice}">
 			<p th:if="${#fields.hasErrors('originalPrice')}" th:errors="*{originalPrice}"></p>
 		</fieldset>
 		<fieldset>
-			Whole Price <input type="text" th:field="*{wholesalePrice}">
+			Whole Price <input type="number" step=0.01 th:field="*{wholesalePrice}">
 			<p th:if="${#fields.hasErrors('wholesalePrice')}" th:errors="*{wholesalePrice}"></p>
 		</fieldset>
 		<fieldset>
-			Retail Price <input type="text" th:field="*{retailPrice}">
+			Retail Price <input type="number" step=0.01 th:field="*{retailPrice}">
 			<p th:if="${#fields.hasErrors('retailPrice')}" th:errors="*{retailPrice}"></p>
 		</fieldset>
 		<fieldset>
-			Partner Price <input type="text" th:field="*{partnerPrice}">
+			Partner Price <input type="number" step=0.01 th:field="*{partnerPrice}">
 			<p th:if="${#fields.hasErrors('partnerPrice')}" th:errors="*{partnerPrice}"></p>
 		</fieldset>
 		<fieldset>
-			Units <input type="text" th:field="*{units}">
+			Units <input type="number" step=1 th:field="*{units}">
 			<p th:if="${#fields.hasErrors('units')}" th:errors="*{units}"></p>
 		</fieldset> 
 		
 		<fieldset>
-			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
-				type="reset" value="Reset" />
+			<input type="submit" value="Save" /> &nbsp; &nbsp; 
+			<!-- <input type="button" value="Reset" onclick="window.location.href='/inventory/add'; return false" /> -->
 		</fieldset>
 
-	</form>  
+	</form> 
+	
+	<h1 style="color:red" th:text=${message}></h1>
 	<br />
 	<div th:replace="fragments/general.html :: footer"></div>
+
 </body>
 </html>

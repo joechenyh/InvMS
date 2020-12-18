@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<title>Employee Form</title>
+</head>
+<body>
+
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>User Form</h1>
+	<form action="#" th:object="${employee}" th:action="@{/admin/save}"
+		method="post">
+		<fieldset>
+			<input type="hidden" th:field="*{ID}">
+		</fieldset>
+		<fieldset>
+			Role <select th:field="*{role}">
+				<option th:each="roleOpt : ${T(com.nus.invms.domain.RoleType).values()}" 
+        th:value="${roleOpt}" th:text="${roleOpt}"></option>
+			</select>
+		</fieldset>
+		<fieldset>
+			Name <input type="text" th:field="*{name}">
+			<p style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+		</fieldset>
+		
+		<fieldset>
+			Status <select th:field="*{status}">
+				<option th:each="statOpt : ${T(com.nus.invms.domain.Status).values()}" 
+        th:value="${statOpt}" th:text="${statOpt}"></option>
+			</select>
+		</fieldset>
+
+		<fieldset>
+			Username <input type="text" th:field="*{username}">
+			<p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+		</fieldset>
+		<fieldset>
+			Password <input type="text" th:field="*{epassword}">
+			<p style="color:red" th:if="${#fields.hasErrors('epassword')}" th:errors="*{epassword}"></p>
+		</fieldset>
+
+		<fieldset>
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
+		</fieldset>
+
+	</form>
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+
+</body>
+</html>

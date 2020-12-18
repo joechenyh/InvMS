@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product List</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Product List</h1>
+	<!-- Add Hyperlink -->
+	<a href="AddProduct.html" th:href="@{/product/add}">New Product</a>
+
+	<h2 th:if="${not #lists.isEmpty(productList)}">Product List</h2>
+	<table th:if="${not #lists.isEmpty(productList)}"  class="table">
+		<tr>
+			<th>Part Number</th>
+			<th>Status</th>
+			<th>Product Name</th>
+			<th>Description</th>
+			<th>Colour</th>
+			<th>Dimension</th>
+			<th>Manufacturer</th>
+			<th>Shelf Location</th>
+			<th>Unit Price</th>
+			<th>Reorder Level</th>
+			<th>Minimum Reorder Quantity</th>
+			<th >Edit Product</th>
+			<th >Delete Product</th>
+
+		</tr>
+		<tr th:each="product:${productList}" >
+			<td th:text=${product.partNumber}>Part Number</td>
+			<td th:text=${product.status}>Part Number</td>
+			<td th:text="${product.productName}">Product Name</td>
+			<td th:text=${product.description}>Description</td>
+			<td th:text=${product.colour}>Colour</td>
+			<td th:text=${product.dimension}>Dimension</td>
+			<td th:text=${product.manufacturer}>Manufacturer</td>
+			<td th:text="${product.shelfLocation}">Shelf</td>
+			<td th:text=${product.unitPrice}>Unit Price</td>
+			<td th:text=${product.reorderLevel}>Reorder Level</td>
+			<td th:text=${product.minReorderQty}>Minimum Reorder Quantity</td>
+			<td><a href="EditProduct.html"
+				th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
+			<td><a href="DeleteProduct.html"
+				th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td>	
+			<!-- <td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td> -->
+		</tr>
+	</table>
+    <br/>
+	<div th:replace="fragments/general.html :: footer"></div>
+	
+</body>
+</html>

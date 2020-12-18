@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<title>Login Page</title>
+</head>
+<body>
+<header th:insert="fragments/general.html :: header"></header>
+  <div th:replace="fragments/general.html :: menu" ></div>
+  <h1>Login form</h1>
+
+<form action="" th:object="${employee}" th:action="@{/admin/authenticate}" method="post">
+        <fieldset>
+			Name: <input type="text" th:field="*{username}">
+			<p style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+		</fieldset>
+		<fieldset>
+			Password: <input type="password" th:field="*{epassword}">
+			<p style="color:red" th:if="${#fields.hasErrors('epassword')}" th:errors="*{epassword}"></p>
+		</fieldset>
+		<fieldset>
+			<button type="submit" >Log In</button>
+		</fieldset>
+		
+</form>
+  <div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>
