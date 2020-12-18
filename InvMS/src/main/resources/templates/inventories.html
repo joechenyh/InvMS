@@ -34,8 +34,9 @@
 			<th >partnerPrice</th>
 			<th >units</th>
 		
-			<th >Edit inventory</th>
-			<th >Delete inventory</th>
+			<th >Edit Inventory</th>
+			<th >Out Inventory</th>
+			<th >Delete Inventory</th>
 		</tr>
 		<tr th:each="inventory:${inventories}" class="table-row">
 			<td th:text=${inventory.inventoryId}>Part Num</td>
@@ -55,10 +56,9 @@
 			<td th:text=${inventory.units}>Unit Price</td>
 			
 		
-			<td><a href="Editinventory.html"
-				th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
-			<td><a href="Deleteinventory.html"
-				th:href="@{/inventory/delete/}+${inventory.inventoryId}">Delete</a></td>
+			<td><a href="Editinventory.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
+			<td><a href="Outinventory.html" th:href="@{/inventory/out/}+${inventory.inventoryId}">Out</a></td>
+			<td><a href="Deleteinventory.html" th:href="@{/inventory/delete/}+${inventory.inventoryId}">Delete</a></td>
 		</tr>
 	</table>
     <br/>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Inventory Form</title>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/style.css" th:href="@{/css/style.css}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function () {
+	$("#ddlselect").on("click", function (event) {
+		var product = $("#ddlselect").val();
+		
+		if(product != "0"){	
+		    $.ajax({
+		      type : "POST",
+		      url :  "/inventory/getProduct/" + product,
+		      traditional: true,
+		      data: { text: product },
+		      success: successFunc
+		    });
+		
+		    function successFunc(data){
+	    	  $("#pdt_price").val(data[0]);
+	    	  $("#pdt_name").val(data[1]);
+		    }
+	    }else{
+	    	$("#pdt_price").val("");
+	    	$("#pdt_name").val("");
+	    	return
+	    }
+	  });
+});
+</script>
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Inventory Out Form</h1>
+	
+	<form action="#" th:object="${inventory}" th:action="@{/inventory/confirm}"
+		method="post">
+		<fieldset>
+			<input type="hidden" th:field="*{inventoryId}">
+		</fieldset> 
+		<fieldset>
+			Part Number<input type="text" th:field="*{product.partNumber}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('product.partNumber')}"
+				th:errors="*{product.partNumber}"></p>
+		</fieldset>
+		 
+		<fieldset>
+			Item Name <input type="text" th:field="*{itemName}" readonly="readonly">
+			<p th:if="${#fields.hasErrors('itemName')}" th:errors="*{itemName}"></p>
+		</fieldset>
+		
+		
+		<fieldset>
+			Out Unit<input type="text" th:field="*{units}" >
+			<p th:if="${#fields.hasErrors('units')}" th:errors="*{units}"></p>
+		</fieldset> 
+		
+		<fieldset>
+			<input type="submit" value="Confirm" /> &nbsp; &nbsp; 
+		</fieldset>
+
+	</form> 
+	<h1 style="color:red" th:text=${msg}></h1> 
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+</body>
+</html>

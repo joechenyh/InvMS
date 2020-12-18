@@ -72,12 +72,12 @@ public class InventoryController {
 		return productInfo;
 	}
 	
-	@RequestMapping(value = "/edit/{id}")
-	public String editForm(@PathVariable("id") Integer id, Model model) {
+	@RequestMapping(value = "/out/{id}")
+	public String outForm(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("inventory", iservice.findInventoryById(id));
 		ArrayList<Product> plist = pservice.findAllProducts();
 		model.addAttribute("products",plist);
-		return "inventory-edit-form";
+		return "inventory-out-form";
 	}
 	
 	@RequestMapping(value = "/save")
@@ -130,17 +130,24 @@ public class InventoryController {
 	{
 		Inventory inventorycore = iservice.findInventoryById(inventory.getInventoryId());
 		int pdtId = inventory.getProduct().getPartNumber();
-		System.out.print("TESTTT" + pdtId);
-		Product product = pservice.findProductById(pdtId);
-		int reorderlvl = product.getReorderLevel();
-		int newUnit = inventorycore.getUnits() - inventory.getUnits();
-		if (newUnit<reorderlvl) {
-			String msg = product.getPartNumber() + " " + "Product Name: " + product.getProductName();
-			nservice.sendNotification(msg);
+		if(inventory.getUnits()>inventorycore.getUnits()) {
+			model.addAttribute("msg", "Insufficient store");
+			return "inventory-out-form";
 		}
-		inventorycore.setUnits(newUnit);
-		iservice.saveInventory(inventorycore);
-		return "forward:/inventory/list";
+		else {
+			//System.out.print("TESTTT" + pdtId);
+			Product product = pservice.findProductById(pdtId);
+			int reorderlvl = product.getReorderLevel();
+			int newUnit = inventorycore.getUnits() - inventory.getUnits();
+			if (newUnit<reorderlvl) {
+				String msg = product.getPartNumber() + " " + "Product Name: " + product.getProductName();
+				//nservice.sendNotification(msg);
+			}
+			inventorycore.setUnits(newUnit);
+			iservice.saveInventory(inventorycore);
+			return "forward:/inventory/list";
+		}
+		
 //		String msg = checkError(inventory);
 //		if (bindingResult.hasErrors()||msg!=null) 
 //		{
@@ -164,6 +171,13 @@ public class InventoryController {
 //			iservice.saveInventory(inventory);
 //			return "forward:/inventory/list";	
 //		}
+	}
+	@RequestMapping(value = "/edit/{id}")
+	public String editForm(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("inventory", iservice.findInventoryById(id));
+		ArrayList<Product> plist = pservice.findAllProducts();
+		model.addAttribute("products",plist);
+		return "inventory-edit-form";
 	}
 
 }
