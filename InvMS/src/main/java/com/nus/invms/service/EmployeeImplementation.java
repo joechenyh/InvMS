@@ -50,7 +50,7 @@ public class EmployeeImplementation implements EmployeeInterface {
 		// TODO Auto-generated method stub
 		Employee dbuser = emprepo.findEmployeeByUsername(employee.getUsername());
 		
-		if (dbuser.getUsername().equals(employee.getUsername()) && dbuser.getPassword().equals(employee.getPassword()))
+		if (dbuser.getUsername().equals(employee.getUsername()) && dbuser.getEPassword().equals(employee.getEPassword()))
 			return true;
 		else
 			return false;

@@ -38,6 +38,12 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 	//6. Find Inventory by Sub Category 
 	 @Query("Select i from Inventory i where i.subCategory LIKE :subCategory")
 		List<Inventory> findInventoryBySubCategory(@Param("subCategory") String subCategory);
+	 
+	 //Testing Paul code 
+	 @Query("SELECT i FROM Inventory i WHERE concat(i.productId, '', i.supplierName, '', i.brandId, '', i.itemName, '', i.invdescription, '', invtype) LIKE '%:keyword%'")
+		public List<Inventory> findInventoryItem(@Param("keyword") String keyword);
+	 
+
 	
 	
 }

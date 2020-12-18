@@ -42,7 +42,7 @@ public class PasswordController {
 			BindingResult bindingResult, Model model, HttpSession session, Errors errors)
 	{
 		Employee emp = (Employee) session.getAttribute("empsession");
-		if (!password.getPassword().equals(emp.getPassword()))
+		if (!password.getPassword().equals(emp.getEPassword()))
 		{
 			errors.rejectValue("password", "password mismatch", "Current password is incorrect");
 		}
@@ -58,11 +58,11 @@ public class PasswordController {
 		if (empservice.checkEmployeeNameExist(emp)) 
 		{
 			
-			if (emp.getPassword().equals(password.getPassword()))
+			if (emp.getEPassword().equals(password.getPassword()))
 			{
 				if (password.getNewPassword().equals(password.getConfNewPassword()) && !password.getNewPassword().isBlank() && !password.getConfNewPassword().isBlank())
 				{
-					emp.setPassword(password.getNewPassword());
+					emp.setEPassword(password.getNewPassword());
 					empservice.saveEmployee(emp);
 					
 					return "forward:/admin/list";

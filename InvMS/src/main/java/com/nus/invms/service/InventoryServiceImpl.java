@@ -1,5 +1,6 @@
 package com.nus.invms.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,59 @@ public class InventoryServiceImpl implements InventoryService {
 		return irepo.findAll();
 	}
 
+	@Override
+	public void createInventory(Inventory inventory) {
+		irepo.save(inventory);
+	}
 
+	@Override
+	public List<Inventory> listCompleteInventory() {
+		return irepo.findAll();
+	}
 
+	@Override
+	public void updateInventory(Inventory inventory) {
+		irepo.save(inventory);
+	}
+
+	public Inventory findByProductId(Integer id) {
+		return irepo.findById(id).get();
+	}
+
+	@Override
+	public ArrayList<Inventory> findBySupplierNameLike(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Inventory findByBrandId(Integer bid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Inventory> findByBrandNameLike(String bname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+//	Bottom part to create? 
+
+/*	public ArrayList<Inventory> findBySupplierNameLike(String name) {
+		return (ArrayList<Inventory>) irepo.findBySupplierName(name);
+	}
+
+	public Inventory findByBrandId(Integer bid) {
+		return irepo.findByBrandId(bid);
+	}
+
+	public ArrayList<Inventory> findByBrandNameLike(String bname) {
+		ArrayList<Inventory> bnlist = (ArrayList<Inventory>) irepo.findByBrandNameLike(bname);
+		return bnlist;
+	}
+
+*/
 
 
 }

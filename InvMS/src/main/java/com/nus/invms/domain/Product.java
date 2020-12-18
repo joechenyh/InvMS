@@ -1,3 +1,4 @@
+
 package com.nus.invms.domain;
 
 
@@ -13,8 +14,6 @@ import javax.persistence.Table;
 
 
 @Entity
-@Data
-@NoArgsConstructor
 @Table(name = "product")
 
 public class Product {
@@ -27,7 +26,11 @@ public class Product {
 	@NotNull
 	private int reorderLevel, minReorderQty; 
 	@NotEmpty
-	private String productName, description, colour, dimension, manufacturer, shelfLocation;
+	private String productName, description, colour, dimension, shelfLocation;
+	
+	@NotEmpty 
+	private String manufacturer;
+	
 	@NotNull
 	private Double unitPrice;
 	private Status status;
@@ -72,10 +75,37 @@ public class Product {
 	}
 	
 	*/
+	
+	
 
 	public int getReorderLevel() {
 		return reorderLevel;
 	}
+
+	public int getPartNumber() {
+		return partNumber;
+	}
+
+
+	public void setPartNumber(int partNumber) {
+		this.partNumber = partNumber;
+	}
+
+
+	public Status getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+
+	public Product() {
+	super();
+}
+
 
 	public void setReorderLevel(int reorderLevel) {
 		this.reorderLevel = reorderLevel;

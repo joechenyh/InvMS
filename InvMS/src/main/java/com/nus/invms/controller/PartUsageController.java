@@ -2,13 +2,19 @@ package com.nus.invms.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.PartUsage;
+import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryServiceImpl;
 import com.nus.invms.service.PartUsageServiceImpl;
 
@@ -22,12 +28,20 @@ public class PartUsageController  {
 	@Autowired
 	private PartUsageServiceImpl puservice;
 	
+	@Autowired 
+	EmployeeInterface empservice;
+	
 	//@Autowired
 	//private EmployeeService eservice; 
 	
 	@Autowired
-	public void setPUService(PartUsageServiceImpl puservice) {
-		this.puservice = puservice;
+	public void setInvService(InventoryServiceImpl invserviceimpl) {
+		this.invservice = invserviceimpl;
+	}
+	
+	@Autowired
+	public void setPUService(PartUsageServiceImpl puserviceimpl) {
+		this.puservice = puserviceimpl;
 	}
 	
 
@@ -38,49 +52,37 @@ public class PartUsageController  {
 	}
 	
 	
-	//2. Create Usage
-	@RequestMapping(value = "/createusage")
-	public String addUsage(Model model) {
-		model.addAttribute("partusage", new PartUsage());
-	//	ArrayList<String> flist = fservice.findAllFacilityNames(); need a service to show all available part numbers 
-	//	model.addAttribute("fnames", flist);
-		return "usage-form";
-	}
-	
-	//3. Update Usage
-	@RequestMapping(value = "/editusage")
-	public String editPartUsage(@PathVariable("id") Integer id) {
-		puservice.editPartUsage(puservice.findPartUsageById(id));
-		return "forward:/partusage/list";
-	}
-	
-	//4. Check Usage
-	@RequestMapping(value = "/viewusage")
-	public String viewPartUsage(@PathVariable("id") Integer id) {
-		//puservice.viewPartUsage(puservice.findPartUsageById(id));
-		return "forward:/partusage/list";
-	}
-	
-	//5. Deactivate Usage
-	@RequestMapping(value = "/deactivateusage")
-	public String deletePartUsage(@PathVariable("id") Integer id) {
-		puservice.deletePartUsage(puservice.findPartUsageById(id));
-		return "forward:/partusage/list";
-	}
-	
-	//6. Search/List Usage 
-	@RequestMapping(value = "/searchusage")
-	public String searchPartUsage(@PathVariable("id") Integer id) {
-		//puservice.searchPartUsage(puservice.findPartUsageById(id));
-		return "forward:/partusage/list";
-	}
-	
-	
+
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
-		model.addAttribute("usages", puservice.listPartUsage());
-		return "usages";
+		model.addAttribute("pusages", puservice.listPartUsage());
+		return "pusages";
 	}
+	@RequestMapping(value = "/add")
+	public String addForm(Model model) {
+		model.addAttribute("pusage", new PartUsage());
+		return "pusage-form";
+	}
+	@RequestMapping(value = "/edit/{id}")
+	public String editForm(@PathVariable("id") String id, Model model) {
+		model.addAttribute("pusage", puservice.viewPartUsage(id));
+		return "pusage-form";
+	}
+	@RequestMapping(value = "/save")
+	public String saveInventory(@ModelAttribute("pusage") @Valid PartUsage pusage, 
+			BindingResult bindingResult,  Model model) {
+		if (bindingResult.hasErrors()) {
+			return "pusage-form";
+		}
+		puservice.addPartUsage(pusage);
+		return "forward:/partusage/list";
+	}
+	@RequestMapping(value = "/delete/{id}")
+	public String deletePartUsage(@PathVariable("id") Integer id) {
+		invservice.deactivateInventory(invservice.getInventory(id));
+		return "forward:/partusage/list";
+	}
+	
 	
 	
 
