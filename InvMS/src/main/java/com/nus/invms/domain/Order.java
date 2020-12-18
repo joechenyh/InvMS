@@ -34,7 +34,8 @@ public class Order {
 	private LocalDate dateReceivedReturned;
 	
 	@NotNull
-	private int quantityOrdered, quantityReceived;
+	private int quantityOrdered;
+	private int quantityReceived;
 	@NotEmpty
 	private String partNumber; 
 

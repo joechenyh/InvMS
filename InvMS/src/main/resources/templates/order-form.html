@@ -7,6 +7,18 @@
 <script>
  window.onload=function(){
 //     alert();
+
+	 	var e = document.getElementById("order_type");
+	 	var selection = e.value;
+		var order = document.getElementById("order_status");
+	    	
+	    if (selection === "RETURN"){
+	    	order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option> <option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
+	    }
+	    if (selection === "ORDER") {
+	        order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option> <option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
+	    }
+
     document.getElementById("order_type").onchange = function(){
     	var e = document.getElementById("order_type");
     	var selection = e.value;
