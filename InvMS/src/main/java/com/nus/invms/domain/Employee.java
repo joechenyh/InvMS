@@ -13,8 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.*;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Entity
 public class Employee{

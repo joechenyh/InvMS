@@ -11,8 +11,7 @@ import javax.validation.constraints.FutureOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Entity
 //@Table only needed if table different name 
