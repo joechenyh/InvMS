@@ -2,7 +2,6 @@
 package com.nus.invms.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.validation.Valid;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Product;
+import com.nus.invms.domain.Supplier;
 import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
@@ -24,6 +24,7 @@ import com.nus.invms.service.PartUsageService;
 import com.nus.invms.service.PartUsageServiceImpl;
 import com.nus.invms.service.ProductService;
 import com.nus.invms.service.ProductServiceImpl;
+import com.nus.invms.service.SupplierInterface;
 
 
 
@@ -39,6 +40,9 @@ public class InventoryController {
 	
 	@Autowired 
 	EmployeeInterface empservice;
+	
+	@Autowired
+	private SupplierInterface supservice;
 	
 	//@Autowired
 	//private EmployeeService eservice; 
@@ -79,6 +83,8 @@ public class InventoryController {
 		model.addAttribute("inventory", new Inventory());
 		ArrayList<Product> plist = pservice.findAllProducts();
 		model.addAttribute("products",plist);
+		ArrayList<Supplier> slist = supservice.listAllSuppliers();
+		model.addAttribute("suppliers",slist);
 		return "inventory-form";
 	}
 	
@@ -147,6 +153,22 @@ public class InventoryController {
 			msg="Negative value unacceptable";
 		}
 		return msg;
+	}
+	
+	@RequestMapping(value = "/getSupplier/{id}")
+	@ResponseBody
+	public ArrayList<String> getSupplierById(@PathVariable("id") Integer id, Model model) {
+		model.addAttribute("inventory", new Inventory());
+		Supplier result = supservice.findById(id);
+		ArrayList<String> supplierInfo = new ArrayList<String>();
+		String supId = String.valueOf(result.getSupplierId());
+		supplierInfo.add(supId);
+		//System.out.println(productInfo.get(0));
+		//System.out.println("!!!"+result.getPartNumber());
+		//String partNum = String.valueOf(result.getPartNumber());
+		//supplierInfo.add(result.getSupplierName().toString());
+		//System.out.println(productInfo.get(1));
+		return supplierInfo;
 	}
 }
 

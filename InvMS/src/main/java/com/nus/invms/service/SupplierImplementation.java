@@ -27,7 +27,7 @@ public class SupplierImplementation implements SupplierInterface {
 
 	}
 
-	@Override
+	@Transactional
 	public ArrayList<Supplier> listAllSuppliers() {
 		// TODO Auto-generated method stub
 		return (ArrayList<Supplier>) suprepo.findAll();
@@ -62,7 +62,7 @@ public class SupplierImplementation implements SupplierInterface {
 		return suprepo.findSupplierBysupplierName(name);
 	}
 
-	@Override
+	@Transactional
 	public Supplier findById(int id) {
 		// TODO Auto-generated method stub
 		return suprepo.findById(id).get();
