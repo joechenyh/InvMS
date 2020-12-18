@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,9 +16,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 @Entity
 @Table(name="order_list")
@@ -33,7 +30,8 @@ public class Order {
 	private LocalDate orderDate;
 	@FutureOrPresent
 	@DateTimeFormat (pattern="yyyy-MM-dd")
-	private LocalDate dateReceived;
+	@Nullable
+	private LocalDate dateReceivedReturned;
 	
 	@NotNull
 	private int quantityOrdered, quantityReceived;
@@ -41,7 +39,7 @@ public class Order {
 	private String partNumber; 
 
 	private OrderType type;
-	private Status status;
+	private OrderStatus status;
 
 	
 	@ManyToOne
@@ -51,11 +49,11 @@ public class Order {
 	private Collection<Supplier> suppliers;
 
 	
-	public Order(LocalDate orderDate, LocalDate dateReceived, int quantityOrdered, int quantityReceived,
-			String partNumber, Status status, OrderType type, Employee employee, Collection<Supplier> suppliers) {
+	public Order(LocalDate orderDate, LocalDate dateReceivedReturned, int quantityOrdered, int quantityReceived,
+			String partNumber, OrderStatus status, OrderType type, Employee employee, Collection<Supplier> suppliers) {
 		super();
 		this.orderDate = orderDate;
-		this.dateReceived = dateReceived;
+		this.dateReceivedReturned = dateReceivedReturned;
 		this.employee = employee;
 		this.quantityOrdered = quantityOrdered;
 		this.quantityReceived = quantityReceived;
@@ -92,13 +90,13 @@ public class Order {
 	}
 
 
-	public LocalDate getDateReceived() {
-		return dateReceived;
+	public LocalDate getDateReceivedReturned() {
+		return dateReceivedReturned;
 	}
 
 
-	public void setDateReceived(LocalDate dateReceived) {
-		this.dateReceived = dateReceived;
+	public void setDateReceivedReturned(LocalDate dateReceivedReturned) {
+		this.dateReceivedReturned = dateReceivedReturned;
 	}
 
 
@@ -142,12 +140,12 @@ public class Order {
 	}
 
 
-	public Status getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(Status status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
 

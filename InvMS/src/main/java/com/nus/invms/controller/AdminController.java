@@ -86,7 +86,7 @@ public class AdminController extends MechanicController {
 		}
 		else if (!empservice.authenticateEmployee(employee))
 		{
-			errors.rejectValue("password", "wrong password", "username/ password is incorrect");
+			errors.rejectValue("epassword", "wrong password", "username/ password is incorrect");
 		}
 		
 		if (bindingResult.hasErrors()) {

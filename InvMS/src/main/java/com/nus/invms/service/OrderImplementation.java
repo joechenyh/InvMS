@@ -30,13 +30,11 @@ public class OrderImplementation implements OrderInterface {
 		return (ArrayList<Order>) orepo.findAll();
 	}
 
-	@Override
-	public void deleteProduct(int id) {
-		// TODO Auto-generated method stub
-		Order order = findById(id);
-		order.setStatus(Status.INACTIVE);;
-		orepo.save(order);
-	}
+	/*
+	 * @Override public void deleteProduct(int id) { // TODO Auto-generated method
+	 * stub Order order = findById(id); order.setStatus(OrderStatus.INACTIVE);;
+	 * orepo.save(order); }
+	 */
 
 	@Override
 	public Order findById(int id) {

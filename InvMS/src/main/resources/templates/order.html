@@ -19,29 +19,29 @@
 		<tr>
 			<th>Order Id</th>
 			<th>Employee Id</th>
-			<th>Status</th>
 			<th>Order Date</th>
 			<th>Date Received</th>
 			<th>Order Quantity</th>
 			<th>Receive Quantity</th>
 			<th>Part Number</th>
 			<th>Order Type</th>
+			<th>Status</th>
 
 		</tr>
 		<tr th:each="order:${orderList}" >
 			<td th:text=${order.orderId}>Order Id</td>
 			<td th:text=${order.employee.ID}>Employee Id</td>
-			<td th:text="${order.status}"> Status</td>
 			<td th:text=${order.orderDate}> Order Date</td>
-			<td th:text=${order.dateReceived}> Date Received</td>
+			<td th:text=${order.dateReceivedReturned}> Date Received/Returned</td>
 			<td th:text=${order.quantityOrdered}> Order Quantity</td>
 			<td th:text=${order.quantityReceived}> Receive Quantity</td>
 			<td th:text=${order.partNumber}> Part Number</td>
 			<td th:text=${order.type}> Order Type</td>
+			<td th:text="${order.status}"> Status</td>
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
 				<a href="EditOrder.html" th:href="@{/order/edit/}+${order.orderId}">Edit</a></td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="DeleteOrder.html" th:href="@{/order/delete/}+${order.orderId}">Delete</a></td>
+<!-- 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="DeleteOrder.html" th:href="@{/order/delete/}+${order.orderId}">Delete</a></td> -->
 		</tr>
 	</table>
     <br/>
