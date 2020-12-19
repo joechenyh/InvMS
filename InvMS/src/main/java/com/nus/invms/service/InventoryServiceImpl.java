@@ -45,17 +45,22 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	@Transactional
 	public Inventory editInventory(Inventory inventory) {
-		Inventory currentinventory = irepo.findById(inventory.getProductId()).get();
+		Inventory currentinventory = irepo.findById(inventory.getInventoryId()).get();
 		currentinventory = inventory;
 		irepo.save(currentinventory);
 		
 		return currentinventory;
 	}
 
-	@Override
+//	@Override
+//	@Transactional
+//	public List<Inventory> listInventory() {
+//		return irepo.findAll();
+//	}
+	
 	@Transactional
-	public List<Inventory> listInventory() {
-		return irepo.findAll();
+	public ArrayList<Inventory> findAllInventories() {
+		return (ArrayList<Inventory>) irepo.findAll();
 	}
 
 	@Override
@@ -63,17 +68,18 @@ public class InventoryServiceImpl implements InventoryService {
 		irepo.save(inventory);
 	}
 
-	@Override
-	public List<Inventory> listCompleteInventory() {
-		return irepo.findAll();
-	}
+//	@Override
+//	public List<Inventory> listCompleteInventory() {
+//		return irepo.findAll();
+//	}
 
 	@Override
 	public void updateInventory(Inventory inventory) {
 		irepo.save(inventory);
 	}
-
-	public Inventory findByProductId(Integer id) {
+	
+	@Transactional
+	public Inventory findByInventoryId(Integer id) {
 		return irepo.findById(id).get();
 	}
 

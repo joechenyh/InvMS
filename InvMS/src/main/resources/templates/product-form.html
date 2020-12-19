@@ -13,15 +13,20 @@
 	<h1>Product Form</h1>
 	<form action="#" th:object="${product}" th:action="@{/product/save}"
 		method="post">
-		<fieldset>
-			<input type="hidden" th:field="*{partNumber}">
-		</fieldset>
+		<!-- <fieldset>
+			<input type="hidden" th:field="*{partNumber}"> 
+		</fieldset> -->
 		
 		<fieldset>
 			Status <select th:field="*{status}">
 				<option th:each="statOpt : ${T(com.nus.invms.domain.Status).values()}" 
         th:value="${statOpt}" th:text="${statOpt}"></option>
 			</select>
+		</fieldset>
+		
+		<fieldset>
+			Part Number <input type="text" th:field="*{partNumber}">
+			<p th:if="${#fields.hasErrors('partNumber')}" th:errors="*{partNumber}"></p>
 		</fieldset>
 
 		<fieldset>
@@ -71,11 +76,12 @@
 		
 
 		<fieldset>
-			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
-				type="reset" value="Reset" />
+			<input type="submit" value="Save" /> &nbsp; &nbsp; 
+			<input type="button" value="Reset" onclick="window.location.href='/product/add'; return false"/>
 		</fieldset>
 
 	</form>
+	<h1 style="color:red" th:text=${message}></h1>
 	<br />
 	<div th:replace="fragments/general.html :: footer"></div>
 

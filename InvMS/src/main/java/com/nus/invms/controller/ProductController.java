@@ -1,5 +1,8 @@
 package com.nus.invms.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nus.invms.domain.Product;
 import com.nus.invms.domain.Status;
-import com.nus.invms.service.ProductInterface;
+import com.nus.invms.service.ProductService;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
 
-	public ProductController() {
-		// TODO Auto-generated constructor stub
-	}
+//	public ProductController() {
+//		// TODO Auto-generated constructor stub
+//	}
 	
 	@Autowired
-	ProductInterface proservice;
+	ProductService proservice;
 	
 	@RequestMapping(value = "/add")
 	public String add(Model model) 
@@ -37,15 +40,16 @@ public class ProductController {
 	@RequestMapping(value = "/save")
 	public String saveUser(@ModelAttribute("product") @Valid Product product, 
 			BindingResult bindingResult,  Model model) {
-		
-		if (bindingResult.hasErrors()) {
+		String msg = checkError(product);
+		if (bindingResult.hasErrors()||msg!=null) {
+			model.addAttribute("message",msg);
 			return "product-form";
 		}
 
-		if (proservice.checkProductNameExist(product)) 
-		{
-			return "product-form";
-		}
+//		if (proservice.checkProductNameExist(product)) 
+//		{
+//			return "product-form";
+//		}
 		
 		proservice.saveProduct(product);
 		return "forward:/product/list";
@@ -54,24 +58,62 @@ public class ProductController {
 	@RequestMapping(value="/list")
 	public String list(Model model)
 	{
-		model.addAttribute("productList", proservice.listAllProducts());
+		//model.addAttribute("productList", proservice.listAllProducts());
+		model.addAttribute("productList", proservice.findAllProducts()); //I used the build in JPA repo
 		return "product";
 	}
 	
-	@RequestMapping(value = "/edit/{partNumber}")
-	public String editForm(@PathVariable("partNumber") int number, Model model) {
-		model.addAttribute("product", proservice.findById(number).get());
+	@RequestMapping(value = "/edit/{id}")
+	public String editForm(@PathVariable("id") Integer id, Model model) {
+		//model.addAttribute("product", proservice.findById(number).get());
+		model.addAttribute("product", proservice.findProductById(id));
 		return "editProduct";
 	}
 	
-	@RequestMapping(value = "/delete/{partNumber}")
-	public String deleteProduct(@PathVariable("partNumber") int number) {
-		Product product = proservice.findById(number).get();
+	@RequestMapping(value = "/delete/{id}")
+	public String deleteProduct(@PathVariable("id") Integer id) {
+		//Product product = proservice.findById(number).get();
+		Product product = proservice.findProductById(id);
 		product.setStatus(Status.INACTIVE);
 		proservice.saveProduct(product);
 		return "forward:/product/list";
 	}
 
+	@RequestMapping(value = "/confirmEdit")
+	public String saveInventory(@ModelAttribute("product") @Valid Product product, 
+			BindingResult bindingResult,  Model model) {
+		
+		if (bindingResult.hasErrors()) 
+		{
+			
+			return "editProduct";
+		}
+		
+		proservice.saveProduct(product);
+		return "forward:/product/list";
+	}
 	
+	public String checkError(Product product) {
+		String msg = null;
+		ArrayList<Product> flist = new ArrayList<Product>();
+		flist = (ArrayList<Product>) proservice.findAllProducts();
+		//Product lastProduct = flist.get(flist.size()-1);
+		for (Iterator <Product> iterator = flist.iterator(); iterator.hasNext();) {
+			Product product2 = iterator.next();
+			if(product.getPartNumber() == product2.getPartNumber()) {
+				msg="Part Number Exist";
+				break;
+			}
+			else if (product.getPartNumber()<1000) {
+				msg="Invalid Part Number and has to be greater than 1000";
+				break;
+			}
+			else if (product.getReorderLevel()<0 || product.getMinReorderQty()<0||product.getUnitPrice()<0) {
+				msg="Negative value unacceptable";
+				break;
+			}	
+		}
+		return msg;
+	}
 
 }

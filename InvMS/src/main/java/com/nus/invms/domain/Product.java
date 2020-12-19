@@ -18,10 +18,8 @@ import javax.persistence.Table;
 
 public class Product {
 
-	
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	//@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int partNumber;
 	@NotNull
 	private int reorderLevel, minReorderQty; 
@@ -33,11 +31,12 @@ public class Product {
 	
 	@NotNull
 	private Double unitPrice;
-	private Status status;
+	private Status status;    
 	
-	public Product(int reorderLevel, int minReorderQty, String productName, String description, String colour,
-			String dimension, String manufacturer, String shelfLocation, Double unitPrice) {
+	public Product(int partNumber, int reorderLevel, int minReorderQty, String productName, String description, String colour,
+			String dimension, String manufacturer, String shelfLocation, Double unitPrice, Status status) {
 		super();
+		this.partNumber = partNumber;
 		this.reorderLevel = reorderLevel;
 		this.minReorderQty = minReorderQty;
 		this.productName = productName;
@@ -47,6 +46,7 @@ public class Product {
 		this.manufacturer = manufacturer;
 		this.shelfLocation = shelfLocation;
 		this.unitPrice = unitPrice;
+		this.status = status;
 	} 
 	
 	

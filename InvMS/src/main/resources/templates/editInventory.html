@@ -7,63 +7,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 </script>
 <script>
-$(document).ready(function () 
-		{
-			$("#ddlselect").on("click", function (event) 
-					{
-						var product = $("#ddlselect").val();
-						if(product != "0")
-							{	
-		    					$.ajax(
-		    						{
-		      							type : "POST",
-		      							url :  "/inventory/getProduct/" + product,
-		      							traditional: true,
-		      							data: { text: product },
-		      							success: successFunc
-		    						});
+$(document).ready(function () {
+	$("#ddlselect").on("click", function (event) {
+		var product = $("#ddlselect").val();
 		
-		    				function successFunc(data)
-		    					{
-	    	  						$("#pdt_price").val(data[0]);
-	    	  						$("#pdt_name").val(data[1]);
-		    					}
-	    					}
-						else
-							{
-	    						$("#pdt_price").val("");
-	    						$("#pdt_name").val("");
-	    						return
-	    					}
-	  				});
-			$("#ddlselect1").on("click", function (event)
-					{
-				var supplier = $("#ddlselect1").val();
-				if(supplier != "0")
-					{	
-    					$.ajax(
-    						{
-      							type : "POST",
-      							url :  "/inventory/getSupplier/" + supplier,
-      							traditional: true,
-      							data: { text: supplier },
-      							success: successFunc
-    						});
-
-    				function successFunc(data)
-    					{
-	  						$("#sup_id").val(data[0]);
-	  						/* $("#sup_name").val(data[1]); */
-    					}
-					}
-				else
-					{
-						$("#sup_id").val("");
-						/* $("#sup_name").val(""); */
-						return
-					}
-				});
-		});
+		if(product != "0"){	
+		    $.ajax({
+		      type : "POST",
+		      url :  "/inventory/getProduct/" + product,
+		      traditional: true,
+		      data: { text: product },
+		      success: successFunc
+		    });
+		
+		    function successFunc(data){
+	    	  $("#pdt_price").val(data[0]);
+	    	  $("#pdt_name").val(data[1]);
+		    }
+	    }else{
+	    	$("#pdt_price").val("");
+	    	$("#pdt_name").val("");
+	    	return
+	    }
+	  });
+});
 </script>
 </head>
 <body>
@@ -72,24 +39,14 @@ $(document).ready(function ()
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Inventory Form</h1>
-	Product Name<select id="ddlselect">
+	Part Number<select id="ddlselect">
 	<option value="0">--Select--</option>
 	<option th:each="product:${products}" th:value="${product.partNumber}"
-					th:text="${product.productName}"></option>
+					th:text="${product.partNumber}"></option>
 	</select>
 	
-	Part Number<input type="text" readonly="readonly" id="pdt_name"/>
+	Name<input type="text" readonly="readonly" id="pdt_name"/>
 	Unit Price<input type="text" readonly="readonly" id="pdt_price"/>
-	
-	<p>Supplier Name<select id="ddlselect1">
-	<option value="0">--Select--</option>
-	<option th:each="supplier:${suppliers}" th:value="${supplier.supplierId}"
-					th:text="${supplier.supplierName}"></option>
-	</select>
-	Supplier Id<input type="text" readonly="readonly" id="sup_id"/>
-	<!-- Unit Price<input type="text" readonly="readonly" id="sup_name"/> -->
-	
-	</p>
 	
 	<form action="#" th:object="${inventory}" th:action="@{/inventory/save}"
 		method="post">
@@ -101,18 +58,12 @@ $(document).ready(function ()
 				<option th:each="product:${products}" th:value="${product.partNumber}"
 					th:text="${product.partNumber}"></option>
 			</select>
-		</fieldset>
-		<fieldset>
-			Supplier ID <select th:field="*{supplier.supplierId}">
-				<option th:each="supplier:${suppliers}" th:value="${supplier.supplierId}"
-					th:text="${supplier.supplierId}"></option>
-			</select>
 		</fieldset> 
-		 <!-- <fieldset>
+		 <fieldset>
 			Supplier Name <input type="text" th:field="*{supplierName}">
 			<p th:if="${#fields.hasErrors('supplierName')}"
 				th:errors="*{supplierName}"></p>
-		</fieldset> -->
+		</fieldset>
 		<fieldset>
 			Brand Id <input type="number" step=1 th:field="*{brandId}">
 			<p th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}"></p>
@@ -165,7 +116,7 @@ $(document).ready(function ()
 		
 		<fieldset>
 			<input type="submit" value="Save" /> &nbsp; &nbsp; 
-			<input type="button" value="Reset" onclick="window.location.href='/inventory/add'; return false" />
+			<!-- <input type="button" value="Reset" onclick="window.location.href='/inventory/add'; return false" /> -->
 		</fieldset>
 
 	</form> 
