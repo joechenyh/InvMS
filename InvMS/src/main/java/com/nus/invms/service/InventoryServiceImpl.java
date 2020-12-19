@@ -1,6 +1,7 @@
 package com.nus.invms.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,21 @@ public class InventoryServiceImpl implements InventoryService {
 	public ArrayList<Inventory> findByBrandNameLike(String bname) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public Inventory findInventoryByPartNumber(int partNum) {
+		Inventory isearch = null;
+		ArrayList<Inventory> iList = new ArrayList<Inventory>();
+		iList = (ArrayList<Inventory>) irepo.findAll();
+		for (Iterator<Inventory> iterator = iList.iterator(); iterator.hasNext();) {
+			Inventory inventory = iterator.next();
+			if (inventory.getProduct().getPartNumber()==partNum) {
+				isearch = inventory;
+				break;
+			}
+		}
+		return isearch;
 	}
 	
 //	Bottom part to create? 

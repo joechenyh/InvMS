@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
@@ -37,30 +39,40 @@ public class Order {
 	@NotNull
 	private int quantityOrdered;
 	private int quantityReceived;
-	@NotEmpty
-	private String partNumber; 
+//	@NotEmpty
+//	private String partNumber; 
 
 	private OrderType type;
 	private OrderStatus status;
 
 	
-	@ManyToOne
+	@OneToOne
 	private Employee employee; 
 	
 	@OneToOne
-	private Supplier supplier;
+	private Supplier suppliers;
+	
+	@OneToOne
+	private Product product;
+
 
 	
-	public Order(LocalDate orderDate, LocalDate dateReceivedReturned, int quantityOrdered, int quantityReceived,
-			String partNumber, OrderStatus status, OrderType type, Employee employee, Supplier supplier) {
-		super();
+
+
+	public Order(LocalDate orderDate, LocalDate dateReceivedReturned, int quantityOrdered, int quantityReceived, 
+			OrderStatus status, OrderType type, Employee employee, Supplier suppliers, Product product) {
+
+	
 		this.orderDate = orderDate;
 		this.dateReceivedReturned = dateReceivedReturned;
 		this.employee = employee;
 		this.quantityOrdered = quantityOrdered;
 		this.quantityReceived = quantityReceived;
-		this.partNumber = partNumber;
-		this.supplier = supplier;
+
+
+		this.product = product;
+		this.suppliers = suppliers;
+
 		this.status = status;
 		this.type = type;
 	}
@@ -122,19 +134,31 @@ public class Order {
 	}
 
 
-	public String getPartNumber() {
-		return partNumber;
-	}
-
-
-	public void setPartNumber(String partNumber) {
-		this.partNumber = partNumber;
-	}
+//	public String getPartNumber() {
+//		return partNumber;
+//	}
+//
+//
+//	public void setPartNumber(String partNumber) {
+//		this.partNumber = partNumber;
+//	}
 
 
 	public OrderType getType() {
 		return type;
 	}
+
+
+	public Product getProduct() {
+		return product;
+	}
+
+
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
 
 
 	public void setType(OrderType type) {
@@ -163,15 +187,17 @@ public class Order {
 
 
 
-	public Supplier getSupplier() {
-		return supplier;
+	public Supplier getSuppliers() {
+		return suppliers;
 	}
 
 
 
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
+	public void setSuppliers(Supplier suppliers) {
+		this.suppliers = suppliers;
 	}
+
+
 
 
 

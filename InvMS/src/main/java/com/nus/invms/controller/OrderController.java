@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nus.invms.domain.Employee;
+import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Order;
 import com.nus.invms.domain.RoleType;
 import com.nus.invms.service.EmployeeInterface;
+import com.nus.invms.service.InventoryService;
+import com.nus.invms.service.InventoryServiceImpl;
 import com.nus.invms.service.OrderInterface;
 
 
@@ -34,6 +37,14 @@ public class OrderController {
 	@Autowired 
 	EmployeeInterface empservice;
 	
+	@Autowired
+	InventoryService iservice;
+	
+	@Autowired
+	public void setInvService(InventoryServiceImpl invserviceimpl) {
+		this.iservice = invserviceimpl;
+	}
+	
 	@RequestMapping(value = "/add")
 	public String add(Model model, HttpSession session) 
 	{
@@ -45,10 +56,10 @@ public class OrderController {
 	
 	@RequestMapping(value = "/save")
 	public String saveOrder(@ModelAttribute("order") @Valid Order order, 
-			BindingResult bindingResult,  Model model, Errors errors, HttpSession session) {
+			BindingResult bindingResult,  Model model, Errors errors, HttpSession session) 
+	{
 		
 		Employee emp = (Employee) session.getAttribute("empsession");
-		
 		if (order.getEmployee().getID() != emp.getID())
 		{
 			if (emp.getRole() != RoleType.ADMIN)
@@ -82,9 +93,46 @@ public class OrderController {
 		if (bindingResult.hasErrors()) {
 			return "order-form";
 		}
+		else {
+			if(order.getStatus().toString()=="OrderReceived") 
+			{
+				int quantity = order.getQuantityReceived();
+				int partNum = order.getProduct().getPartNumber();
+				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
+				if (inventory==null) {
+					return "forward:/inventory/add";
+				}
+				else {
+					int newQuantity = inventory.getUnits() + quantity;
+					inventory.setUnits(newQuantity);
+					iservice.updateInventory(inventory);
+					oservice.saveOrder(order);
+					return "forward:/order/list";
+				}
+				
+			}
+			
+			if(order.getStatus().toString()=="ReturnedToSupplier") 
+			{
+				int quantity = order.getQuantityReceived();
+				int partNum = order.getProduct().getPartNumber();
+				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
+				//System.out.println("!!!" + inventory.getUnits());
+				if (inventory.getUnits()>quantity) {
+					int newQuantity = inventory.getUnits() - quantity;
+					inventory.setUnits(newQuantity);
+					iservice.updateInventory(inventory);
+					oservice.saveOrder(order);
+					return "forward:/order/list";
+				}
+				
+				
+			}return "order-form";
+		}
 		
-		oservice.saveOrder(order);
-		return "forward:/order/list";
+			
+		
+		
 	}
 	
 	@RequestMapping(value="/list")

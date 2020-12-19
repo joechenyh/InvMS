@@ -28,5 +28,6 @@ public interface InventoryService {
 	public ArrayList<Inventory>	findByBrandNameLike(String bname);
 //	public ArrayList<Inventory> findByItemNameLike(String s);
 //	public ArrayList<Inventory> findByTypeLike(String s);
+	public Inventory findInventoryByPartNumber(int partNum);
 
 }
