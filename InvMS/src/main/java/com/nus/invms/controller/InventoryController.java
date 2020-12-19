@@ -98,6 +98,8 @@ public class InventoryController {
 		model.addAttribute("inventory", invservice.getInventory(id));
 		ArrayList<Product> plist = pservice.findAllProducts();
 		model.addAttribute("products",plist);
+		ArrayList<Supplier> slist = supservice.listAllSuppliers();
+		model.addAttribute("suppliers",slist);
 		return "editInventory";
 	}
 	

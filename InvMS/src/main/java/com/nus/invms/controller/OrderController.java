@@ -56,10 +56,10 @@ public class OrderController {
 	
 	@RequestMapping(value = "/save")
 	public String saveOrder(@ModelAttribute("order") @Valid Order order, 
-			BindingResult bindingResult,  Model model, Errors errors, HttpSession session) {
+			BindingResult bindingResult,  Model model, Errors errors, HttpSession session) 
+	{
 		
 		Employee emp = (Employee) session.getAttribute("empsession");
-		
 		if (order.getEmployee().getID() != emp.getID())
 		{
 			if (emp.getRole() != RoleType.ADMIN)
@@ -93,18 +93,46 @@ public class OrderController {
 		if (bindingResult.hasErrors()) {
 			return "order-form";
 		}
-		
-		
-		if(order.getStatus().toString()=="OrderReceived") 
-		{
-			int quantity = order.getQuantityReceived();
-			int partNum = order.getProduct().getPartNumber();
-			Inventory inventory = iservice.find
-			System.out.println(order.getType());
+		else {
+			if(order.getStatus().toString()=="OrderReceived") 
+			{
+				int quantity = order.getQuantityReceived();
+				int partNum = order.getProduct().getPartNumber();
+				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
+				if (inventory==null) {
+					return "forward:/inventory/add";
+				}
+				else {
+					int newQuantity = inventory.getUnits() + quantity;
+					inventory.setUnits(newQuantity);
+					iservice.updateInventory(inventory);
+					oservice.saveOrder(order);
+					return "forward:/order/list";
+				}
+				
+			}
+			
+			if(order.getStatus().toString()=="ReturnedToSupplier") 
+			{
+				int quantity = order.getQuantityReceived();
+				int partNum = order.getProduct().getPartNumber();
+				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
+				//System.out.println("!!!" + inventory.getUnits());
+				if (inventory.getUnits()>quantity) {
+					int newQuantity = inventory.getUnits() - quantity;
+					inventory.setUnits(newQuantity);
+					iservice.updateInventory(inventory);
+					oservice.saveOrder(order);
+					return "forward:/order/list";
+				}
+				
+				
+			}return "order-form";
 		}
 		
-		oservice.saveOrder(order);
-		return "forward:/order/list";
+			
+		
+		
 	}
 	
 	@RequestMapping(value="/list")
