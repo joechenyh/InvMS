@@ -11,7 +11,6 @@ public class Password {
 	@Size(min=5, max=20)
 	private String confNewPassword;
 	
-	@NotEmpty
 	@Size(min = 5, max = 20)
 	private String userName;
 	@NotEmpty

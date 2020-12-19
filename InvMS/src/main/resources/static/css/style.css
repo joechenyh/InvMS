@@ -154,3 +154,7 @@ error {
 	font-size : 10pt;
 	color: red;
 }
+
+fieldset {
+	padding: 50px;
+}

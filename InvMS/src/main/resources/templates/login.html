@@ -8,8 +8,10 @@
 <body>
 <header th:insert="fragments/general.html :: header"></header>
   <div th:replace="fragments/general.html :: menu" ></div>
-  <h1>Login form</h1>
+  
 
+<div class="container">
+<h1>Login form</h1>
 <form action="" th:object="${employee}" th:action="@{/admin/authenticate}" method="post">
         <fieldset>
 			Name: <input type="text" th:field="*{username}">
@@ -24,6 +26,8 @@
 		</fieldset>
 		
 </form>
+</div>
+
   <div th:replace="fragments/general.html :: footer"></div>
 </body>
 </html>

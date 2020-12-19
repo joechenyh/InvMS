@@ -13,7 +13,7 @@
 	<h1>User Update Form</h1>
 
 	<form action="#" th:object="${employee}" th:action="@{/admin/save}"
-		method="post">
+		method="post" >
 		
 		<fieldset>
 			Name <input type="text" th:field="*{name}" th:value="*{name}">
