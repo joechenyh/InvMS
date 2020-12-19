@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
@@ -46,12 +47,12 @@ public class Order {
 	@ManyToOne
 	private Employee employee; 
 	
-	@OneToMany (mappedBy = "order")
-	private Collection<Supplier> suppliers;
+	@OneToOne
+	private Supplier supplier;
 
 	
 	public Order(LocalDate orderDate, LocalDate dateReceivedReturned, int quantityOrdered, int quantityReceived,
-			String partNumber, OrderStatus status, OrderType type, Employee employee, Collection<Supplier> suppliers) {
+			String partNumber, OrderStatus status, OrderType type, Employee employee, Supplier supplier) {
 		super();
 		this.orderDate = orderDate;
 		this.dateReceivedReturned = dateReceivedReturned;
@@ -59,7 +60,7 @@ public class Order {
 		this.quantityOrdered = quantityOrdered;
 		this.quantityReceived = quantityReceived;
 		this.partNumber = partNumber;
-		this.suppliers = suppliers;
+		this.supplier = supplier;
 		this.status = status;
 		this.type = type;
 	}
@@ -161,14 +162,18 @@ public class Order {
 	}
 
 
-	public Collection<Supplier> getSuppliers() {
-		return suppliers;
+
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
 
-	public void setSuppliers(Collection<Supplier> suppliers) {
-		this.suppliers = suppliers;
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
+
+
 
 	
 

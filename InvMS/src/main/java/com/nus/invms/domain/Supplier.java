@@ -33,10 +33,21 @@ public class Supplier {
 	private String phoneNumber;
 	@NotEmpty
 	private String address, emailAddress;
+
 	
-	@ManyToOne
-	private Order order;
 	
+	
+	public Supplier(@NotEmpty String supplierName, Status status, @NotEmpty String phoneNumber,
+			@NotEmpty String address, @NotEmpty String emailAddress) {
+		super();
+		this.supplierName = supplierName;
+		this.status = status;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.emailAddress = emailAddress;
+		
+	}
+
 	public Supplier(String supplierName) {
 		super();
 		this.supplierName = supplierName;
@@ -94,13 +105,6 @@ public class Supplier {
 		this.emailAddress = emailAddress;
 	}
 
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
-	}
 
 
 	
