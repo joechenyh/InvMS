@@ -38,7 +38,7 @@
 			<td th:text=${order.partNumber}> Part Number</td>
 			<td th:text=${order.type}> Order Type</td>
 			<td th:text="${order.status}"> Status</td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			<td th:if="${not #lists.isEmpty(session.empsession)">
 				<a href="EditOrder.html" th:href="@{/order/edit/}+${order.orderId}">Edit</a></td>
 <!-- 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
 				<a href="DeleteOrder.html" th:href="@{/order/delete/}+${order.orderId}">Delete</a></td> -->
