@@ -32,7 +32,10 @@
 			<th >retailPrice</th>
 			<th >partnerPrice</th>
 			<th >units</th>
-			<th >Edit Inventory</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			Edit Inventory</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			Delete Inventory</th>
 
 		</tr>
 		<tr th:each="inventory:${inventories}" class="table-row">
@@ -51,11 +54,11 @@
 			<td th:text=${inventory.retailPrice}>Manu</td>
 			<td th:text=${inventory.partnerPrice}>Loc</td>
 			<td th:text=${inventory.units}>Unit Price</td>
-			<td><a href="Editinventory.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>	
-			<!-- <td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
+			<!-- <td><a href="Editinventory.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td> -->	
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td> -->
+				<a href="EditProduct.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="DeleteProduct.html" th:href="@{/inventory/delete/}+${inventory.inventoryId}">Delete</a></td>
 		</tr>
 	</table>
     <br/>

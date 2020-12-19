@@ -60,6 +60,8 @@ public class OrderController {
 	public String add(Model model, HttpSession session) 
 	{
 		model.addAttribute("order", new Order());
+		ArrayList<Product> plist = pdtservice.findAllProducts();
+		model.addAttribute("products",plist);
 		return "order-form";
 	}
 	
