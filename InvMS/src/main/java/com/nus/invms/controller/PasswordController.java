@@ -50,6 +50,7 @@ public class PasswordController {
 			
 		if (bindingResult.hasErrors()) 
 		{
+			System.out.println("There are errors");
 			return "update";
 		}
 		
@@ -57,11 +58,14 @@ public class PasswordController {
 
 		if (empservice.checkEmployeeNameExist(emp)) 
 		{
+			System.out.println("Employee Name Exists ");
 			
 			if (emp.getEPassword().equals(password.getPassword()))
 			{
+				System.out.println("Current password verified ");
 				if (password.getNewPassword().equals(password.getConfNewPassword()) && !password.getNewPassword().isBlank() && !password.getConfNewPassword().isBlank())
 				{
+					System.out.println("Prepare to update password, final step:");
 					emp.setEPassword(password.getNewPassword());
 					empservice.saveEmployee(emp);
 					
