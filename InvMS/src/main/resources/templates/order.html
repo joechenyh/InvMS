@@ -35,7 +35,7 @@
 			<td th:text=${order.dateReceivedReturned}> Date Received/Returned</td>
 			<td th:text=${order.quantityOrdered}> Order Quantity</td>
 			<td th:text=${order.quantityReceived}> Receive Quantity</td>
-			<td th:text=${order.product.productId}> Part Number</td>
+			<td th:text=${order.product.partNumber}> Part Number</td>
 			<td th:text=${order.type}> Order Type</td>
 			<td th:text="${order.status}"> Status</td>
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">

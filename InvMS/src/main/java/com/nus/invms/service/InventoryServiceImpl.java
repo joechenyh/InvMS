@@ -101,6 +101,11 @@ public class InventoryServiceImpl implements InventoryService {
 		return null;
 	}
 	
+	@Transactional
+	public Inventory findInventoryByPartNumber(int partNum) {
+		return irepo.
+	}
+	
 //	Bottom part to create? 
 
 /*	public ArrayList<Inventory> findBySupplierNameLike(String name) {

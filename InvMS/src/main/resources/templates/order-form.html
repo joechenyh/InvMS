@@ -73,8 +73,8 @@
 		</fieldset>
 
 		<fieldset>
-			Part Number <input type="text" th:field="*{partNumber}">
-			<p style="color:red" th:if="${#fields.hasErrors('partNumber')}" th:errors="*{partNumber}"></p>
+			Part Number <input type="text" th:field="*{product.partNumber}">
+			<p style="color:red" th:if="${#fields.hasErrors('product.partNumber')}" th:errors="*{product.partNumber}"></p>
 		</fieldset>
 		
 		<fieldset>
