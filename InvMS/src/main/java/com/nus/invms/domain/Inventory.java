@@ -28,7 +28,7 @@ public class Inventory {
 //	@OneToMany(mapped by "supplier")
 	//private String supplierName;
 	@NotEmpty
-	String supplierName, brandName, invdescription, invtype, category, subCategory;
+	String brandName, invdescription, invtype, category, subCategory;
 	@NotNull
 	Double originalPrice, wholesalePrice,retailPrice,partnerPrice;
 	
@@ -37,6 +37,10 @@ public class Inventory {
 	
 	@OneToOne
 	Product product;
+	@OneToOne
+	Supplier supplier;
+	
+	String supplierName;
 //	@Column
 //	private int brandId;
 //
@@ -153,35 +157,49 @@ public class Inventory {
 		return category;
 	}
 
-	public Inventory(@NotNull int brandId, int units, @NotEmpty String supplierName, @NotEmpty String brandName,
-		String itemName, @NotEmpty String invdescription, @NotEmpty String invtype, @NotEmpty String category,
-		@NotEmpty String subCategory, @NotNull Double originalPrice, @NotNull Double wholesalePrice,
-		@NotNull Double retailPrice, @NotNull Double partnerPrice, Product product) {
-	super();
-	this.brandId = brandId;
-	this.units = units;
-	this.supplierName = supplierName;
-	this.brandName = brandName;
-	this.itemName = itemName;
-	this.invdescription = invdescription;
-	this.invtype = invtype;
-	this.category = category;
-	this.subCategory = subCategory;
-	this.originalPrice = originalPrice;
-	this.wholesalePrice = wholesalePrice;
-	this.retailPrice = retailPrice;
-	this.partnerPrice = partnerPrice;
-	this.product = product;
 	
-}
+
+	
+
+	public Inventory(@NotNull int brandId, @NotEmpty String brandName, @NotEmpty String invdescription,
+			@NotEmpty String invtype, @NotEmpty String category, @NotEmpty String subCategory,
+			@NotNull Double originalPrice, @NotNull Double wholesalePrice, @NotNull Double retailPrice,
+			@NotNull Double partnerPrice, String itemName, int units, Product product, Supplier supplier,
+			String supplierName) {
+		super();
+		this.brandId = brandId;
+		this.brandName = brandName;
+		this.invdescription = invdescription;
+		this.invtype = invtype;
+		this.category = category;
+		this.subCategory = subCategory;
+		this.originalPrice = originalPrice;
+		this.wholesalePrice = wholesalePrice;
+		this.retailPrice = retailPrice;
+		this.partnerPrice = partnerPrice;
+		this.itemName = itemName;
+		this.units = units;
+		this.product = product;
+		this.supplier = supplier;
+		this.supplierName = supplierName;
+	}
 
 	@Override
 	public String toString() {
-		return "Inventory [inventoryId=" + inventoryId + ", brandId=" + brandId + ", units=" + units + ", supplierName="
-				+ supplierName + ", brandName=" + brandName + ", itemName=" + itemName + ", description=" + invdescription
-				+ ", type=" + invtype + ", category=" + category + ", subCategory=" + subCategory + ", originalPrice="
-				+ originalPrice + ", wholesalePrice=" + wholesalePrice + ", retailPrice=" + retailPrice
-				+ ", partnerPrice=" + partnerPrice + ", product=" + product + "]";
+		return "Inventory [inventoryId=" + inventoryId + ", brandId=" + brandId + ", brandName=" + brandName
+				+ ", invdescription=" + invdescription + ", invtype=" + invtype + ", category=" + category
+				+ ", subCategory=" + subCategory + ", originalPrice=" + originalPrice + ", wholesalePrice="
+				+ wholesalePrice + ", retailPrice=" + retailPrice + ", partnerPrice=" + partnerPrice + ", itemName="
+				+ itemName + ", units=" + units + ", product=" + product + ", supplier=" + supplier + ", supplierName="
+				+ supplierName + "]";
+	}
+
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 	public int getInventoryId() {

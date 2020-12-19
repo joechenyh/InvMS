@@ -101,12 +101,18 @@ $(document).ready(function ()
 				<option th:each="product:${products}" th:value="${product.partNumber}"
 					th:text="${product.partNumber}"></option>
 			</select>
+		</fieldset>
+		<fieldset>
+			Supplier ID <select th:field="*{supplier.supplierId}">
+				<option th:each="supplier:${suppliers}" th:value="${supplier.supplierId}"
+					th:text="${supplier.supplierId}"></option>
+			</select>
 		</fieldset> 
-		 <fieldset>
+		 <!-- <fieldset>
 			Supplier Name <input type="text" th:field="*{supplierName}">
 			<p th:if="${#fields.hasErrors('supplierName')}"
 				th:errors="*{supplierName}"></p>
-		</fieldset>
+		</fieldset> -->
 		<fieldset>
 			Brand Id <input type="number" step=1 th:field="*{brandId}">
 			<p th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}"></p>

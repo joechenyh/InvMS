@@ -65,6 +65,11 @@ public class InventoryController {
 		this.pservice = pserviceImpl;
 	}
 	
+	@Autowired
+	public void setSupplierService(SupplierInterface supserviceImpl) {
+		this.supservice = supserviceImpl;
+	}
+	
 	
 /*	//1. Manage Inventory
 	@RequestMapping(value = "/inventorydashboard")
@@ -113,9 +118,12 @@ public class InventoryController {
 		}
 		else 
 		{
-			int partNum = inventory.getProduct().getPartNumber();
-			Product product = pservice.findProductById(partNum);
+			int pdtPartNum = inventory.getProduct().getPartNumber();
+			int supId = inventory.getSupplier().getSupplierId();
+			Product product = pservice.findProductById(pdtPartNum);
 			inventory.setItemName(product.getProductName());
+			Supplier supplier = supservice.findById(supId);
+			inventory.setSupplierName(supplier.getSupplierName());
 			invservice.addInventory(inventory);
 			return "forward:/inventory/list";
 		}
