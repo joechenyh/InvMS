@@ -83,6 +83,9 @@ public class OrderController {
 			return "order-form";
 		}
 		
+		int quantity = order.getQuantityReceived();
+		int partNum = order.getProduct().getPartNumber();
+		
 		oservice.saveOrder(order);
 		return "forward:/order/list";
 	}
