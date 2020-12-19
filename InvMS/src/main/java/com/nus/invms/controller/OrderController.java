@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Order;
+import com.nus.invms.domain.Product;
 import com.nus.invms.domain.RoleType;
 import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
 import com.nus.invms.service.OrderInterface;
+import com.nus.invms.service.ProductService;
+import com.nus.invms.service.ProductServiceImpl;
 
 
 
@@ -41,8 +44,16 @@ public class OrderController {
 	InventoryService iservice;
 	
 	@Autowired
+	ProductService pdtservice;
+	
+	@Autowired
 	public void setInvService(InventoryServiceImpl invserviceimpl) {
 		this.iservice = invserviceimpl;
+	}
+	
+	@Autowired
+	public void setPdtService(ProductServiceImpl pdtserviceimpl) {
+		this.pdtservice = pdtserviceimpl;
 	}
 	
 	@RequestMapping(value = "/add")
@@ -118,10 +129,25 @@ public class OrderController {
 				int partNum = order.getProduct().getPartNumber();
 				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
 				//System.out.println("!!!" + inventory.getUnits());
-				if (inventory.getUnits()>quantity) {
+				if (inventory.getUnits()>quantity||inventory.getUnits()==quantity) 
+				{
 					int newQuantity = inventory.getUnits() - quantity;
-					inventory.setUnits(newQuantity);
-					iservice.updateInventory(inventory);
+					System.out.println("test!!!!!!" + newQuantity);
+					if(newQuantity==0) 
+					{
+						iservice.deactivateInventory(inventory);
+						//void sendNotification(String msg) throws MailException{
+					}
+					else 
+					{
+						Product product = pdtservice.findProductById(partNum);
+						int reorderlvl = product.getReorderLevel();
+						if(newQuantity<reorderlvl) {
+							//void sendNotification(String msg) throws MailException{
+						}
+						inventory.setUnits(newQuantity);
+						iservice.updateInventory(inventory);
+					}
 					oservice.saveOrder(order);
 					return "forward:/order/list";
 				}
