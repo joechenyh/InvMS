@@ -12,6 +12,9 @@ public interface PartUsageService {
 	public PartUsage editPartUsage(PartUsage usage); //U
 	public List<PartUsage> listPartUsage();
 	public List<PartUsage> viewPartUsage(String partnumber);
-	public PartUsage findPartUsageById(int id);
+	public List<PartUsage> findPartUsageByCarplate(String carplate);
+	public List<PartUsage> findByUsagedateBetween(String d1, String d2);
+	public PartUsage findByTransactionId(Integer tid);
+
 
 }

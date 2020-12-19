@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Usage Recording Form</title>
+<title>Part Usage Form</title>
 <link rel="stylesheet" type="text/css" media="all"
 	href="../../css/style.css" th:href="@{/css/style.css}" />
 </head>
@@ -10,42 +10,43 @@
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Usage Recording Form</h1>
-	<form action="#" th:object="${booking}" th:action="@{/partusage/save}"
-		method="post">
+	<h1>Part Usage Form</h1>
+	<form action="#" th:object="${partUsage}"
+		th:action="@{/partusage/save}" method="post">
 		<fieldset>
 			<input type="hidden" th:field="*{transactionId}">
 		</fieldset>
 		<fieldset>
-			Part Number <select th:field="*{member.firstName}">
-				<option th:each="mname:${mnames}" th:value="${mname}"
-					th:text="${mname}"></option>
-			</select>
+			Employee name: <input type="text" th:field="*{employee}">
+			<p style="color: red" th:if="${#fields.hasErrors('employee')}"
+				th:errors="*{employee}"></p>
 		</fieldset>
 		<fieldset>
-			Quantity <select th:field="*{facility.name}">
-				<option th:each="fname:${fnames}" th:value="${fname}"
-					th:text="${fname}"></option>
-			</select>
-			<fieldset>
-			Car Plate <select th:field="*{facility.name}">
-				<option th:each="fname:${fnames}" th:value="${fname}"
-					th:text="${fname}"></option>
-			</select>
+			Part Number: <input type="text" th:field="*{partNumber}">
+			<p style="color: red" th:if="${#fields.hasErrors('partNumber')}"
+				th:errors="*{partNumber}"></p>
 		</fieldset>
-		
-	<!--  	<fieldset>
-			Comments:
-			<textarea name="comments" th:text="*{comments}"></textarea>
-		</fieldset>
-		
-		-->
 		<fieldset>
-			<input type="submit" value="Save"/>
-			&nbsp; &nbsp; 	
-			<input type="reset" value="Reset"/>
+			Quantity used: <input type="text" th:field="*{quantity}">
+			<p style="color: red" th:if="${#fields.hasErrors('quantity')}"
+				th:errors="*{quantity}"></p>
 		</fieldset>
-
+		<fieldset>
+			Date of use: <input type="text" th:field="*{usagedate}"
+				placeholder="dd-MM-yyyy"
+				th:text="${#dates.format(partUsage.usagedate, 'dd-MM-yyyy')}" />
+			<p th:if="${#fields.hasErrors('usagedate')}" th:errors="*{usagedate}"></p>
+		</fieldset>
+		<fieldset>
+			Carplate: <input type="text" th:field="*{carplate}">
+			<p style="color: red" th:if="${#fields.hasErrors('carplate')}"
+				th:errors="*{carplate}"></p>
+		</fieldset>
+		<fieldset>
+			<input type="submit" value="Save" /> 
+			&nbsp; &nbsp; 
+			<input type="reset" value="Reset" />
+		</fieldset>
 	</form>
 	<br />
 	<div th:replace="fragments/general.html :: footer"></div>
