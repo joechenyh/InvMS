@@ -72,9 +72,11 @@ public class OrderController {
 			}
 		}
 		
-		if (order.getDateReceived().isBefore(order.getOrderDate()))
-		{
-			errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
+		if (order.getDateReceivedReturned() != null) {
+			if (order.getDateReceivedReturned().isBefore(order.getOrderDate()))
+			{
+				errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
+			}
 		}
 		
 		if (bindingResult.hasErrors()) {
@@ -98,10 +100,10 @@ public class OrderController {
 		return "editOrder";
 	}
 	
-	@RequestMapping(value = "/delete/{orderId}")
-	public String deleteProduct(@PathVariable("orderId") int number) {
-		oservice.deleteProduct(number);
-		return "forward:/order/list";
-	}
+	/*
+	 * @RequestMapping(value = "/delete/{orderId}") public String
+	 * deleteProduct(@PathVariable("orderId") int number) {
+	 * oservice.deleteProduct(number); return "forward:/order/list"; }
+	 */
 
 }

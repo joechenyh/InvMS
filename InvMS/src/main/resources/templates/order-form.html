@@ -4,6 +4,36 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <title>Order Form</title>
+<script>
+ window.onload=function(){
+//     alert();
+
+	 	var e = document.getElementById("order_type");
+	 	var selection = e.value;
+		var order = document.getElementById("order_status");
+	    	
+	    if (selection === "RETURN"){
+	    	order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option> <option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
+	    }
+	    if (selection === "ORDER") {
+	        order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option> <option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
+	    }
+
+    document.getElementById("order_type").onchange = function(){
+    	var e = document.getElementById("order_type");
+    	var selection = e.value;
+    	var order = document.getElementById("order_status");
+    	
+    	if (selection === "RETURN"){
+    		order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option> <option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
+        }
+    	if (selection === "ORDER") {
+            order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option> <option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
+    	}
+    }
+}; 
+
+</script>
 </head>
 <body>
 
@@ -28,8 +58,8 @@
 		</fieldset>
 		
 		<fieldset>
-			Date Received <input type="date" th:field="*{dateReceived}">
-			<p style="color:red" th:if="${#fields.hasErrors('dateReceived')}" th:errors="*{dateReceived}"></p>
+			Date Received/Returned <input type="date" th:field="*{dateReceivedReturned}">
+			<p style="color:red" th:if="${#fields.hasErrors('dateReceivedReturned')}" th:errors="*{dateReceivedReturned}"></p>
 		</fieldset>
 		
 		<fieldset>
@@ -48,20 +78,18 @@
 		</fieldset>
 		
 		<fieldset>
-			Type <select th:field="*{type}">
+			Type <select th:field="*{type}" id="order_type">	
+				<option value="" selected>---Please select---</option>
 				<option th:each="typeOpt : ${T(com.nus.invms.domain.OrderType).values()}" 
         th:value="${typeOpt}" th:text="${typeOpt}"></option>
 			</select>
 		</fieldset>
 		
-		
 		<fieldset>
-			Status <select th:field="*{status}">
-				<option th:each="statOpt : ${T(com.nus.invms.domain.Status).values()}" 
-        th:value="${statOpt}" th:text="${statOpt}"></option>
-			</select>
+			Status <select th:field="*{status}" id="order_status">
+			</select> 
 		</fieldset>
-
+		
 		<fieldset>
 			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
 				type="reset" value="Reset" />

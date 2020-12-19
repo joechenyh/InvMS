@@ -8,7 +8,7 @@ public interface OrderInterface {
 	
 	public void saveOrder(Order order);
 	public ArrayList<Order> listAllOrders();
-	public void deleteProduct(int id);
+//	public void deleteProduct(int id);
 	public Order findById(int id);
 
 }
