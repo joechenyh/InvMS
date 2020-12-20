@@ -63,13 +63,14 @@ public class PasswordController {
 			if (emp.getEPassword().equals(password.getPassword()))
 			{
 				System.out.println("Current password verified ");
-				if (password.getNewPassword().equals(password.getConfNewPassword()) && !password.getNewPassword().isBlank() && !password.getConfNewPassword().isBlank())
+				if (password.getNewPassword().equals(password.getConfNewPassword()) 
+						&& !password.getNewPassword().isBlank() && !password.getConfNewPassword().isBlank())
 				{
-					System.out.println("Prepare to update password, final step:");
+					//System.out.println("Prepare to update password, final step:");
 					emp.setEPassword(password.getNewPassword());
 					empservice.saveEmployee(emp);
 					
-					return "forward:/admin/list";
+					return "updatedPassword";
 				}
 			}
 			

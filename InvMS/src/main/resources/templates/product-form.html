@@ -25,7 +25,7 @@
 		</fieldset>
 		
 		<fieldset>
-			Part Number <input type="text" th:field="*{partNumber}">
+			Part Number <input type="number" step="1" th:field="*{partNumber}">
 			<p th:if="${#fields.hasErrors('partNumber')}" th:errors="*{partNumber}"></p>
 		</fieldset>
 
@@ -40,7 +40,7 @@
 		</fieldset>
 		
 		<fieldset>
-			Colour <input type="color" th:field="*{colour}">
+			Colour <input type="text" th:field="*{colour}">
 			<p style="color:red" th:if="${#fields.hasErrors('colour')}" th:errors="*{colour}"></p>
 		</fieldset>
 		
