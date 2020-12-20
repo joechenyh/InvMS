@@ -16,6 +16,8 @@ public interface InventoryService {
 	
 	public ArrayList<Inventory> findAllInventories(); //Rahmat
 	
+	public List<Inventory> searchAllInventories(String keyword);
+	
 	public void createInventory(Inventory inventory);
 	//public List<Inventory> listCompleteInventory();
 	public void updateInventory(Inventory inventory);

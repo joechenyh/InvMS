@@ -46,6 +46,20 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 	 @Query("SELECT i FROM Inventory i WHERE concat(i.product.partNumber, '', i.supplierName, '', i.brandId, '', i.itemName, '', i.invdescription, '', invtype) LIKE '%:keyword%'")
 		public List<Inventory> findInventoryItem(@Param("keyword") String keyword);
 	 //I used product.partNumber because theres OneToOne r/s with product so the product object is in the table instead of just productId
+	 
+	 @Query(value = "SELECT * FROM Inventory i "
+		 		+ "WHERE i.product_part_number LIKE %:keyword% "
+		 		+ "OR i.supplier_name LIKE %:keyword% "
+		 		+ "OR CONCAT(i.brand_id, '') LIKE %:keyword% "
+		 		+ "OR i.brand_name LIKE %:keyword% "
+		 		+ "OR CONCAT(i.item_name, '') LIKE %:keyword% "
+		 		+ "OR CONCAT(i.invdescription, '') LIKE %:keyword% "
+		 		+ "OR i.invType LIKE %:keyword% "
+		 		+ "OR i.category LIKE %:keyword% "
+		 		+ "OR i.sub_category LIKE %:keyword% "
+		 		+ "OR CONCAT(i.units, '') LIKE %:keyword%",
+				 nativeQuery = true)
+			public List<Inventory> searchInventoryItem(@Param("keyword") String keyword);
 	
 }
 

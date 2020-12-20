@@ -84,7 +84,11 @@ public class InvMsApplication {
 			
 			Product p1 = new Product(1001, 10, 20, "Sample Product Name", "Sample Description", "Red", "Sample Dimension", "Sample Manufacturer", "Shelf 1A", 23.00, Status.ACTIVE);
 			prepo.save(p1);
+			Product p2 = new Product(1002, 11, 22, "Sample Product Name", "Sample Description", "Red", "Sample Dimension", "Sample Manufacturer", "Shelf 1A", 25.00, Status.ACTIVE);
+			prepo.save(p2);
 			
+			Inventory i1 = new Inventory(1, "Nike", "lala", "Big", "There", "here", 12.00, 13.00, 14.00, 15.00, "Sample Product Name", 100, p1, s1, "Spare Part Supplier Company");
+			irepo.save(i1);
 //			Inventory i1 = new Inventory(1, "Random Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
 //			irepo.save(i1);
 			

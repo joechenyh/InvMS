@@ -24,6 +24,7 @@ import com.nus.invms.domain.Supplier;
 import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
+import com.nus.invms.service.NotificationService;
 import com.nus.invms.service.OrderInterface;
 import com.nus.invms.service.ProductService;
 import com.nus.invms.service.ProductServiceImpl;
@@ -51,6 +52,9 @@ public class OrderController {
 	
 	@Autowired
 	SupplierInterface supservice;
+	
+	@Autowired
+	NotificationService nservice;
 	
 	@Autowired
 	public void setIface(SupplierImplementation siserviceimpl) {
@@ -86,6 +90,7 @@ public class OrderController {
 	{
 		
 		Employee emp = (Employee) session.getAttribute("empsession");
+		System.out.println("Save order");
 		if (order.getEmployee().getID() != emp.getID())
 		{
 			if (emp.getRole() != RoleType.ADMIN)
@@ -151,14 +156,17 @@ public class OrderController {
 					if(newQuantity==0) 
 					{
 						iservice.deactivateInventory(inventory);
-						//void sendNotification(String msg) throws MailException{
+						String msg = "reach 0";
+						//nservice.sendNotification(msg);
+						
 					}
 					else 
 					{
 						Product product = pdtservice.findProductById(partNum);
 						int reorderlvl = product.getReorderLevel();
 						if(newQuantity<reorderlvl) {
-							//void sendNotification(String msg) throws MailException{
+							String msg = "reorder";
+							//nservice.sendNotification(msg);
 						}
 						inventory.setUnits(newQuantity);
 						iservice.updateInventory(inventory);
