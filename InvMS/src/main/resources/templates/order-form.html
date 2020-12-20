@@ -80,6 +80,13 @@
 		</fieldset>
 		
 		<fieldset>
+			Supplier Name <select th:field="*{supplier.supplierId}">
+				<option th:each="supplier:${suppliers}" th:value="${supplier.supplierId}"
+					th:text="${supplier.supplierName}"></option>
+			</select>
+		</fieldset>
+		
+		<fieldset>
 			Type <select th:field="*{type}" id="order_type">	
 				<option value="" selected>---Please select---</option>
 				<option th:each="typeOpt : ${T(com.nus.invms.domain.OrderType).values()}" 

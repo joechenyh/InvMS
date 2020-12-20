@@ -20,12 +20,15 @@ import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Order;
 import com.nus.invms.domain.Product;
 import com.nus.invms.domain.RoleType;
+import com.nus.invms.domain.Supplier;
 import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
 import com.nus.invms.service.OrderInterface;
 import com.nus.invms.service.ProductService;
 import com.nus.invms.service.ProductServiceImpl;
+import com.nus.invms.service.SupplierImplementation;
+import com.nus.invms.service.SupplierInterface;
 
 
 
@@ -47,6 +50,14 @@ public class OrderController {
 	ProductService pdtservice;
 	
 	@Autowired
+	SupplierInterface supservice;
+	
+	@Autowired
+	public void setIface(SupplierImplementation siserviceimpl) {
+		this.supservice = siserviceimpl;
+	}
+	
+	@Autowired
 	public void setInvService(InventoryServiceImpl invserviceimpl) {
 		this.iservice = invserviceimpl;
 	}
@@ -62,6 +73,8 @@ public class OrderController {
 		model.addAttribute("order", new Order());
 		ArrayList<Product> plist = pdtservice.findAllProducts();
 		model.addAttribute("products",plist);
+		ArrayList<Supplier> slist = supservice.listAllSuppliers();
+		model.addAttribute("suppliers",slist);
 		return "order-form";
 	}
 	

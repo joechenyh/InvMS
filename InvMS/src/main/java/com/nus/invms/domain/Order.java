@@ -50,7 +50,7 @@ public class Order {
 	private Employee employee; 
 	
 	@OneToOne
-	private Supplier suppliers;
+	private Supplier supplier;
 	
 	@OneToOne
 	private Product product;
@@ -60,7 +60,7 @@ public class Order {
 
 
 	public Order(LocalDate orderDate, LocalDate dateReceivedReturned, int quantityOrdered, int quantityReceived, 
-			OrderStatus status, OrderType type, Employee employee, Supplier suppliers, Product product) {
+			OrderStatus status, OrderType type, Employee employee, Supplier supplier, Product product) {
 
 	
 		this.orderDate = orderDate;
@@ -71,7 +71,7 @@ public class Order {
 
 
 		this.product = product;
-		this.suppliers = suppliers;
+		this.supplier = supplier;
 
 		this.status = status;
 		this.type = type;
@@ -187,14 +187,14 @@ public class Order {
 
 
 
-	public Supplier getSuppliers() {
-		return suppliers;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
 
 
-	public void setSuppliers(Supplier suppliers) {
-		this.suppliers = suppliers;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 
