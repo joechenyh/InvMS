@@ -26,6 +26,7 @@ public class Employee{
 	private String name;
 	@NotEmpty
 	@Size(min=5, max=20)
+	@Column(unique=true)
 	private String username;
 	@NotEmpty
 	@Size(min=5, max=20)
