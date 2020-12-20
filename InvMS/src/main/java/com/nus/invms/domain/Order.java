@@ -38,6 +38,7 @@ public class Order {
 	
 	@NotNull
 	private int quantityOrdered;
+	@Nullable
 	private int quantityReceived;
 //	@NotEmpty
 //	private String partNumber; 

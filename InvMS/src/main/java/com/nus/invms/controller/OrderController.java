@@ -119,7 +119,7 @@ public class OrderController {
 		if (bindingResult.hasErrors()) {
 			return "order-form";
 		}
-		else {
+		 {
 			if(order.getStatus().toString()=="OrderReceived") 
 			{
 				int quantity = order.getQuantityReceived();
@@ -168,7 +168,9 @@ public class OrderController {
 				}
 				
 				
-			}return "order-form";
+			}
+			oservice.saveOrder(order);
+			return "forward:/order/list";
 		}
 		
 			
@@ -186,6 +188,10 @@ public class OrderController {
 	@RequestMapping(value = "/edit/{orderId}")
 	public String editForm(@PathVariable("orderId") int number, Model model) {
 		model.addAttribute("order", oservice.findById(number));
+		ArrayList<Product> plist = pdtservice.findAllProducts();
+		model.addAttribute("products",plist);
+		ArrayList<Supplier> slist = supservice.listAllSuppliers();
+		model.addAttribute("suppliers",slist);
 		return "editOrder";
 	}
 	

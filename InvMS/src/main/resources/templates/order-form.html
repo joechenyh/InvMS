@@ -12,11 +12,17 @@
 	 	var selection = e.value;
 		var order = document.getElementById("order_status");
 	    	
-	    if (selection === "RETURN"){
+		/* if (selection === "RETURN"){
 	    	order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option> <option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
+	    } */
+		if (selection === "RETURN"){
+	    	order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option>";
 	    }
-	    if (selection === "ORDER") {
+	    /* if (selection === "ORDER") {
 	        order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option> <option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
+	    } */
+	    if (selection === "ORDER") {
+	        order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option>";
 	    }
 
     document.getElementById("order_type").onchange = function(){
@@ -24,11 +30,17 @@
     	var selection = e.value;
     	var order = document.getElementById("order_status");
     	
-    	if (selection === "RETURN"){
+    	/* if (selection === "RETURN"){
     		order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option> <option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
+        } */
+    	if (selection === "RETURN"){
+    		order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option>";
         }
-    	if (selection === "ORDER") {
+    	/* if (selection === "ORDER") {
             order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option> <option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
+    	} */
+    	if (selection === "ORDER") {
+            order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option>";
     	}
     }
 }; 
@@ -53,24 +65,24 @@
 		</fieldset>
 
 		<fieldset>
-			Order Date <input type="date" th:field="*{orderDate}">
+			Order Date/Return Date <input type="date" th:field="*{orderDate}">
 			<p style="color:red" th:if="${#fields.hasErrors('orderDate')}" th:errors="*{orderDate}"></p>
 		</fieldset>
 		
-		<fieldset>
-			Date Received/Returned <input type="date" th:field="*{dateReceivedReturned}">
+		<!-- <fieldset>
+			Date Received/Returned <input type="date" th:field="*{dateReceivedReturned}" th:if="${not #lists.isEmpty(order)}">
 			<p style="color:red" th:if="${#fields.hasErrors('dateReceivedReturned')}" th:errors="*{dateReceivedReturned}"></p>
-		</fieldset>
+		</fieldset> -->
 		
 		<fieldset>
-			Order Quantity <input type="number" th:field="*{quantityOrdered}">
+			Order Quantity/Return Quantity <input type="number" th:field="*{quantityOrdered}">
 			<p style="color:red" th:if="${#fields.hasErrors('quantityOrdered')}" th:errors="*{quantityOrdered}"></p>
 		</fieldset>
 		
-		<fieldset>
-			Receive Quantity <input type="number" th:field="*{quantityReceived}">
+		<!-- <fieldset>
+			Receive Quantity <input type="number" th:field="*{quantityReceived}" >
 			<p style="color:red" th:if="${#fields.hasErrors('quantityReceived')}" th:errors="*{quantityReceived}"></p>
-		</fieldset>
+		</fieldset> -->
 
 		<fieldset>
 			Product Number <select th:field="*{product.partNumber}">

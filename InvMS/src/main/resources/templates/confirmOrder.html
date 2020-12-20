@@ -53,30 +53,28 @@
 		</fieldset>
 
 		<fieldset>
-			Order Date/Return Date <input type="date" th:field="*{orderDate}" th:value="*{orderDate}">
+			Order Date <input type="date" th:field="*{orderDate}" th:value="*{orderDate}">
 			<p style="color:red" th:if="${#fields.hasErrors('orderDate')}" th:errors="*{orderDate}"></p>
 		</fieldset>
 		
 		<fieldset>
-			Date Received/Date Returned <input type="date" th:field="*{dateReceivedReturned}" th:value="*{dateReceivedReturned}">
+			Date Received/Returned <input type="date" th:field="*{dateReceivedReturned}" th:value="*{dateReceivedReturned}">
 			<p style="color:red" th:if="${#fields.hasErrors('dateReceivedReturned')}" th:errors="*{dateReceivedReturned}"></p>
 		</fieldset>
 		
 		<fieldset>
-			Order Quantity/Return Quantity <input type="number" th:field="*{quantityOrdered}" th:value="*{quantityReceived}">
+			Order Quantity <input type="number" th:field="*{quantityOrdered}" th:value="*{quantityReceived}">
 			<p style="color:red" th:if="${#fields.hasErrors('quantityOrdered')}" th:errors="*{quantityOrdered}"></p>
 		</fieldset>
 		
 		<fieldset>
-			Order Received/Goods Returned <input type="number" th:field="*{quantityReceived}" th:value="*{quantityReceived}">
+			Receive Quantity <input type="number" th:field="*{quantityReceived}" th:value="*{quantityReceived}">
 			<p style="color:red" th:if="${#fields.hasErrors('quantityReceived')}" th:errors="*{quantityReceived}"></p>
 		</fieldset>
 
 		<fieldset>
-			Product Number <select th:field="*{product.partNumber}">
-				<option th:each="product:${products}" th:value="${product.partNumber}"
-					th:text="${product.partNumber}"></option>
-			</select>
+			Part Number <input type="text" th:field="*{partNumber}" th:value="*{partNumber}">
+			<p style="color:red" th:if="${#fields.hasErrors('partNumber')}" th:errors="*{partNumber}"></p>
 		</fieldset>
 		
 		<fieldset>
