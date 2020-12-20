@@ -74,7 +74,7 @@ public class PasswordController {
 					emp.setEPassword(password.getNewPassword());
 					empservice.saveEmployee(emp);
 
-					return "forward:/admin/list";
+					return "updatedPassword";
 				}
 
 			}
