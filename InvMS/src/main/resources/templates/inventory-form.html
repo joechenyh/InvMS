@@ -9,7 +9,7 @@
 <script>
 $(document).ready(function () 
 		{
-			$("#ddlselect").on("click", function (event) 
+			$("#ddlselect").on("keyup", function (event) 
 					{
 						var product = $("#ddlselect").val();
 						if(product != "0")
@@ -29,12 +29,18 @@ $(document).ready(function ()
 	    	  						$("#pdt_name").val(data[1]);
 		    					}
 	    					}
-						else
+						else if (product == null)
 							{
 	    						$("#pdt_price").val("");
 	    						$("#pdt_name").val("");
 	    						return
 	    					}
+						else
+						{
+    						$("#pdt_price").val("");
+    						$("#pdt_name").val("");
+    						return
+    					}
 	  				});
 			$("#ddlselect1").on("click", function (event)
 					{
@@ -73,11 +79,8 @@ $(document).ready(function ()
 
 	<h1>Inventory Form</h1>
 	<h3>Checking</h3>
-	Product Name<select id="ddlselect">
-	<option value="0">--Select--</option>
-	<option th:each="product:${products}" th:value="${product.partNumber}"
-					th:text="${product.productName}"></option>
-	</select>
+	Product Name<input type="text" id="ddlselect"></input>
+	
 	
 	Part Number<input type="text" readonly="readonly" id="pdt_name"/>
 	Unit Price<input type="text" readonly="readonly" id="pdt_price"/>

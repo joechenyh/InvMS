@@ -155,9 +155,10 @@ public class InventoryController {
 	
 	@RequestMapping(value = "/getProduct/{id}")
 	@ResponseBody
-	public ArrayList<String> getProductById(@PathVariable("id") Integer id, Model model) {
+	public ArrayList<String> getProductById(@PathVariable("id") String keyword, Model model) {
 		model.addAttribute("inventory", new Inventory());
-		Product result = pservice.findProductById(id);
+		//Product result = pservice.findProductById(id);
+		Product result = pservice.findProductByName(keyword);
 		ArrayList<String> productInfo = new ArrayList<String>();
 		productInfo.add(result.getUnitPrice().toString());
 		//System.out.println(productInfo.get(0));

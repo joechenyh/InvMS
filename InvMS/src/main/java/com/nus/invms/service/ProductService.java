@@ -20,5 +20,6 @@ public interface ProductService {
 	 public void deleteProduct(Product product);
 	 public ArrayList<String> findAllProductNames();
 	 public ArrayList<Integer> findAllProductId();
+	 public Product findProductByName(String keyword);
 	
 }
