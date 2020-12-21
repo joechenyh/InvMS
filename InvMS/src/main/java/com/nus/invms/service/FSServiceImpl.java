@@ -58,7 +58,7 @@ public class FSServiceImpl implements FSService {
 	@Override
 	public List<String> findAllFixSetNames() {
 		List<FixSet> fixsets = (List<FixSet>) fsrepo.findAll();
-		List<String> names = new List<String>();
+		List<String> names = new ArrayList<String>();
 		for (Iterator<FixSet> iterator = fixsets.iterator(); iterator.hasNext();) {
 			FixSet fixset = (FixSet) iterator.next();
 			names.add(fixset.getFixsetName());
@@ -69,7 +69,7 @@ public class FSServiceImpl implements FSService {
 	@Override
 	public List<Integer> findAllFixSetId() {
 			List<FixSet> fixsets = (List<FixSet>) fsrepo.findAll();
-			List<Integer> ids = new List<Integer>();
+			List<Integer> ids = new ArrayList<Integer>();
 			for (Iterator<FixSet> iterator = fixsets.iterator(); iterator.hasNext();) {
 				FixSet fixset = (FixSet) iterator.next();
 				ids.add(fixset.getFixsetId());

@@ -21,6 +21,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 //@Table only needed if table different name 
 public class FixSetUsage {
+	public FixSetUsage(FixSet fixset, List<PartUsage> partusages, Employee employee,
+			@FutureOrPresent LocalDate usagedate, String carplate, Status status) {
+		super();
+		this.fixset = fixset;
+		this.partusages = partusages;
+		this.employee = employee;
+		this.usagedate = usagedate;
+		this.carplate = carplate;
+		this.status = status;
+	}
+
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int transactionId;
@@ -101,18 +115,9 @@ public class FixSetUsage {
 		}
 
 		
+		
 
-		public FixSetUsage(FixSet fixset, PartUsage partusage, Employee employee, @FutureOrPresent LocalDate usagedate,
-				String carplate, Status status) {
-			super();
-			this.fixset = fixset;
-			this.partusage = partusage;
-			this.employee = employee;
-			this.usagedate = usagedate;
-			this.carplate = carplate;
-			this.status = status;
-		}
-
+		
 		public FixSetUsage() {
 			super();
 		}
