@@ -60,6 +60,9 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 		 		+ "OR CONCAT(i.units, '') LIKE %:keyword%",
 				 nativeQuery = true)
 			public List<Inventory> searchInventoryItem(@Param("keyword") String keyword);
+
+	 @Query("Select i from Inventory i where i.supplier.supplierId = :supplierId")
+	public List<Inventory> findInventoryBySupplier(int supplierId);
 	
 }
 
