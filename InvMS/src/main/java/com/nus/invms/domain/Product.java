@@ -176,5 +176,16 @@ public class Product {
 	}
 
 
+	@Override
+	public String toString() {
+		return "Product [partNumber=" + partNumber + ", reorderLevel=" + reorderLevel + ", minReorderQty="
+				+ minReorderQty + ", productName=" + productName + ", description=" + description + ", colour=" + colour
+				+ ", dimension=" + dimension + ", shelfLocation=" + shelfLocation + ", manufacturer=" + manufacturer
+				+ ", unitPrice=" + unitPrice + ", status=" + status + "]";
+	}
+	
+	
+
+
 
 }

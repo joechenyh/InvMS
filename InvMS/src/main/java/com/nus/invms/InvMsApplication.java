@@ -1,13 +1,7 @@
 package com.nus.invms;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Date;
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,9 +12,6 @@ import org.springframework.context.annotation.Bean;
 
 import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Inventory;
-import com.nus.invms.domain.Order;
-import com.nus.invms.domain.OrderType;
-import com.nus.invms.domain.PartUsage;
 import com.nus.invms.domain.Product;
 import com.nus.invms.domain.RoleType;
 import com.nus.invms.domain.Status;
@@ -82,9 +73,9 @@ public class InvMsApplication {
 			Supplier s1 = new Supplier("Spare Part Supplier Company", Status.ACTIVE, "91276332", "1 Heng Mui Keng Terrace", "sparepart@gmail.com");
 			srepo.save(s1);
 			
-			Product p1 = new Product(1001, 10, 20, "Sample Product Name", "Sample Description", "Red", "Sample Dimension", "Sample Manufacturer", "Shelf 1A", 23.00, Status.ACTIVE);
+			Product p1 = new Product(1001, 10, 20, "Hello Kitty", "Sample Description", "Red", "Sample Dimension", "Sample Manufacturer", "Shelf 1A", 23.00, Status.INACTIVE);
 			prepo.save(p1);
-			Product p2 = new Product(1002, 11, 22, "Sample Product Name", "Sample Description", "Red", "Sample Dimension", "Sample Manufacturer", "Shelf 1A", 25.00, Status.ACTIVE);
+			Product p2 = new Product(1002, 11, 22, "Sailor Moon", "Sample Description", "Red", "Sample Dimension", "Sample Manufacturer", "Shelf 1A", 25.00, Status.ACTIVE);
 			prepo.save(p2);
 			
 			Inventory i1 = new Inventory(1, "Nike", "lala", "Big", "There", "here", 12.00, 13.00, 14.00, 15.00, "Sample Product Name", 100, p1, s1, "Spare Part Supplier Company");
@@ -98,6 +89,8 @@ public class InvMsApplication {
 //			PartUsage pu1 = new PartUsage(e1, p1.getPartNumber(), 2, LocalDate.now(), "SDV1234R");
 //				
 //			purepo.save(pu1);
+			
+			
 		};
 	} 
 }

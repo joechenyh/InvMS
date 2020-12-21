@@ -1,6 +1,5 @@
 package com.nus.invms.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +8,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.lang.Nullable;
 
 
 @Entity
@@ -33,6 +34,7 @@ public class Inventory {
 	Double originalPrice, wholesalePrice,retailPrice,partnerPrice;
 	
 	String itemName;
+	@NotNull
 	int units;
 	
 	@OneToOne
@@ -156,15 +158,34 @@ public class Inventory {
 	public String getCategory() {
 		return category;
 	}
-
+	
 	
 
 	
 
-	public Inventory(@NotNull int brandId, @NotEmpty String brandName, @NotEmpty String invdescription,
-			@NotEmpty String invtype, @NotEmpty String category, @NotEmpty String subCategory,
-			@NotNull Double originalPrice, @NotNull Double wholesalePrice, @NotNull Double retailPrice,
-			@NotNull Double partnerPrice, String itemName, int units, Product product, Supplier supplier,
+	
+
+//	public Inventory(@NotNull int brandId, @NotEmpty String brandName, @NotEmpty String invdescription,
+//			@NotEmpty String invtype, @NotEmpty String category, @NotEmpty String subCategory, String itemName,
+//			int units, Product product, Supplier supplier, String supplierName) {
+//		super();
+//		this.brandId = brandId;
+//		this.brandName = brandName;
+//		this.invdescription = invdescription;
+//		this.invtype = invtype;
+//		this.category = category;
+//		this.subCategory = subCategory;
+//		this.itemName = itemName;
+//		this.units = units;
+//		this.product = product;
+//		this.supplier = supplier;
+//		this.supplierName = supplierName;
+//	}
+//
+	public Inventory(int brandId, String brandName, String invdescription,
+			String invtype, String category, String subCategory,
+			Double originalPrice, Double wholesalePrice, Double retailPrice,
+			Double partnerPrice, String itemName, int units, Product product, Supplier supplier,
 			String supplierName) {
 		super();
 		this.brandId = brandId;

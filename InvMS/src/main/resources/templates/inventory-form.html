@@ -119,12 +119,12 @@ $(document).ready(function ()
 		</fieldset> -->
 		<fieldset>
 			Brand Id <input type="number" step=1 th:field="*{brandId}">
-			<p th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}"></p>
+			<p style="color:red" th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}"></p>
 		</fieldset>
 
 		<fieldset>
 			Brand Name <input type="text" th:field="*{brandName}">
-			<p th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></p>
+			<p style="color:red" th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}"></p>
 		</fieldset>
 		<!-- <fieldset>
 			Item Name <input type="text" th:field="*{itemName}" >
@@ -132,39 +132,39 @@ $(document).ready(function ()
 		</fieldset> -->
 		<fieldset>
 			Description <input type="text" th:field="*{invdescription}">
-			<p th:if="${#fields.hasErrors('invdescription')}" th:errors="*{invdescription}"></p>
+			<p style="color:red" th:if="${#fields.hasErrors('invdescription')}" th:errors="*{invdescription}"></p>
 		</fieldset>
 		<fieldset>
 			Type <input type="text" th:field="*{invtype}">
-			<p th:if="${#fields.hasErrors('invtype')}" th:errors="*{invtype}"></p>
+			<p style="color:red" th:if="${#fields.hasErrors('invtype')}" th:errors="*{invtype}"></p>
 		</fieldset>
 		<fieldset>
 			Category <input type="text" th:field="*{category}">
-			<p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
+			<p style="color:red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
 		</fieldset>
 		<fieldset>
 			Subcategory <input type="text" th:field="*{subCategory}">
-			<p th:if="${#fields.hasErrors('subCategory')}" th:errors="*{subCategory}"></p>
+			<p style="color:red" th:if="${#fields.hasErrors('subCategory')}" th:errors="*{subCategory}"></p>
 		</fieldset>
 		<fieldset>
-			Original Price <input type="number" step=0.01 th:field="*{originalPrice}">
-			<p th:if="${#fields.hasErrors('originalPrice')}" th:errors="*{originalPrice}"></p>
+			Original Price <input type="number" step=0.01  th:field="*{originalPrice}">
+			<p style="color:red" th:if="${#fields.hasErrors('originalPrice')}" th:errors="*{originalPrice}"></p>
 		</fieldset>
 		<fieldset>
-			Whole Price <input type="number" step=0.01 th:field="*{wholesalePrice}">
-			<p th:if="${#fields.hasErrors('wholesalePrice')}" th:errors="*{wholesalePrice}"></p>
+			Whole Price <input type="number" step=0.01  th:field="*{wholesalePrice}">
+			<p style="color:red" th:if="${#fields.hasErrors('wholesalePrice')}" th:errors="*{wholesalePrice}"></p>
 		</fieldset>
 		<fieldset>
-			Retail Price <input type="number" step=0.01 th:field="*{retailPrice}">
-			<p th:if="${#fields.hasErrors('retailPrice')}" th:errors="*{retailPrice}"></p>
+			Retail Price <input type="number" step=0.01  th:field="*{retailPrice}">
+			<p style="color:red" th:if="${#fields.hasErrors('retailPrice')}" th:errors="*{retailPrice}"></p>
 		</fieldset>
 		<fieldset>
-			Partner Price <input type="number" step=0.01 th:field="*{partnerPrice}">
-			<p th:if="${#fields.hasErrors('partnerPrice')}" th:errors="*{partnerPrice}"></p>
+			Partner Price <input type="number" step=0.01  th:field="*{partnerPrice}">
+			<p style="color:red" th:if="${#fields.hasErrors('partnerPrice')}" th:errors="*{partnerPrice}"></p>
 		</fieldset>
 		<fieldset>
 			Units <input type="number" step=1 th:field="*{units}">
-			<p th:if="${#fields.hasErrors('units')}" th:errors="*{units}"></p>
+			<p style="color:red" th:if="${#fields.hasErrors('units')}" th:errors="*{units}"></p>
 		</fieldset> 
 		
 		<fieldset>

@@ -47,6 +47,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	 		+ "WHERE p.product_name LIKE %:keyword% ",
 			 nativeQuery = true)
 		public Product findProductByName(@Param("keyword") String keyword);
+	
+//	@Query("Select p FROM Product p WHERE p.shelfLocation = :shelfLocation")
+//		public ArrayList<Product> findAllActiveProduct();
 		
 
 }

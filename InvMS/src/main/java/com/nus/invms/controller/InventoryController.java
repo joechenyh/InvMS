@@ -2,6 +2,7 @@
 package com.nus.invms.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -84,6 +85,17 @@ public class InventoryController {
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		model.addAttribute("inventories", invservice.findAllInventories());
+		ArrayList<Product> pList = new ArrayList<Product>();
+		ArrayList<Product> pList2 = new ArrayList<Product>();
+		pList = (ArrayList<Product>) pservice.findAllProducts();
+		for (Iterator<Product> iterator = pList.iterator(); iterator.hasNext();) {
+			Product product = iterator.next();
+			if(product.getStatus().toString()=="ACTIVE") {
+				System.out.println("!!!!" + product);
+				pList2.add(product);
+			}
+			
+		}
 		return "inventories";
 	}
 	
@@ -96,20 +108,54 @@ public class InventoryController {
 	}
 	
 	@RequestMapping(value = "/add")
-	public String addForm(Model model) {
+	public String addForm(Model model) 
+	{
 		model.addAttribute("inventory", new Inventory());
-		ArrayList<Product> plist = pservice.findAllProducts();
-		model.addAttribute("products",plist);
-		ArrayList<Supplier> slist = supservice.listAllSuppliers();
-		model.addAttribute("suppliers",slist);
+		ArrayList<Product> pList = new ArrayList<Product>();
+		ArrayList<Product> pList2 = new ArrayList<Product>();
+		pList = (ArrayList<Product>) pservice.findAllProducts();
+		for (Iterator<Product> iterator = pList.iterator(); iterator.hasNext();) {
+			Product product = iterator.next();
+			if(product.getStatus().toString()=="ACTIVE") {
+				System.out.println("!!!!" + product);
+				pList2.add(product);
+			}
+			
+		}
+		model.addAttribute("products",pList2);
+		ArrayList<Supplier> sList = new ArrayList<Supplier>();
+		ArrayList<Supplier> sList2 = new ArrayList<Supplier>();
+		sList = (ArrayList<Supplier>) supservice.listAllSuppliers();
+		System.out.println("!!!!" + "supplier");
+		for (Iterator<Supplier> iterator = sList.iterator(); iterator.hasNext();) 
+		{
+			Supplier supplier = iterator.next();
+			if(supplier.getStatus().toString()=="ACTIVE") 
+			{
+				System.out.println("!!!!" + supplier);
+				sList2.add(supplier);
+			}
+			model.addAttribute("suppliers",sList2);
+			
+		}
 		return "inventory-form";
 	}
 	
 	@RequestMapping(value = "/edit/{id}")
 	public String editForm(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("inventory", invservice.getInventory(id));
-		ArrayList<Product> plist = pservice.findAllProducts();
-		model.addAttribute("products",plist);
+		ArrayList<Product> pList = new ArrayList<Product>();
+		ArrayList<Product> pList2 = new ArrayList<Product>();
+		pList = (ArrayList<Product>) pservice.findAllProducts();
+		for (Iterator<Product> iterator = pList.iterator(); iterator.hasNext();) {
+			Product product = iterator.next();
+			if(product.getStatus().toString()=="ACTIVE") {
+				System.out.println("!!!!" + product);
+				pList2.add(product);
+			}
+			
+		}
+		model.addAttribute("products",pList2);
 		ArrayList<Supplier> slist = supservice.listAllSuppliers();
 		model.addAttribute("suppliers",slist);
 		return "editInventory";
@@ -119,15 +165,48 @@ public class InventoryController {
 	@RequestMapping(value = "/save")
 	public String saveInventory(@ModelAttribute("inventory") @Valid Inventory inventory, 
 		BindingResult bindingResult,  Model model) {
-		String msg = checkError(inventory);
 		
-		if (bindingResult.hasErrors()|| msg!=null) 
+		//String msg = checkError(inventory);
+		
+
+		if (bindingResult.hasErrors()) 
+			 
 		{
-			model.addAttribute("message",msg);
+			
+				
+			//model.addAttribute("message",msg);
 			ArrayList<Product> plist = pservice.findAllProducts();
 			model.addAttribute("products",plist);
 			//model.addAttribute("inventory", new Inventory());
-			System.out.println("!!!" + msg);
+			//System.out.println("!!!" + msg);
+			model.addAttribute("inventory", inventory);
+			ArrayList<Product> pList = new ArrayList<Product>();
+			ArrayList<Product> pList2 = new ArrayList<Product>();
+			pList = (ArrayList<Product>) pservice.findAllProducts();
+			for (Iterator<Product> iterator = pList.iterator(); iterator.hasNext();) {
+				Product product = iterator.next();
+				if(product.getStatus().toString()=="ACTIVE") {
+					System.out.println("!!!!" + product);
+					pList2.add(product);
+				}
+				
+			}
+			model.addAttribute("products",pList2);
+			ArrayList<Supplier> sList = new ArrayList<Supplier>();
+			ArrayList<Supplier> sList2 = new ArrayList<Supplier>();
+			sList = (ArrayList<Supplier>) supservice.listAllSuppliers();
+			System.out.println("!!!!" + "supplier");
+			for (Iterator<Supplier> iterator = sList.iterator(); iterator.hasNext();) 
+			{
+				Supplier supplier = iterator.next();
+				if(supplier.getStatus().toString()=="ACTIVE") 
+				{
+					System.out.println("!!!!" + supplier);
+					sList2.add(supplier);
+				}
+				model.addAttribute("suppliers",sList2);
+				
+			}
 			return "inventory-form";
 		}
 		else 
@@ -171,10 +250,13 @@ public class InventoryController {
 	
 	public String checkError(Inventory inventory) {
 		String msg = null;
-		if(inventory.getBrandId()<0||inventory.getOriginalPrice()<0||inventory.getPartnerPrice()<0||inventory.getRetailPrice()<0||inventory.getWholesalePrice()<0||inventory.getUnits()<0) 
-		{
-			msg="Negative value unacceptable";
+		if (inventory.getOriginalPrice()!=null||inventory.getPartnerPrice()!=null||inventory.getRetailPrice()!=null||inventory.getWholesalePrice()!=null) {
+			if(inventory.getBrandId()<0||inventory.getOriginalPrice()<0||inventory.getPartnerPrice()<0||inventory.getRetailPrice()<0||inventory.getWholesalePrice()<0||inventory.getUnits()<0) 
+			{
+				msg="Negative value unacceptable";
+			}
 		}
+		
 		return msg;
 	}
 	
