@@ -1,5 +1,6 @@
 package com.nus.invms.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +54,8 @@ public class PartUsageServiceImpl implements PartUsageService {
 
 	@Override
 	@Transactional
-	public List<PartUsage> viewPartUsage(String partnumber) {
-		return purepo.findPartUsageByPartNumber(partnumber);
+	public List<PartUsage> findPartUsageByPartNumber(Integer pnumber) {
+		return purepo.findPartUsageByPartNumber(pnumber);
 	}
 
 	@Override
@@ -64,13 +65,20 @@ public class PartUsageServiceImpl implements PartUsageService {
 		return purepo.findUsageByCarplate(carplate);
 	}
 
+//	@Override
+//	@Transactional
+//	public List<PartUsage> findByUsagedateBetween(LocalDate fromDate, LocalDate toDate) {
+//		// TODO Auto-generated method stub
+//		return purepo.findByUsagedateBetween(fromDate, toDate);
+//	}
+
 	@Override
 	@Transactional
-	public List<PartUsage> findByUsagedateBetween(String d1, String d2) {
+	public List<PartUsage> findByUsagedateBetween(String fromDate, String toDate) {
 		// TODO Auto-generated method stub
-		return purepo.findByUsagedateBetween(d1, d2);
+		return purepo.findByUsagedateBetween(fromDate, toDate);
 	}
-
+	
 	@Override
 	@Transactional
 	public PartUsage findByTransactionId(Integer tid) {

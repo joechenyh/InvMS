@@ -1,89 +1,161 @@
 package com.nus.invms.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.nus.invms.domain.Inventory;
+import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.PartUsage;
+import com.nus.invms.domain.Product;
+import com.nus.invms.service.EmployeeImplementation;
 import com.nus.invms.service.EmployeeInterface;
+import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
+import com.nus.invms.service.PartUsageService;
 import com.nus.invms.service.PartUsageServiceImpl;
+import com.nus.invms.service.ProductService;
+import com.nus.invms.service.ProductServiceImpl;
 
 @Controller
 @RequestMapping("/partusage")
-public class PartUsageController  {
-	
+public class PartUsageController {
+
 	@Autowired
-	private InventoryServiceImpl invservice;
-	
+	private InventoryService invservice;
+
 	@Autowired
-	private PartUsageServiceImpl puservice;
-	
-	@Autowired 
-	EmployeeInterface empservice;
-	
-	//@Autowired
-	//private EmployeeService eservice; 
-	
+	private PartUsageService puservice;
+
 	@Autowired
 	public void setInvService(InventoryServiceImpl invserviceimpl) {
 		this.invservice = invserviceimpl;
 	}
-	
+
 	@Autowired
 	public void setPUService(PartUsageServiceImpl puserviceimpl) {
 		this.puservice = puserviceimpl;
 	}
-	
 
-	//1. Manage Usage
-	@RequestMapping(value = "/usagedashboard")
-	public String Viewdashboard(){
-		return "usagedashboard";
+	@Autowired
+	private ProductService pservice;
+
+	@Autowired
+	public void setProdService(ProductServiceImpl pserviceimpl) {
+		this.pservice = pserviceimpl;
 	}
-	
-	
+
+	@Autowired
+	private EmployeeInterface empservice;
+
+	@Autowired
+	public void setEmpService(EmployeeImplementation empserviceimpl) {
+		this.empservice = empserviceimpl;
+	}
+
+//	//1. Manage Usage
+//	@RequestMapping(value = "/usagedashboard")
+//	public String Viewdashboard(){
+//		return "usagedashboard";
+//	}
 
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
-		model.addAttribute("pusages", puservice.listPartUsage());
-		return "pusages";
+		model.addAttribute("usages", puservice.listPartUsage());
+		return "usages";
 	}
+
+//	!!!For Transaction history function!!!
+	@GetMapping("/partnumberfilter")
+	public String ListPartNumber(Model model, @Param("pnumber") Integer pnumber) {
+		List<PartUsage> usages = puservice.findPartUsageByPartNumber(pnumber);
+		model.addAttribute("usages", usages);
+		model.addAttribute("pnumber", pnumber);
+		return "usageByPartNumber";
+	}
+
+//	@GetMapping("/datefilter")
+//	public String ListByDate(Model model, @Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate) {
+//		System.out.println("#1 :" + fromDate + "-" + toDate);
+//		List<PartUsage> usages = puservice.findByUsagedateBetween(fromDate, toDate);
+//		System.out.println("#2");
+//		model.addAttribute("usages", usages);
+//		model.addAttribute("fromDate", fromDate);
+//		model.addAttribute("toDate", toDate);
+//		return "usageByDate";
+//	}
+
+	@GetMapping("/datefilter")
+	public String ListByDate(Model model, @Param("fromDate") String fromDate, @Param("toDate") String toDate) {
+		List<PartUsage> usages = puservice.findByUsagedateBetween(fromDate, toDate);
+		model.addAttribute("usages", usages);
+		model.addAttribute("fromDate", fromDate);
+		model.addAttribute("toDate", toDate);
+		return "usageByDate";
+	}
+	
 	@RequestMapping(value = "/add")
 	public String addForm(Model model) {
-		model.addAttribute("pusage", new PartUsage());
-		return "pusage-form";
+		model.addAttribute("usage", new PartUsage());
+		ArrayList<Product> plist = pservice.findAllProducts();
+		model.addAttribute("products", plist);
+		ArrayList<Employee> elist = empservice.listAllEmployees();
+		model.addAttribute("employees", elist);
+		return "usage-form";
 	}
+
 	@RequestMapping(value = "/edit/{id}")
-	public String editForm(@PathVariable("id") String id, Model model) {
-		model.addAttribute("pusage", puservice.viewPartUsage(id));
-		return "pusage-form";
+	public String editForm(@PathVariable("id") int id, Model model) {
+		model.addAttribute("usage", puservice.findByTransactionId(id));
+		return "usage-form";
 	}
+
 	@RequestMapping(value = "/save")
-	public String saveInventory(@ModelAttribute("pusage") @Valid PartUsage pusage, 
-			BindingResult bindingResult,  Model model) {
-		if (bindingResult.hasErrors()) {
-			return "pusage-form";
+	public String saveusage(@ModelAttribute("usage") @Valid PartUsage usage, BindingResult bindingResult, Model model) {
+		String msg = checkError(usage);
+		if (bindingResult.hasErrors() || msg != null) {
+			model.addAttribute("message", msg);
+			ArrayList<Employee> elist = empservice.listAllEmployees();
+			model.addAttribute("employees", elist);
+			System.out.println("!!!" + msg);
+			return "usage-form";
+		} else {
+			int pdtPartNum = usage.getProduct().getPartNumber();
+			Product product = pservice.findProductById(pdtPartNum);
+			usage.setProduct(product);
+
+			int empId = usage.getEmployee().getID();
+			Employee employee = empservice.findById(empId);
+			usage.setEmployee(employee);
+
+			puservice.addPartUsage(usage);
+			return "forward:/partusage/list";
 		}
-		puservice.addPartUsage(pusage);
-		return "forward:/partusage/list";
 	}
+
 	@RequestMapping(value = "/delete/{id}")
 	public String deletePartUsage(@PathVariable("id") Integer id) {
-		invservice.deactivateInventory(invservice.getInventory(id));
+		puservice.deletePartUsage(puservice.findByTransactionId(id));
 		return "forward:/partusage/list";
 	}
-	
-	
-	
+
+	public String checkError(PartUsage partusage) {
+		String msg = null;
+		if (partusage.getQuantity() < 0) {
+			msg = "Negative value unacceptable";
+		}
+		return msg;
+	}
 
 }
