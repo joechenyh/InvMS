@@ -101,7 +101,7 @@ $(document).ready(function ()
 			<input type="hidden" th:field="*{inventoryId}">
 		</fieldset>
 		<fieldset>
-			Product Number <select th:field="*{product.partNumber}">
+			Part Number <select th:field="*{product.partNumber}">
 				<option th:each="product:${products}" th:value="${product.partNumber}"
 					th:text="${product.partNumber}"></option>
 			</select>

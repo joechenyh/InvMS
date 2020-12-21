@@ -9,11 +9,11 @@ import org.springframework.context.annotation.Bean;
 
 import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Fixset;
-import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Part;
 import com.nus.invms.domain.Product;
 import com.nus.invms.domain.RoleType;
 import com.nus.invms.domain.Status;
+import com.nus.invms.domain.Supplier;
 import com.nus.invms.repo.EmployeeRepository;
 import com.nus.invms.repo.FixsetRepository;
 import com.nus.invms.repo.InventoryRepository;
@@ -144,6 +144,12 @@ public class InvMsApplication {
 			 Employee e2 = new Employee("Elmo", "asdfgh", "asdfgh", Status.INACTIVE, RoleType.MECHANIC);
 			 erepo.save(e1);
 			 erepo.save(e2);
+			 
+			 Supplier s1 = new Supplier("Nestle", Status.ACTIVE, "91134512", "Pasir Ris", "style@mail.com");
+			 Supplier s2 = new Supplier("Gogo", Status.ACTIVE, "92323890", "Jurong", "se@mail.com");
+			 srepo.save(s1);
+			 srepo.save(s2);
+			 
 			 
 			 
 			

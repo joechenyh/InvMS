@@ -166,7 +166,7 @@ public class InventoryController {
 	public String saveInventory(@ModelAttribute("inventory") @Valid Inventory inventory, 
 		BindingResult bindingResult,  Model model) {
 		
-		//String msg = checkError(inventory);
+		String msg;
 		
 
 		if (bindingResult.hasErrors()) 
@@ -205,12 +205,56 @@ public class InventoryController {
 					sList2.add(supplier);
 				}
 				model.addAttribute("suppliers",sList2);
-				
 			}
+			
 			return "inventory-form";
 		}
 		else 
 		{
+			ArrayList<Inventory> iList = new ArrayList<Inventory>();
+			iList = (ArrayList<Inventory>) invservice.findAllInventories();
+			for (Iterator<Inventory> iterator = iList.iterator(); iterator.hasNext();) {
+				Inventory inventory2 = iterator.next();
+				if (inventory2.getProduct().getPartNumber()==inventory.getProduct().getPartNumber()) {
+					//model.addAttribute("message",msg);
+					ArrayList<Product> plist = pservice.findAllProducts();
+					model.addAttribute("products",plist);
+					//model.addAttribute("inventory", new Inventory());
+					//System.out.println("!!!" + msg);
+					model.addAttribute("inventory", inventory);
+					ArrayList<Product> pList = new ArrayList<Product>();
+					ArrayList<Product> pList2 = new ArrayList<Product>();
+					pList = (ArrayList<Product>) pservice.findAllProducts();
+					for (Iterator<Product> iterator1 = pList.iterator(); iterator1.hasNext();) {
+						Product product = iterator1.next();
+						if(product.getStatus().toString()=="ACTIVE") {
+							System.out.println("!!!!" + product);
+							pList2.add(product);
+						}
+						
+					}
+					model.addAttribute("products",pList2);
+					ArrayList<Supplier> sList = new ArrayList<Supplier>();
+					ArrayList<Supplier> sList2 = new ArrayList<Supplier>();
+					sList = (ArrayList<Supplier>) supservice.listAllSuppliers();
+					System.out.println("!!!!" + "supplier");
+					for (Iterator<Supplier> iterator2 = sList.iterator(); iterator2.hasNext();) 
+					{
+						Supplier supplier = iterator2.next();
+						if(supplier.getStatus().toString()=="ACTIVE") 
+						{
+							System.out.println("!!!!" + supplier);
+							sList2.add(supplier);
+						}
+						model.addAttribute("suppliers",sList2);
+						
+					}
+					msg = "Duplicate Part Number";
+					model.addAttribute("message",msg);
+					return "inventory-form";
+				}
+				
+			}
 			int pdtPartNum = inventory.getProduct().getPartNumber();
 			int supId = inventory.getSupplier().getSupplierId();
 			Product product = pservice.findProductById(pdtPartNum);
