@@ -1,5 +1,6 @@
 package com.nus.invms.controller;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ import com.nus.invms.domain.Part;
 import com.nus.invms.repo.FixsetRepository;
 import com.nus.invms.repo.PartRepository;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api")
@@ -40,7 +42,17 @@ public class RestFixsetController {
 	@PostMapping("/parts")
 	public ResponseEntity<Part> createPart (@RequestBody Part part) {
 		try {
-			Part p = partrepo.save(new Part(part.getProduct(), part.getQuantity()));
+			Part p = new Part(part.getProduct(), part.getQuantity());
+			List<Part> existingParts = (List<Part>) partrepo.findAll();
+			for (Iterator<Part> iterator = existingParts.iterator(); iterator.hasNext();) {
+				Part existingpart = (Part) iterator.next();
+				
+				if (existingpart.getProduct().getPartNumber() == p.getProduct().getPartNumber() && existingpart.getQuantity() == p.getQuantity()) {
+					return new ResponseEntity<>(null, HttpStatus.CONFLICT);			
+			    }
+			}
+			partrepo.save(p);
+			
 			return new ResponseEntity<>(p, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
@@ -75,8 +87,25 @@ public class RestFixsetController {
 	@DeleteMapping("/parts/{id}")
 	public ResponseEntity<HttpStatus> deletePart(@PathVariable("id") int id) {
 		try {
+			List<Fixset> fixsets = (List<Fixset>) fixrepo.findAll();
+			
+			for (Iterator<Fixset> iterator = fixsets.iterator(); iterator.hasNext();) {
+				Fixset fixset = (Fixset) iterator.next();
+				
+				List<Part> parts = fixset.getPart();
+				
+				for (Iterator<Part> iterator2 = parts.iterator(); iterator2.hasNext();) {
+					Part part = (Part) iterator2.next();
+					
+					if (part.getPartId() == id) {
+						parts.remove(id);			
+				    }
+				}
+				fixrepo.save(fixset);
+			}
+			
 			partrepo.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 		}
@@ -140,8 +169,28 @@ public class RestFixsetController {
 	@DeleteMapping("/fixsets/{id}")
 	public ResponseEntity<HttpStatus> deleteFixset(@PathVariable("id") int id) {
 		try {
+			
+			Fixset fixset = fixrepo.findById(id).get();
+//			List<Part> parts = fixset.getPart();
+			
+//			List<Part> dbparts = (List<Part>) partrepo.findAll();
+			
 			fixrepo.deleteById(id);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+					
+			/*
+			 * for (Iterator<Part> iterator = parts.iterator(); iterator.hasNext();) { Part
+			 * part = (Part) iterator.next();
+			 * 
+			 * for (Iterator<Part> iterator2 = dbparts.iterator(); iterator2.hasNext();) {
+			 * Part dbpart = (Part) iterator.next();
+			 * 
+			 * if (dbpart.getPartId() == part.getPartId()) {
+			 * partrepo.deleteById(part.getPartId()); } }
+			 * fixrepo.deleteById(part.getPartId()); }
+			 */
+			
+			return new ResponseEntity<>(HttpStatus.OK);
+			
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
 		}

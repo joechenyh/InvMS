@@ -81,50 +81,59 @@ public class InvMsApplication {
 
 			
 			
-			  Product prod1 = new Product (12, 12, "tyre", "car tyre", "black", "20cm",
-			  "dunlop", "bottom", 120.0, Status.ACTIVE); 
-			  Product prod2 = new Product (2, 2,
-			  "jockey tool", "jockey tool for car repair", "silver", "20cm", "mytool",
-			  "office", 20.0, Status.ACTIVE); 
-			  prepo.save(prod1); 
-			  prepo.save(prod2);
+//			
+			/*
+			 * Product prod1 = new Product (12, 12, "tyre", "car tyre", "black", "20cm",
+			 * "dunlop", "bottom", 120.0, Status.ACTIVE); Product prod2 = new Product (2, 2,
+			 * "jockey tool", "jockey tool for car repair", "silver", "20cm", "mytool",
+			 * "office", 20.0, Status.ACTIVE); Product prod3 = new Product (5, 5, "grease",
+			 * "car grease", "black", "1 litre", "greeeeease", "top", 12.50, Status.ACTIVE);
+			 * Product prod4 = new Product (1, 1,"motor engine", "motor engine replacement",
+			 * "silver", "12kg", "engine centre", "middle", 70.0, Status.ACTIVE);
+			 * prepo.save(prod1); prepo.save(prod2); prepo.save(prod3); prepo.save(prod4);
+			 */
 			  
-			  // Product prod1 = prepo.findById(1).get(); Product prod2 = //
-//			  prepo.findById(2).get();
+//			  Product prod3 = prepo.findById(3).get(); 
+//			  Product prod4 = prepo.findById(4).get();
 			  
 			  
-			  Part p1 = new Part (prod1, 4); 
-			  partrepo.save(p1); 
-			  Part p2 = new Part (prod2, 1); 
-			  partrepo.save(p2);
+			
+			/*
+			 * Part p1 = new Part (prod1, 4); partrepo.save(p1); Part p2 = new Part (prod2,
+			 * 1); partrepo.save(p2); Part p3 = new Part (prod3, 2); partrepo.save(p3); Part
+			 * p4 = new Part (prod4, 1); partrepo.save(p4);
+			 */
+//			 
 			 
 			  
 			  
 			  
 			
-//			  Part p1 = partrepo.findById(1).get(); 
-//			  Part p2 = partrepo.findById(2).get();
+			
+//			  Part p1 = partrepo.findById(1).get(); Part p2 = partrepo.findById(2).get();
+//			  Part p3 = partrepo.findById(3).get(); Part p4 = partrepo.findById(4).get();
 			  
-			  Fixset fixset3 = new Fixset(); 
-			  fixset3.getPart().add(p1);
-			  fixset3.getPart().add(p2); 
-			  fixset3.setFixsetName("Check car");
-			  fixset3.setFixsetDescription("check car");
-			  fixrepo.save(fixset3);
 			  
-			  Part p3 = new Part (prod1, 4); 
-			  partrepo.save(p3); 
-			  Part p4 = new Part (prod2, 1); 
-			  partrepo.save(p4);
+			/*
+			 * Fixset fixset1 = new Fixset(); fixset1.getPart().add(p1);
+			 * fixset1.getPart().add(p2); fixset1.setFixsetName("Car Retyre");
+			 * fixset1.setFixsetDescription("retyre car"); fixrepo.save(fixset1);
+			 * 
+			 * 
+			 * Fixset fixset2 = new Fixset(); fixset2.getPart().add(p3);
+			 * fixset2.getPart().add(p4); fixset2.setFixsetName("Motor Maintenance");
+			 * fixset2.setFixsetDescription("check and maintain motor");
+			 * 
+			 * fixrepo.save(fixset2);
+			 * 
+			 * 
+			 * Fixset fixset3 = new Fixset(); fixset3.getPart().add(p1);
+			 * fixset3.getPart().add(p3); fixset3.setFixsetName("Car Maintenance");
+			 * fixset3.setFixsetDescription("check and maintain car");
+			 * 
+			 * fixrepo.save(fixset3);
+			 */
 			 
-			  
-			  Fixset fixset4 = new Fixset(); 
-			  fixset4.getPart().add(p3);
-			  fixset4.getPart().add(p4); 
-			  fixset4.setFixsetName("Check Motor");
-			  fixset4.setFixsetDescription("check motor");
-			  
-			  fixrepo.save(fixset4);
 			 
 			 
 

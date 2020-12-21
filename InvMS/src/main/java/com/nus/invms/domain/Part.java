@@ -1,12 +1,20 @@
 package com.nus.invms.domain;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
+
 
 @Entity
 public class Part {
@@ -18,6 +26,20 @@ public class Part {
 		@OneToOne
 		private Product product;
 		
+		@JsonIgnore
+		@ManyToMany (mappedBy = "parts")
+		private List<Fixset> fixsets = new ArrayList<Fixset>();
+		
+		@JsonIgnore
+		public List<Fixset> getFixset() {
+			return fixsets;
+		}
+		@JsonIgnore
+		public void setFixset(List<Fixset> fixsets) {
+			this.fixsets = fixsets;
+		}
+		
+		
 //		private String partName;
 		
 //		private String partName;
@@ -28,7 +50,7 @@ public class Part {
 			// TODO Auto-generated constructor stub
 		}
 		
-		
+
 
 
 		public Part(Product product, Integer quantity) {
@@ -36,6 +58,10 @@ public class Part {
 			this.product = product;
 			this.quantity = quantity;
 		}
+
+		
+
+		
 
 
 

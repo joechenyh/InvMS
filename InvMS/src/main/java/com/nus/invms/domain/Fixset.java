@@ -8,7 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+
 
 @Entity
 public class Fixset {
@@ -21,8 +26,21 @@ public class Fixset {
 	
 	private String fixsetDescription;
 	
-	@OneToMany
-	private List<Part> part = new ArrayList<Part>();
+	@ManyToMany
+	@JoinTable(name="fixsets_parts",
+			joinColumns = {@JoinColumn(name="fk_fixset")},
+			inverseJoinColumns = {@JoinColumn(name="fk_parts")})
+	private List<Part> parts = new ArrayList<Part>();
+	
+	public List<Part> getPart() {
+		return parts;
+	}
+
+
+
+	public void setPart(List<Part> part) {
+		this.parts = parts;
+	}
 
 	public Fixset() {
 		super();
@@ -31,11 +49,11 @@ public class Fixset {
 
 	
 
-	public Fixset(String fixsetName, String fixsetDescription, List<Part> part) {
+	public Fixset(String fixsetName, String fixsetDescription, List<Part> parts) {
 		super();
 		this.fixsetName = fixsetName;
 		this.fixsetDescription = fixsetDescription;
-		this.part = part;
+		this.parts = parts;
 	}
 
 
@@ -77,15 +95,7 @@ public class Fixset {
 
 
 
-	public List<Part> getPart() {
-		return part;
-	}
-
-
-
-	public void setPart(List<Part> part) {
-		this.part = part;
-	}
+	
 
 
 
@@ -114,7 +124,7 @@ public class Fixset {
 	@Override
 	public String toString() {
 		return "Fixset [fixsetId=" + fixsetId + ", fixsetName=" + fixsetName + ", fixsetDescription="
-				+ fixsetDescription + ", part=" + part + "]";
+				+ fixsetDescription + ", parts=" + parts + "]";
 	}
 	
 	
