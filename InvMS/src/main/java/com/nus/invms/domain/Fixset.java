@@ -56,49 +56,34 @@ public class Fixset {
 		this.parts = parts;
 	}
 
-
-	
-
 	public int getFixsetId() {
 		return fixsetId;
 	}
-
-
 
 	public void setFixsetId(int fixsetId) {
 		this.fixsetId = fixsetId;
 	}
 
-
-
 	public String getFixsetName() {
 		return fixsetName;
 	}
-
-
 
 	public void setFixsetName(String fixsetName) {
 		this.fixsetName = fixsetName;
 	}
 
-
-
 	public String getFixsetDescription() {
 		return fixsetDescription;
 	}
 
-
-
 	public void setFixsetDescription(String fixsetDescription) {
 		this.fixsetDescription = fixsetDescription;
 	}
-
-
-
 	
-
-
-
+	public void removePart(Part part) {
+		parts.remove(part);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -97,7 +97,6 @@ public class InvMsApplication {
 //			  Product prod4 = prepo.findById(4).get();
 			  
 			  
-			
 			/*
 			 * Part p1 = new Part (prod1, 4); partrepo.save(p1); Part p2 = new Part (prod2,
 			 * 1); partrepo.save(p2); Part p3 = new Part (prod3, 2); partrepo.save(p3); Part

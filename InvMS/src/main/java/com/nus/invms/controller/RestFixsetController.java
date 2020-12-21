@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nus.invms.domain.Fixset;
@@ -34,12 +35,12 @@ public class RestFixsetController {
 	@Autowired
 	private FixsetRepository fixrepo;
 	
-	@GetMapping("/parts")
+	@GetMapping("/parts/get")
 	public List<Part> getParts(){
 		return (List<Part>) partrepo.findAll();
 	}
 	
-	@PostMapping("/parts")
+	@PostMapping("/parts/create")
 	public ResponseEntity<Part> createPart (@RequestBody Part part) {
 		try {
 			Part p = new Part(part.getProduct(), part.getQuantity());
@@ -59,7 +60,7 @@ public class RestFixsetController {
 		}
 	}
 	
-	@GetMapping("/parts/{id}")
+	@GetMapping("/parts/get/{id}")
 	public ResponseEntity<Part> getPartById(@PathVariable("id") Integer id) {
 		int i = id;
 		Optional<Part> pData = partrepo.findById(i);
@@ -84,21 +85,22 @@ public class RestFixsetController {
 	}
 
 	
-	@DeleteMapping("/parts/{id}")
+	@DeleteMapping("/parts/delete/{id}")
 	public ResponseEntity<HttpStatus> deletePart(@PathVariable("id") int id) {
-		try {
+//		try {
 			List<Fixset> fixsets = (List<Fixset>) fixrepo.findAll();
-			
+			Part deletePart = partrepo.findById(id).get();
 			for (Iterator<Fixset> iterator = fixsets.iterator(); iterator.hasNext();) {
 				Fixset fixset = (Fixset) iterator.next();
-				
 				List<Part> parts = fixset.getPart();
-				
 				for (Iterator<Part> iterator2 = parts.iterator(); iterator2.hasNext();) {
 					Part part = (Part) iterator2.next();
-					
+					System.out.println("Part " + part);
 					if (part.getPartId() == id) {
-						parts.remove(id);			
+						System.out.println("Part 1" + part);
+						fixset.removePart(deletePart);	
+						System.out.println("Part 2" + part);
+						break;
 				    }
 				}
 				fixrepo.save(fixset);
@@ -106,12 +108,12 @@ public class RestFixsetController {
 			
 			partrepo.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}
+//		} catch (Exception e) {
+//			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+//		}
 	}
 	
-	@DeleteMapping("/parts")
+	@DeleteMapping("/parts/delete")
 	public ResponseEntity<HttpStatus> deleteAllParts() {
 		try {
 			partrepo.deleteAll();
@@ -123,22 +125,24 @@ public class RestFixsetController {
 
 	}
 	
-	@GetMapping("/fixsets")
+	@GetMapping("/fixsets/get")
 	public List<Fixset> getFixsets(){
 		return (List<Fixset>) fixrepo.findAll();
 	}
 	
-	@PostMapping("/fixsets")
+	@PostMapping("/fixsets/create")
 	public ResponseEntity<Fixset> createFixset (@RequestBody Fixset fixset) {
 		try {
-			Fixset f = fixrepo.save(new Fixset(fixset.getFixsetName(), fixset.getFixsetDescription(),fixset.getPart()));
+			List<Part> parts = fixset.getPart();
+			Fixset f = fixrepo.save(new Fixset(fixset.getFixsetName(), fixset.getFixsetDescription(),parts));
+			System.out.println(fixset.getPart());
 			return new ResponseEntity<>(f, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
 		}
 	}
 	
-	@GetMapping("/fixsets/{id}")
+	@GetMapping("/fixsets/get/{id}")
 	public ResponseEntity<Fixset> getFixsetById(@PathVariable("id") Integer id) {
 		int i = id;
 		Optional<Fixset> fData = fixrepo.findById(i);
@@ -150,15 +154,16 @@ public class RestFixsetController {
 		}
 	}
 	
-	@PutMapping("/fixsets/edit/{id}")
-	public ResponseEntity<Fixset> editFixset(@PathVariable("id") int id, @RequestBody Fixset fixset) {
+	@PutMapping("/fixsets/edit/{id}/{id2}")
+	public ResponseEntity<Fixset> editFixset(@PathVariable("id") int id, @PathVariable("id2") int id2, @RequestBody Fixset fixset) {
 		Optional<Fixset> fData = fixrepo.findById(id);
 		if (fData.isPresent()&& (fixset.getFixsetId() == id)) {
 			Fixset _fset = fData.get();
-			_fset.setFixsetId(fixset.getFixsetId());
+			
 			_fset.setFixsetName(fixset.getFixsetName());
 			_fset.setFixsetDescription(fixset.getFixsetDescription());
-			_fset.setPart(fixset.getPart());
+			_fset.getPart().add(partrepo.findById(id2).get());
+		
 			return new ResponseEntity<>(fixrepo.save(_fset), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -166,28 +171,13 @@ public class RestFixsetController {
 	}
 
 	
-	@DeleteMapping("/fixsets/{id}")
+	@DeleteMapping("/fixsets/delete/{id}")
 	public ResponseEntity<HttpStatus> deleteFixset(@PathVariable("id") int id) {
 		try {
 			
 			Fixset fixset = fixrepo.findById(id).get();
-//			List<Part> parts = fixset.getPart();
-			
-//			List<Part> dbparts = (List<Part>) partrepo.findAll();
 			
 			fixrepo.deleteById(id);
-					
-			/*
-			 * for (Iterator<Part> iterator = parts.iterator(); iterator.hasNext();) { Part
-			 * part = (Part) iterator.next();
-			 * 
-			 * for (Iterator<Part> iterator2 = dbparts.iterator(); iterator2.hasNext();) {
-			 * Part dbpart = (Part) iterator.next();
-			 * 
-			 * if (dbpart.getPartId() == part.getPartId()) {
-			 * partrepo.deleteById(part.getPartId()); } }
-			 * fixrepo.deleteById(part.getPartId()); }
-			 */
 			
 			return new ResponseEntity<>(HttpStatus.OK);
 			
@@ -196,7 +186,23 @@ public class RestFixsetController {
 		}
 	}
 	
-	@DeleteMapping("/fixsets")
+	@DeleteMapping("/fixsets/delete/{id}/{id2}")
+	public ResponseEntity<HttpStatus> deleteFixsetPart(@PathVariable("id") int id,@PathVariable("id2") int id2) {
+//		try {
+			
+			Fixset fixset = fixrepo.findById(id).get();
+			
+			fixset.removePart(partrepo.findById(id2).get());
+			fixrepo.save(fixset);
+			
+			return new ResponseEntity<>(HttpStatus.OK);
+			
+/*		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		}*/
+	}
+	
+	@DeleteMapping("/fixsets/delete")
 	public ResponseEntity<HttpStatus> deleteAllFixsets() {
 		try {
 			fixrepo.deleteAll();
