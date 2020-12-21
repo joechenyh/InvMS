@@ -47,7 +47,7 @@ public class WeeklyReorderReportServiceImpl implements WeeklyReorderReportServic
 			{ 
 				Double sum = 0.00;
 				
-				String stringtowriteheader="Inventory Reorder Report for products from Supplier/t:/t" + s.getSupplierName() +  " \r\n" + 
+				String stringtowriteheader="Inventory Reorder Report for products from Supplier\t:\t" + s.getSupplierName() +  " \r\n" + 
 						"------------------------------------------------------\r\n" + 
 						"===================================================================\r\n" + 
 						"Part No. Unit.Price Qty Reorder Qty. Min.Ord.Qty Ord.Qty Price\r\n" + 
@@ -55,6 +55,7 @@ public class WeeklyReorderReportServiceImpl implements WeeklyReorderReportServic
 				byte a[]=stringtowriteheader.getBytes();
 				
 				try {
+					System.out.println("Inside try block HEADER");
 					out1.write(a);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -83,15 +84,16 @@ public class WeeklyReorderReportServiceImpl implements WeeklyReorderReportServic
 		        
 		        		
 		        stringtowrite = partnumber.toString() + "\t" + unitprice.toString() + "\t" + quantity.toString() + "\t" + reorderqty.toString() + "\t" + minorderqty.toString() + "\t" + orderquantity.toString() 
-		        + "\t" + price.toString() + "\r\n" + "Total Amount =" + sum.toString() + "\r\n";
+		        + "\t" + price.toString() + "\r\n";
 		        
 		        
 		        byte b[]=stringtowrite.getBytes();//converting string into byte array    
 		        
 		        try
 		        {
-		        	System.out.println("Inside try block");
+		        	System.out.println("Inside try block INVENTORY LINES");
 		        	out1.write(b);
+		        	
 		        }
 		        catch(Exception e)
 		        { 
@@ -102,6 +104,26 @@ public class WeeklyReorderReportServiceImpl implements WeeklyReorderReportServic
 		        	System.out.println("finally block executed");
 		        }
 			}
+		        
+		        String finalstring = "Total Amount =" + sum.toString();
+		        
+		        byte c[]=finalstring.getBytes();//converting string into byte array    
+		        
+		        try
+		        {
+		        	System.out.println("Inside try block TOTAL AMOUNT");
+		        	out1.write(c);
+		        	
+		        }
+		        catch(Exception e)
+		        { 
+		            System.out.println("Exception caught in catch block"); 
+		        } 
+		        finally
+		        {
+		        	System.out.println("finally block executed");
+		        }
+		        
 			}
 	
 		
