@@ -68,7 +68,7 @@ public class InvMsApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-			System.out.println("Let's start to see our models! ");
+			
 			
 			Employee e1 = new Employee("Joe Chen", "joechen", "password", Status.ACTIVE, RoleType.ADMIN); 
 			Employee e2 = new Employee("Mechanic", "mechanic", "password", Status.ACTIVE, RoleType.MECHANIC); 
@@ -83,8 +83,46 @@ public class InvMsApplication {
 			Product p1 = new Product(1, 10, 20, "Sample Product Name", "Sample Description", "Red", "Sample Dimension", "Sample Manufacturer", "Shelf 1A", 23.00, Status.ACTIVE);
 			prepo.save(p1);
 			
-			Inventory i1 = new Inventory(1, "Random Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i1 = new Inventory(1, "Random Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i2 = new Inventory(2, "King Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i3 = new Inventory(3, "Singa Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i4 = new Inventory(4, "Coco Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i5 = new Inventory(5, "Alan Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i6 = new Inventory(6, "Taka Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i7 = new Inventory(7, "Lee Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i8 = new Inventory(8, "Rocky Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i9 = new Inventory(9, "Metal Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i10 = new Inventory(10, "Caterpillar Brand", "This stock is on special offer", "Car Windows", "Front Windows", "Unbreakable Windows", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i11 = new Inventory(1, "Random Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i12 = new Inventory(2, "King Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i13 = new Inventory(3, "Singa Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i14 = new Inventory(4, "Coco Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i15 = new Inventory(5, "Alan Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i16 = new Inventory(6, "Taka Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i17 = new Inventory(7, "Lee Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i18 = new Inventory(8, "Rocky Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i19 = new Inventory(9, "Metal Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
+			Inventory i20 = new Inventory(10, "Caterpillar Brand", "This stock is expiring soon", "Car Parts", "Tyres", "Tyres for Rainy Days", 23.00, 35.00, 47.00, 96.00, "Anti Skid Tyre with ultra hard rubber", 35, p1, s1, s1.getSupplierName());
 			irepo.save(i1);
+			irepo.save(i2);
+			irepo.save(i3);
+			irepo.save(i4);
+			irepo.save(i5);
+			irepo.save(i6);
+			irepo.save(i7);
+			irepo.save(i8);
+			irepo.save(i9);
+			irepo.save(i10);
+			irepo.save(i11);
+			irepo.save(i12);
+			irepo.save(i13);
+			irepo.save(i14);
+			irepo.save(i15);
+			irepo.save(i16);
+			irepo.save(i17);
+			irepo.save(i18);
+			irepo.save(i19);
+			irepo.save(i20);
 			
 			
 			/*	Order o1 = new Order();*/
@@ -93,7 +131,7 @@ public class InvMsApplication {
 				
 			purepo.save(pu1);
 
-			
+			System.out.println("Team Alpha Bean - Ready to Run!");
 	
 
 };

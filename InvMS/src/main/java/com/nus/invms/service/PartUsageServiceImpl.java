@@ -1,5 +1,6 @@
 package com.nus.invms.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,28 +48,28 @@ public class PartUsageServiceImpl implements PartUsageService {
 
 	@Override
 	@Transactional
-	public List<PartUsage> listPartUsage() {
-		return purepo.findAll();
+	public ArrayList<PartUsage> listPartUsage() {
+		return (ArrayList<PartUsage>) purepo.findAll();
 	}
 
 	@Override
 	@Transactional
-	public List<PartUsage> viewPartUsage(String partnumber) {
-		return purepo.findPartUsageByPartNumber(partnumber);
+	public ArrayList<PartUsage> viewPartUsage(String partnumber) {
+		return (ArrayList<PartUsage>) purepo.findPartUsageByPartNumber(partnumber);
 	}
 
 	@Override
 	@Transactional
-	public List<PartUsage> findPartUsageByCarplate(String carplate) {
+	public ArrayList<PartUsage> findPartUsageByCarplate(String carplate) {
 		// TODO Auto-generated method stub
-		return purepo.findUsageByCarplate(carplate);
+		return (ArrayList<PartUsage>) purepo.findUsageByCarplate(carplate);
 	}
 
 	@Override
 	@Transactional
-	public List<PartUsage> findByUsagedateBetween(String d1, String d2) {
+	public ArrayList<PartUsage> findByUsagedateBetween(String d1, String d2) {
 		// TODO Auto-generated method stub
-		return purepo.findByUsagedateBetween(d1, d2);
+		return (ArrayList<PartUsage>) purepo.findByUsagedateBetween(d1, d2);
 	}
 
 	@Override

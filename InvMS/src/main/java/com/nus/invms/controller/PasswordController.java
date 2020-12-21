@@ -36,6 +36,9 @@ public class PasswordController {
 		binder.addValidators(new PasswordValidator());
 	}
 	
+	
+	
+	
 	@RequestMapping(value = "/updatePassword")
 	public String update(
 			@ModelAttribute("password") @Valid Password password,
@@ -78,5 +81,8 @@ public class PasswordController {
 		return "update";
 		
 	}
+	
+	
+
 
 }

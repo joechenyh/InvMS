@@ -18,9 +18,7 @@ public class InventoryServiceImpl implements InventoryService {
 	@Autowired
 	InventoryRepository irepo;
 	
-	public InventoryServiceImpl() {
-		// TODO Auto-generated constructor stub
-	}
+
 
 	@Override
 	@Transactional

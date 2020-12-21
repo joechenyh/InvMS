@@ -10,12 +10,12 @@
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Inventory List</h1>
+	<h1>Inventory List with Pagination</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddInventory.html" th:href="@{/inventory/add}">New Inventory</a>
+	
 
-	<h2 th:if="${not #lists.isEmpty(inventories)}">Product List</h2>
-	<table th:if="${not #lists.isEmpty(inventories)}"  class="table">
+	<h2 th:if="${not #lists.isEmpty(inventoryPage)}">Product List</h2>
+	<table th:if="${not #lists.isEmpty(inventoryPage)}"  class="table">
 		<tr>
 			<th >inventoryId</th>
 			
@@ -32,13 +32,10 @@
 			<th >retailPrice</th>
 			<th >partnerPrice</th>
 			<th >units</th>
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-			Edit Inventory</th>
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-			Delete Inventory</th>
+			
 
 		</tr>
-		<tr th:each="inventory:${inventories}" class="table-row">
+		<tr th:each="inventory:${inventoryPage.content}" class="table-row">
 			<td th:text=${inventory.inventoryId}>Part Num</td>
 		
 			<td th:text=${inventory.supplierName}>Min Qty</td>
@@ -55,16 +52,13 @@
 			<td th:text=${inventory.partnerPrice}>Loc</td>
 			<td th:text=${inventory.units}>Unit Price</td>
 			<!-- <td><a href="Editinventory.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td> -->	
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="EditProduct.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="DeleteProduct.html" th:href="@{/inventory/delete/}+${inventory.inventoryId}">Delete</a></td>
+			
 		</tr>
 	</table>
 	
 	<div th:if="${inventoryPage.totalPages > 0}" class="pagination"
     th:each="pageNumber : ${pageNumbers}">
-    <a th:href="@{/list(size=${inventoryPage.size}, page=${pageNumber})}"
+    <a th:href="@{/inventoryreport/list(size=${inventoryPage.size}, page=${pageNumber})}"
         th:text=${pageNumber}
         th:class="${pageNumber==inventoryPage.number + 1} ? active"></a>
 </div>
