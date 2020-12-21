@@ -75,10 +75,33 @@ public class OrderController {
 	public String add(Model model, HttpSession session) 
 	{
 		model.addAttribute("order", new Order());
-		ArrayList<Product> plist = pdtservice.findAllProducts();
-		model.addAttribute("products",plist);
-		ArrayList<Supplier> slist = supservice.listAllSuppliers();
-		model.addAttribute("suppliers",slist);
+		ArrayList<Product> pList = new ArrayList<Product>();
+		ArrayList<Product> pList2 = new ArrayList<Product>();
+		pList = (ArrayList<Product>) pdtservice.findAllProducts();
+		for (Iterator<Product> iterator = pList.iterator(); iterator.hasNext();) {
+			Product product = iterator.next();
+			if(product.getStatus().toString()=="ACTIVE") {
+				System.out.println("!!!!" + product);
+				pList2.add(product);
+			}
+			
+		}
+		model.addAttribute("products",pList2);
+		ArrayList<Supplier> sList = new ArrayList<Supplier>();
+		ArrayList<Supplier> sList2 = new ArrayList<Supplier>();
+		sList = (ArrayList<Supplier>) supservice.listAllSuppliers();
+		System.out.println("!!!!" + "supplier");
+		for (Iterator<Supplier> iterator = sList.iterator(); iterator.hasNext();) 
+		{
+			Supplier supplier = iterator.next();
+			if(supplier.getStatus().toString()=="ACTIVE") 
+			{
+				System.out.println("!!!!" + supplier);
+				sList2.add(supplier);
+			}
+			model.addAttribute("suppliers",sList2);
+			
+		}
 		return "order-form";
 	}
 	
@@ -114,12 +137,12 @@ public class OrderController {
 			}
 		}
 		
-		if (order.getDateReceivedReturned() != null) {
-			if (order.getDateReceivedReturned().isBefore(order.getOrderDate()))
-			{
-				errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
-			}
-		}
+//		if (order.getDateReceivedReturned() != null) {
+//			if (order.getDateReceivedReturned().isBefore(order.getOrderDate()))
+//			{
+//				errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
+//			}
+//		}
 		
 		if (bindingResult.hasErrors()) {
 			return "order-form";

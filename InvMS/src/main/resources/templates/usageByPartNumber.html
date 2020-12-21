@@ -13,16 +13,22 @@
 
 	<h1>Part Usage Management</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddPartUsage.html" th:href="@{/partusage/add}">New Part Usage</a>
-	&nbsp;&nbsp;
-	<a href="PartNumberFilter.html" th:href="@{/partusage/partnumberfilter}">Search by Part Number</a>
-	&nbsp;&nbsp;
+	<a href="list.html" th:href="@{/partusage/list}">Back to Part Usage Transaction List</a>
+	&nbsp;
+	&nbsp;
 	<a href="DateFilter.html" th:href="@{/partusage/datefilter}">Search by Date</a>
+
+	<h2>Filter by:</h2>
+	<form th:action="@{/partusage/partnumberfilter}" method="get">
+		<input type="number" name="pnumber" id="pnumber" th:value="${pnumber}"
+			required /> &nbsp;
+		<button type="submit">Filter by part number</button>
+	</form>
 
 
 <!-- 	<h2 th:if="${not #lists.isEmpty(pusages)}">Part Usage History</h2> -->
 <!-- 	<table th:if="${not #lists.isEmpty(pusages)}" > -->
-	<h2>Part Usage History</h2>
+	<h2>Part Usage Transaction History by Part Number</h2>
 	<table class="table">
 		<tr>
 			<th>Transaction Id</th>

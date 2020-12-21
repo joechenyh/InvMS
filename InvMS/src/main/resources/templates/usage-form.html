@@ -3,28 +3,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Part Usage Form</title>
-<link rel="stylesheet" type="text/css" media="all"
-	href="../../css/style.css" th:href="@{/css/style.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 </head>
 <body>
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Part Usage Form</h1>
-	<form action="#" th:object="${partUsage}"
-		th:action="@{/partusage/save}" method="post">
+	<form action="#" th:object="${usage}" th:action="@{/partusage/save}"
+		method="post">
 		<fieldset>
 			<input type="hidden" th:field="*{transactionId}">
 		</fieldset>
 		<fieldset>
-			Employee name: <input type="text" th:field="*{employee}">
-			<p style="color: red" th:if="${#fields.hasErrors('employee')}"
-				th:errors="*{employee}"></p>
+			Employee ID: <input type="number" th:field="*{employee.ID}">
+			<p style="color: red" th:if="${#fields.hasErrors('employee.ID')}"
+				th:errors="*{employee.ID}"></p>
 		</fieldset>
 		<fieldset>
-			Part Number: <input type="text" th:field="*{partNumber}">
-			<p style="color: red" th:if="${#fields.hasErrors('partNumber')}"
-				th:errors="*{partNumber}"></p>
+			Part Number: <input type="text" th:field="*{product.partNumber}">
+			<p style="color: red"
+				th:if="${#fields.hasErrors('product.partNumber')}"
+				th:errors="*{product.partNumber}"></p>
 		</fieldset>
 		<fieldset>
 			Quantity used: <input type="text" th:field="*{quantity}">
@@ -32,10 +34,9 @@
 				th:errors="*{quantity}"></p>
 		</fieldset>
 		<fieldset>
-			Date of use: <input type="text" th:field="*{usagedate}"
-				placeholder="dd-MM-yyyy"
-				th:text="${#dates.format(partUsage.usagedate, 'dd-MM-yyyy')}" />
-			<p th:if="${#fields.hasErrors('usagedate')}" th:errors="*{usagedate}"></p>
+			Date of use: <input type="date" th:field="*{usagedate}">
+			<p style="color: red" th:if="${#fields.hasErrors('usagedate')}"
+				th:errors="*{usagedate}"></p>
 		</fieldset>
 		<fieldset>
 			Carplate: <input type="text" th:field="*{carplate}">
@@ -43,9 +44,8 @@
 				th:errors="*{carplate}"></p>
 		</fieldset>
 		<fieldset>
-			<input type="submit" value="Save" /> 
-			&nbsp; &nbsp; 
-			<input type="reset" value="Reset" />
+			<input type="submit" value="Save" /> &nbsp; &nbsp; <input
+				type="reset" value="Reset" />
 		</fieldset>
 	</form>
 	<br />

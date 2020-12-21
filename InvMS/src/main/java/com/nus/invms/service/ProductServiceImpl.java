@@ -100,6 +100,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Transactional
+	public Product findProductByName(String keyword) {
+		return prepo.findProductByName(keyword);
+	}
+	
+	@Transactional
 	public ArrayList<Integer> findAllProductId() {
 		List<Product> products = prepo.findAll();
 		ArrayList<Integer> id = new ArrayList<Integer>();

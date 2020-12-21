@@ -34,14 +34,16 @@ public class SupplierController {
 	public String saveUser(@ModelAttribute("supplier") @Valid Supplier supplier, 
 			BindingResult bindingResult,  Model model) {
 		
+		System.out.println("!!!! save me!!!!" );
+		
 		if (bindingResult.hasErrors()) {
 			return "supplier-form";
 		}
 
-		if (supservice.checkSupplierNameExist(supplier)) 
-		{
-			return "supplier-form";
-		}
+//		if (supservice.checkSupplierNameExist(supplier)) 
+//		{
+//			return "supplier-form";
+//		}
 		
 		supservice.saveSupplier(supplier);
 		return "forward:/supplier/list";
@@ -57,7 +59,7 @@ public class SupplierController {
 	@RequestMapping(value = "/edit/{supplierId}")
 	public String editForm(@PathVariable("supplierId") int number, Model model) {
 		model.addAttribute("supplier", supservice.findById(number));
-		return "editSupplier";
+		return "supplier-form";
 	}
 	
 	@RequestMapping(value = "/delete/{supplierId}")
