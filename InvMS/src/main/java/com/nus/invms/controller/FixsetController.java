@@ -103,7 +103,7 @@ public class FixsetController {
 	@RequestMapping(value = "/saveusage")
 	public String saveFixSetUsage(@ModelAttribute("fixsetusage") @Valid FixSetUsage fixsetusage, 
 			BindingResult bindingResult,  Model model) {
-		fsservice.saveFixSetUsage(fixsetusage);
+		fsservice.addFixSetUsage(fixsetusage);
 		return "forward:/fixsetusage/listusage";
 	}
 	
@@ -127,7 +127,7 @@ public class FixsetController {
 		//Product product = proservice.findById(number).get();
 		FixSetUsage fsusage = fsservice.findByTransactionId(id);
 		fsusage.setStatus(Status.INACTIVE);
-		fsservice.saveFixSetUsage(fsusage);
+		fsservice.addFixSetUsage(fsusage);
 		return "forward:/fixsetusage/listusage";
 	}
 
@@ -141,7 +141,7 @@ public class FixsetController {
 			return "editfixsetusage";
 		}
 		
-		fsservice.saveFixSetUsage(fixsetusage);
+		fsservice.addFixSetUsage(fixsetusage);
 		return "forward:/fixsetusage/listusage";
 	}
 	
