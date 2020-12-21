@@ -7,9 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Fixset;
+import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Part;
 import com.nus.invms.domain.Product;
+import com.nus.invms.domain.RoleType;
 import com.nus.invms.domain.Status;
 import com.nus.invms.repo.EmployeeRepository;
 import com.nus.invms.repo.FixsetRepository;
@@ -25,7 +28,7 @@ import com.nus.invms.repo.SupplierRepository;
 @SpringBootApplication
 public class InvMsApplication {
 	
-	//testtt
+	//push to siyu
 	
 	@Autowired
 	EmployeeRepository erepo; 
@@ -136,6 +139,13 @@ public class InvMsApplication {
 			 fixset3.setFixsetDescription("check and maintain car");
 			              
 			 fixrepo.save(fixset3);
+			 
+			 Employee e1 = new Employee("Elo", "qwerty", "qwerty", Status.ACTIVE, RoleType.ADMIN);
+			 Employee e2 = new Employee("Elmo", "asdfgh", "asdfgh", Status.INACTIVE, RoleType.MECHANIC);
+			 erepo.save(e1);
+			 erepo.save(e2);
+			 
+			 
 			
 			
 		};

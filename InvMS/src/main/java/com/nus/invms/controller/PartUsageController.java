@@ -1,6 +1,5 @@
 package com.nus.invms.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nus.invms.domain.Employee;
+import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.PartUsage;
 import com.nus.invms.domain.Product;
 import com.nus.invms.service.EmployeeImplementation;
@@ -124,20 +124,47 @@ public class PartUsageController {
 	@RequestMapping(value = "/save")
 	public String saveusage(@ModelAttribute("usage") @Valid PartUsage usage, BindingResult bindingResult, Model model) {
 		String msg = checkError(usage);
-		if (bindingResult.hasErrors() || msg != null) {
+		
+		int pdtPartNum = usage.getProduct().getPartNumber();
+		Product product = pservice.findProductById(pdtPartNum);
+		usage.setProduct(product);
+
+		int empId = usage.getEmployee().getID();
+		Employee employee = empservice.findById(empId);
+		usage.setEmployee(employee);
+		
+		int reorderLvl = product.getReorderLevel();
+		int quantity = usage.getQuantity();
+		Inventory inventory = invservice.findInventoryByPartNumber(pdtPartNum);
+		
+		if (bindingResult.hasErrors() || msg != null||inventory.getUnits()<quantity) {
 			model.addAttribute("message", msg);
 			ArrayList<Employee> elist = empservice.listAllEmployees();
 			model.addAttribute("employees", elist);
 			System.out.println("!!!" + msg);
 			return "usage-form";
 		} else {
-			int pdtPartNum = usage.getProduct().getPartNumber();
-			Product product = pservice.findProductById(pdtPartNum);
-			usage.setProduct(product);
-
-			int empId = usage.getEmployee().getID();
-			Employee employee = empservice.findById(empId);
-			usage.setEmployee(employee);
+			
+			if(inventory.getUnits()>quantity||inventory.getUnits()==quantity) {
+				int newQuantity = inventory.getUnits() - quantity;
+				if(newQuantity==0) 
+				{
+					invservice.deactivateInventory(inventory);
+					String mail = "reach 0";
+					//nservice.sendNotification(mail);
+				}
+				else 
+				{
+					//Product product = pdtservice.findProductById(partNum);
+					//int reorderlvl = product.getReorderLevel();
+					if(newQuantity<reorderLvl) {
+						String mail = "reorder";
+						//nservice.sendNotification(msg);
+					}
+					inventory.setUnits(newQuantity);
+					invservice.updateInventory(inventory);
+				}
+			}
 
 			puservice.addPartUsage(usage);
 			return "forward:/partusage/list";
