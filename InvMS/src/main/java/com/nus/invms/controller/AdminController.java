@@ -53,8 +53,17 @@ public class AdminController extends MechanicController {
 			return "employee-form";
 		}
 
+		Employee emp;
 		
-		Employee emp = empservice.findById(employee.getID());
+		// when first create user, ID is empty
+		if (employee.getID() == 0) {
+			emp = new Employee();
+			
+		}
+		else // for edit user
+		{
+			emp = empservice.findById(employee.getID());
+		}
 		emp.setUsername(employee.getUsername());
 		emp.setStatus(employee.getStatus());
 		emp.setEPassword(employee.getEPassword());
