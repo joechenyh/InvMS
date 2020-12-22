@@ -1,5 +1,14 @@
 package com.nus.invms;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Date;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +19,11 @@ import org.springframework.context.annotation.Bean;
 import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Fixset;
 import com.nus.invms.domain.Part;
+import com.nus.invms.domain.Inventory;
+import com.nus.invms.domain.Order;
+import com.nus.invms.domain.OrderType;
+import com.nus.invms.domain.PartUsage;
+
 import com.nus.invms.domain.Product;
 import com.nus.invms.domain.RoleType;
 import com.nus.invms.domain.Status;
@@ -49,13 +63,10 @@ public class InvMsApplication {
 	ProductRepository prepo;
 	
 	@Autowired
-    PartRepository partrepo;
+	PartRepository partrepo; 
 
- 
-
-    @Autowired
-    FixsetRepository fixrepo;
-	
+	@Autowired
+	FixsetRepository fixrepo; 
 
 
 	public static void main(String[] args) {
@@ -151,9 +162,20 @@ public class InvMsApplication {
 			 srepo.save(s2);
 			 
 			 
-			 
+				Employee e4 = new Employee("Joe Chen", "joechen", "password", Status.ACTIVE, RoleType.ADMIN); 
+				Employee e5 = new Employee("Mechanic", "mechanic", "password", Status.ACTIVE, RoleType.MECHANIC); 
+				Employee e6 = new Employee("Admin", "admin", "password", Status.ACTIVE, RoleType.ADMIN); 
+				erepo.save(e4);
+				erepo.save(e5);
+				erepo.save(e6);
 			
-			
-		};
-	} 
-}
+	
+		
+	
+
+	System.out.println("Team Alpha Bean - Ready to Run!");
+
+		
+
+	} ;
+}}
