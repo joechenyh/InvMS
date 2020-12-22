@@ -10,5 +10,6 @@ public interface OrderInterface {
 	public ArrayList<Order> listAllOrders();
 //	public void deleteProduct(int id);
 	public Order findById(int id);
+	public void deleteById(int id);
 
 }

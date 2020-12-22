@@ -30,6 +30,8 @@
 			Edit</th>
 			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
 			Action</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			Delete</th>
 
 		</tr>
 		<tr th:each="order:${orderList}" >
@@ -49,10 +51,11 @@
 				<a href="EditOrder.html" th:href="@{/order/arrive/}+${order.orderId}">Order Arrive</a></td>
 			<td th:if="${(order.type == T(com.nus.invms.domain.OrderType).RETURN) and (order.status == T(com.nus.invms.domain.OrderStatus).NotYetReturned)}">
 				<a href="EditOrder.html" th:href="@{/order/return/}+${order.orderId}">Return Goods</a></td>
-			<td th:if="${(order.status == T(com.nus.invms.domain.OrderStatus).ReturnedToSupplier) or (order.status == T(com.nus.invms.domain.OrderStatus).OrderReceived)}">
-				CLOSED ORDER</td>
-<!-- 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="DeleteOrder.html" th:href="@{/order/delete/}+${order.orderId}">Delete</a></td> -->
+			<!-- <td th:if="${(order.status == T(com.nus.invms.domain.OrderStatus).ReturnedToSupplier) or (order.status == T(com.nus.invms.domain.OrderStatus).OrderReceived)}">
+				CLOSED ORDER</td> -->
+ 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)
+			and ((order.status == T(com.nus.invms.domain.OrderStatus).NotYetReturned) or (order.status == T(com.nus.invms.domain.OrderStatus).OrderNotYetReceived))}">
+				<a href="DeleteOrder.html" th:href="@{/order/delete/}+${order.orderId}">Delete</a></td>
 		</tr>
 	</table>
     <br/>

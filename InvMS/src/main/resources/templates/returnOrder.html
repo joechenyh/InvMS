@@ -85,7 +85,7 @@
 		</fieldset>
 		
 		<fieldset>
-			Supplier Received<input type="number" th:field="*{quantityReceived}" th:value="*{quantityReceived}">
+			Supplier Received<input type="number" th:field="*{quantityReceived}" th:value="*{quantityReceived}" readonly="readonly">
 			<p style="color:red" th:if="${#fields.hasErrors('quantityReceived')}" th:errors="*{quantityReceived}"></p>
 		</fieldset>
 

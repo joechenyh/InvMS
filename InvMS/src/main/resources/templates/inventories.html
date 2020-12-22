@@ -12,17 +12,18 @@
 
 	<h1>Inventory List</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddInventory.html" th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}" th:href="@{/inventory/add}">New Inventory</a>
+	<a href="AddInventory.html" th:href="@{/inventory/add}">New Inventory</a>
+	&nbsp;&nbsp;
 	<a href="SearchInventory.html" th:href="@{/inventory/search}">Search Inventory</a>
 	
 	
-	
+	<h2>Inventory</h2>
 	<table class="table">
 		<tr>
 			<th>S/No.</th>
 			<th>Part Number</th>
 			<th>Supplier Name</th>
-			<th>Brand Id</th>
+			<!-- <th>Brand Id</th> -->
 			<th>Brand Name</th>
 			<th>Item Name</th>
 			<th>Description</th>
@@ -44,7 +45,7 @@
 			<td th:text=${inventory.inventoryId}>Part Num</td>
 			<td th:text=${inventory.product.partNumber}>Product Id</td>
 			<td th:text=${inventory.supplierName}>Supplier name</td>
-			<td th:text=${inventory.brandId}>Brand Id</td>
+			<!-- <td th:text=${inventory.brandId}>Brand Id</td> -->
 			<td th:text=${inventory.brandName}>Brand Name</td>
 			<td th:text=${inventory.itemName}>Item name</td>
 			<td th:text=${inventory.invdescription}>Description</td>

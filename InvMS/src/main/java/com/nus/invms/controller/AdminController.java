@@ -53,8 +53,9 @@ public class AdminController extends MechanicController {
 			return "employee-form";
 		}
 
+
 		Employee emp;
-		
+
 		// when first create user, ID is empty
 		if (employee.getID() == 0) {
 			emp = new Employee();
@@ -71,6 +72,7 @@ public class AdminController extends MechanicController {
 		emp.setName(employee.getName());
 		empservice.saveEmployee(emp);
 		return "forward:/admin/list";
+
 
 	}
 	
