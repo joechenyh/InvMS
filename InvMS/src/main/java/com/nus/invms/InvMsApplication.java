@@ -1,6 +1,10 @@
 package com.nus.invms;
 
 
+import java.time.LocalDate;
+
+import javax.validation.constraints.PastOrPresent;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,7 +14,11 @@ import org.springframework.context.annotation.Bean;
 import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Fixset;
 import com.nus.invms.domain.Inventory;
+import com.nus.invms.domain.Order;
+import com.nus.invms.domain.OrderStatus;
+import com.nus.invms.domain.OrderType;
 import com.nus.invms.domain.Part;
+import com.nus.invms.domain.PartUsage;
 import com.nus.invms.domain.Product;
 import com.nus.invms.domain.RoleType;
 import com.nus.invms.domain.Status;
@@ -218,8 +226,26 @@ public class InvMsApplication {
 			 prepo.save(prod6);
 			 irepo.save(i2);
 			 
+			 LocalDate startDate = LocalDate.of(2020, 12, 6);
+			
+			 Order o1 = new Order(startDate, null, 100, 0, OrderStatus.OrderNotYetReceived, OrderType.ORDER, e1, s1, prod3, 101);
+			 LocalDate startDate1 = LocalDate.of(2020, 12, 17);
 			 
+			 Order o2 = new Order(startDate1, null, 250, 0, OrderStatus.OrderNotYetReceived, OrderType.ORDER, e2, s1, prod2, 102);
 			 
+			 LocalDate startDate2 = LocalDate.of(2020, 12, 20);
+			 
+			 Order o3 = new Order(startDate2, null, 10, 10, OrderStatus.NotYetReturned, OrderType.RETURN, e1, s2, prod1, 103);
+			 orepo.save(o1);
+			 orepo.save(o2);
+			 orepo.save(o3);
+			 
+			
+			 
+			 PartUsage pu1 = new PartUsage(e1, prod5, 5, startDate2, "SHA1234Z");
+			 PartUsage pu2 = new PartUsage(e2, prod6, 5, startDate1, "SHA1234Z");
+			 purepo.save(pu1);
+			 purepo.save(pu2);
 
 		};
 	}
