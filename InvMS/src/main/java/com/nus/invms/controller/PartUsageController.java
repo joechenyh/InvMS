@@ -68,12 +68,6 @@ public class PartUsageController {
 	@Autowired
 	NotificationService nservice;
 
-//	//1. Manage Usage
-//	@RequestMapping(value = "/usagedashboard")
-//	public String Viewdashboard(){
-//		return "usagedashboard";
-//	}
-
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
 		model.addAttribute("usages", puservice.listPartUsage());
@@ -128,7 +122,11 @@ public class PartUsageController {
 	@RequestMapping(value = "/save")
 	public String saveusage(@ModelAttribute("usage") @Valid PartUsage usage, BindingResult bindingResult, Model model) {
 		String msg = checkError(usage);
-		
+
+		if(bindingResult.hasErrors()) {
+			return "usage-form";
+		}
+
 		int pdtPartNum = usage.getProduct().getPartNumber();
 		Product product = pservice.findProductById(pdtPartNum);
 		usage.setProduct(product);
@@ -140,6 +138,8 @@ public class PartUsageController {
 		int reorderLvl = product.getReorderLevel();
 		int quantity = usage.getQuantity();
 		Inventory inventory = invservice.findInventoryByPartNumber(pdtPartNum);
+
+
 		
 		if (bindingResult.hasErrors() || msg != null||inventory.getUnits()<quantity) {
 			model.addAttribute("message", msg);

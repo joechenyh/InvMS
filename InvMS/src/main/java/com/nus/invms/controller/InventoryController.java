@@ -295,7 +295,7 @@ public class InventoryController {
 	public String checkError(Inventory inventory) {
 		String msg = null;
 		if (inventory.getOriginalPrice()!=null||inventory.getPartnerPrice()!=null||inventory.getRetailPrice()!=null||inventory.getWholesalePrice()!=null) {
-			if(inventory.getBrandId()<0||inventory.getOriginalPrice()<0||inventory.getPartnerPrice()<0||inventory.getRetailPrice()<0||inventory.getWholesalePrice()<0||inventory.getUnits()<0) 
+			if(inventory.getOriginalPrice()<0||inventory.getPartnerPrice()<0||inventory.getRetailPrice()<0||inventory.getWholesalePrice()<0||inventory.getUnits()<0) 
 			{
 				msg="Negative value unacceptable";
 			}

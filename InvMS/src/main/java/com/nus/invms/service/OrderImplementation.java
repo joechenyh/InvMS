@@ -42,6 +42,11 @@ public class OrderImplementation implements OrderInterface {
 		return orepo.findById(id).get();
 	}
 	
+	@Transactional
+	public void deleteById(int id) {
+		orepo.deleteById(id);
+	}
+	
 
 
 }

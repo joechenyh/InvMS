@@ -117,10 +117,10 @@ $(document).ready(function ()
 			<p th:if="${#fields.hasErrors('supplierName')}"
 				th:errors="*{supplierName}"></p>
 		</fieldset> -->
-		<fieldset>
+		<!-- <fieldset>
 			Brand Id <input type="number" step=1 th:field="*{brandId}">
 			<p style="color:red" th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}"></p>
-		</fieldset>
+		</fieldset> -->
 
 		<fieldset>
 			Brand Name <input type="text" th:field="*{brandName}">

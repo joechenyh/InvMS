@@ -7,15 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-//@Table only needed if table different name 
 public class PartUsage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull
 	private Integer transactionId;
 
 	@OneToOne
@@ -24,16 +26,14 @@ public class PartUsage {
 	@OneToOne
 	private Product product;
 
-//	String employeeUsername;
-//	int partNumber;
 	int quantity;
 
 	@PastOrPresent
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	// @Column(name="date", nullable=false)
+	@NotNull
 	private LocalDate usagedate;
 
-	// @Column(name="carplate", nullable=false)
+	@NotEmpty
 	private String carplate;
 
 
@@ -100,12 +100,6 @@ public class PartUsage {
 
 	public void setCarplate(String carplate) {
 		this.carplate = carplate;
-	}
-
-	@Override
-	public String toString() {
-		return "PartUsage [transactionId=" + transactionId + ", employee=" + employee + ", product=" + product
-				+ ", quantity=" + quantity + ", usagedate=" + usagedate + ", carplate=" + carplate + "]";
 	}
 
 }

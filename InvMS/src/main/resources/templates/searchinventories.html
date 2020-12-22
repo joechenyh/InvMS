@@ -10,15 +10,18 @@
 	<header th:insert="fragments/general.html :: header"> </header>
 	<div th:replace="fragments/general.html :: menu"></div>
 
-	<h1>Inventory List</h1>
+	<h1>Inventory Search</h1>
 	<!-- Add Hyperlink -->
+	<a href="AddInventory.html" th:href="@{/inventory/list}">Back to Inventory Management</a>
+	
 	<a href="AddInventory.html" th:href="@{/inventory/add}">New Inventory</a>
 	
 	<h2>Find an item:</h2>
 	<form th:action="@{/inventory/search/}" method="get">
-			<input type="text" name="keyword" id="keyword" th:value="${keyword}" size="50" required />
-		&nbsp;
-			<button type="submit">Search</button>
+		<input type="text" name="keyword" id="keyword" th:value="${keyword}"
+			size="50" required /> &nbsp;
+		<button type="submit">Search</button>
+		&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
 	</form>
 	
 	<table class="table">
@@ -26,7 +29,7 @@
 			<th>S/No.</th>
 			<th>Part Number</th>
 			<th>Supplier Name</th>
-			<th>Brand Id</th>
+			<!-- <th>Brand Id</th> -->
 			<th>Brand Name</th>
 			<th>Item Name</th>
 			<th>Description</th>
@@ -38,13 +41,16 @@
 			<th>Retail Price</th>
 			<th>Partner Price</th>
 			<th>Units</th>
-			<th>Edit Inventory</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			Edit Inventory</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			Delete Inventory</th>
 		</tr>
 		<tr th:each="inventory:${inventories}" class="table-row">
 			<td th:text=${inventory.inventoryId}>Part Num</td>
 			<td th:text=${inventory.product.partNumber}>Product Id</td>
 			<td th:text=${inventory.supplierName}>Supplier name</td>
-			<td th:text=${inventory.brandId}>Brand Id</td>
+			<!-- <td th:text=${inventory.brandId}>Brand Id</td> -->
 			<td th:text=${inventory.brandName}>Brand Name</td>
 			<td th:text=${inventory.itemName}>Item name</td>
 			<td th:text=${inventory.invdescription}>Description</td>
@@ -56,8 +62,10 @@
 			<td th:text=${inventory.retailPrice}>Retail price</td>
 			<td th:text=${inventory.partnerPrice}>Partner price</td>
 			<td th:text=${inventory.units}>Units</td>
-			<td><a href="Editinventory.html"
-				th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="EditProduct.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="DeleteProduct.html" th:href="@{/inventory/delete/}+${inventory.inventoryId}">Delete</a></td>
 			<!-- <td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
 				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
@@ -66,6 +74,11 @@
 	</table>
     <br/>
 	<div th:replace="fragments/general.html :: footer"></div>
+	<script type="text/javascript">
+		function clearSearch() {
+			window.location = '/inventory/search';
+		}
+	</script>
 	
 </body>
 </html>

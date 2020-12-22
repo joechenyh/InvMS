@@ -639,11 +639,13 @@ public class OrderController {
 			}
 			oservice.saveOrder(order);
 			return "forward:/order/list";
-		}
-		
-			
-		
-		
+		}	
+	}
+	
+	@RequestMapping(value = "/delete/{id}")
+	public String deleteOrder(@PathVariable("id") Integer id) {
+		oservice.deleteById(id);
+		return "forward:/order/list";
 	}
 
 }

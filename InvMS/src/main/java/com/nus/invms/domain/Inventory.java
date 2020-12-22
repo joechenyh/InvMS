@@ -21,8 +21,7 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int inventoryId;
 	
-	@NotNull
-	int brandId;
+	
 	
 	//private int productId; // this is the Product Part Number
 
@@ -115,13 +114,7 @@ public class Inventory {
 		this.supplierName = supplierName;
 	}
 
-	public int getBrandId() {
-		return brandId;
-	}
 
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
-	}
 
 	public String getBrandName() {
 		return brandName;
@@ -182,13 +175,13 @@ public class Inventory {
 //		this.supplierName = supplierName;
 //	}
 //
-	public Inventory(int brandId, String brandName, String invdescription,
+	public Inventory(String brandName, String invdescription,
 			String invtype, String category, String subCategory,
 			Double originalPrice, Double wholesalePrice, Double retailPrice,
 			Double partnerPrice, String itemName, int units, Product product, Supplier supplier,
 			String supplierName) {
 		super();
-		this.brandId = brandId;
+		
 		this.brandName = brandName;
 		this.invdescription = invdescription;
 		this.invtype = invtype;
@@ -207,7 +200,7 @@ public class Inventory {
 
 	@Override
 	public String toString() {
-		return "Inventory [inventoryId=" + inventoryId + ", brandId=" + brandId + ", brandName=" + brandName
+		return "Inventory [inventoryId=" + inventoryId + ", brandName=" + brandName
 				+ ", invdescription=" + invdescription + ", invtype=" + invtype + ", category=" + category
 				+ ", subCategory=" + subCategory + ", originalPrice=" + originalPrice + ", wholesalePrice="
 				+ wholesalePrice + ", retailPrice=" + retailPrice + ", partnerPrice=" + partnerPrice + ", itemName="
