@@ -69,6 +69,7 @@ public class InvMsApplication {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 	
+			/*
 	Employee e1 = new Employee("Joe Chen", "joechen", "password", Status.ACTIVE, RoleType.ADMIN); 
 	Employee e2 = new Employee("Mechanic", "mechanic", "password", Status.ACTIVE, RoleType.MECHANIC); 
 	Employee e3 = new Employee("Admin", "admin", "password", Status.ACTIVE, RoleType.ADMIN); 
@@ -99,7 +100,7 @@ public class InvMsApplication {
 	
 	
 	
-	/*	Order o1 = new Order();*/
+		Order o1 = new Order();*/
 		
 	
 
