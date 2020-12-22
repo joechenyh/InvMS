@@ -23,6 +23,7 @@
 		<input type="number" name="pnumber" id="pnumber" th:value="${pnumber}"
 			required /> &nbsp;
 		<button type="submit">Filter by part number</button>
+		&nbsp; <input type="button" value="Clear Filter" onclick="clearFilter()" />
 	</form>
 
 
@@ -54,6 +55,10 @@
 	</table>
 	<br/>
 	<div th:replace="fragments/general.html :: footer"></div>
-	
+	<script type="text/javascript">
+		function clearFilter() {
+			window.location = '/partusage/partnumberfilter';
+		}
+	</script>
 </body>
 </html>

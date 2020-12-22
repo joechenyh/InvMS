@@ -30,6 +30,7 @@
 		</fieldset>
 		<fieldset>
 			<button type="submit">Filter by date</button>
+			&nbsp; <input type="button" value="Clear Filter" onclick="clearFilter()" />
 		</fieldset>
 	</form>
 
@@ -62,6 +63,10 @@
 	</table>
 	<br/>
 	<div th:replace="fragments/general.html :: footer"></div>
-	
+		<script type="text/javascript">
+		function clearFilter() {
+			window.location = '/partusage/datefilter';
+		}
+	</script>
 </body>
 </html>
