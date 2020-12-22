@@ -23,6 +23,7 @@ import com.nus.invms.service.EmployeeImplementation;
 import com.nus.invms.service.EmployeeInterface;
 import com.nus.invms.service.InventoryService;
 import com.nus.invms.service.InventoryServiceImpl;
+import com.nus.invms.service.NotificationService;
 import com.nus.invms.service.PartUsageService;
 import com.nus.invms.service.PartUsageServiceImpl;
 import com.nus.invms.service.ProductService;
@@ -63,6 +64,9 @@ public class PartUsageController {
 	public void setEmpService(EmployeeImplementation empserviceimpl) {
 		this.empservice = empserviceimpl;
 	}
+	
+	@Autowired
+	NotificationService nservice;
 
 //	//1. Manage Usage
 //	@RequestMapping(value = "/usagedashboard")
@@ -150,8 +154,8 @@ public class PartUsageController {
 				if(newQuantity==0) 
 				{
 					invservice.deactivateInventory(inventory);
-					String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach 0. Time to replenish.";
-					//nservice.sendNotification(mail);
+					String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach 0. This product will be removed from the inventory list.";
+					nservice.sendNotification(mail);
 				}
 				else 
 				{
@@ -159,7 +163,7 @@ public class PartUsageController {
 					//int reorderlvl = product.getReorderLevel();
 					if(newQuantity<reorderLvl) {
 						String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach below reorder level. Time to replenish.";
-						//nservice.sendNotification(msg);
+						nservice.sendNotification(mail);
 					}
 					inventory.setUnits(newQuantity);
 					invservice.updateInventory(inventory);

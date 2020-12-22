@@ -18,7 +18,7 @@ private JavaMailSender javaMailSender;
 	public void sendNotification(String msg) throws MailException{
 		
 		SimpleMailMessage mail=new SimpleMailMessage();
-		mail.setTo("rahmatkhairi91@gmail.com");
+		mail.setTo("keyint94@gmail.com");
 		mail.setFrom("rahmatkhairi91@gmail.com");
 		mail.setSubject("Reminder");
 		mail.setText(msg);
