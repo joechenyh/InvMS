@@ -53,15 +53,27 @@ public class AdminController extends MechanicController {
 			return "employee-form";
 		}
 
+		if (employee.getID() == 0) {
+			Employee emp = new Employee();
+			emp.setUsername(employee.getUsername());
+	        emp.setStatus(employee.getStatus());
+	        emp.setEPassword(employee.getEPassword());
+	        emp.setRole(employee.getRole());
+	        emp.setName(employee.getName());
+	        empservice.saveEmployee(emp);
+	        return "forward:/admin/list";
+		}
+		else {
+			Employee emp = empservice.findById(employee.getID());
+			emp.setUsername(employee.getUsername());
+			emp.setStatus(employee.getStatus());
+			emp.setEPassword(employee.getEPassword());
+			emp.setRole(employee.getRole());
+			emp.setName(employee.getName());
+			empservice.saveEmployee(emp);
+			return "forward:/admin/list";
+		}
 		
-		Employee emp = empservice.findById(employee.getID());
-		emp.setUsername(employee.getUsername());
-		emp.setStatus(employee.getStatus());
-		emp.setEPassword(employee.getEPassword());
-		emp.setRole(employee.getRole());
-		emp.setName(employee.getName());
-		empservice.saveEmployee(emp);
-		return "forward:/admin/list";
 
 	}
 	
