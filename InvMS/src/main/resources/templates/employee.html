@@ -35,9 +35,9 @@
 			<td th:text=${employee.role}>Role</td>
 			<td th:text=${employee.status}>Status</td>
 			<td><a href="EditEmployee.html"
-				th:href="@{/admin/edit/}+${employee.username}">Edit</a></td>
+				th:href="@{/admin/edit/}+${employee.ID}">Edit</a></td>
 			<td><a href="DeleteEmployee.html"
-				th:href="@{/admin/delete/}+${employee.username}">Deactivate</a></td>
+				th:href="@{/admin/delete/}+${employee.ID}">Deactivate</a></td>
 		</tr>
 	</table>
     <br/>

@@ -12,7 +12,7 @@
 
 	<h1>Inventory List</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddInventory.html" th:href="@{/inventory/add}">New Inventory</a>
+	<a href="AddInventory.html" th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}" th:href="@{/inventory/add}">New Inventory</a>
 	<a href="SearchInventory.html" th:href="@{/inventory/search}">Search Inventory</a>
 	
 	

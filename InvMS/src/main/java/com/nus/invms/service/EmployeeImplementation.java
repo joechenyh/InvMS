@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nus.invms.domain.Employee;
+import com.nus.invms.domain.Status;
 import com.nus.invms.repo.EmployeeRepository;
 
 @Service
@@ -67,6 +68,20 @@ public class EmployeeImplementation implements EmployeeInterface {
 	public Employee findById(int id) {
 		// TODO Auto-generated method stub
 		return emprepo.findById(id).get();
+	}
+
+	@Override
+	public boolean checkEmployeeStatus(Employee employee) {
+		// TODO Auto-generated method stub
+		
+		Employee emp = emprepo.findEmployeeByUsername(employee.getUsername());
+		
+		if(emp.getStatus() == Status.INACTIVE) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	

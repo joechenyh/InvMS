@@ -13,7 +13,7 @@
 
 	<h1>Part Usage Management</h1>
 	<!-- Add Hyperlink -->
-	<a href="AddPartUsage.html" th:href="@{/partusage/add}">New Part Usage</a>
+	<a href="AddPartUsage.html" th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}" th:href="@{/partusage/add}">New Part Usage</a>
 	&nbsp;&nbsp;
 	<a href="PartNumberFilter.html" th:href="@{/partusage/partnumberfilter}">Search by Part Number</a>
 	&nbsp;&nbsp;
@@ -40,10 +40,10 @@
 			<td th:text=${usage.quantity}>Quantity</td>
 			<td th:text=${usage.usagedate}>Date</td>
 			<td th:text=${usage.carplate}>Carplate</td>
-			<td><a href="EditPartUsage.html"
-				th:href="@{/partusage/edit/}+${usage.transactionId}">Edit</a></td>
-			<td><a href="DeletePartUsage.html"
-				th:href="@{/partusage/delete/}+${usage.transactionId}">Delete</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="EditPartUsage.html" th:href="@{/partusage/edit/}+${usage.transactionId}">Edit</a></td>
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+				<a href="DeletePartUsage.html" th:href="@{/partusage/delete/}+${usage.transactionId}">Delete</a></td>
 		</tr>
 	</table>
 	<br/>

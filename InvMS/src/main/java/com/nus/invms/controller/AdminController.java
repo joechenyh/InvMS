@@ -53,20 +53,16 @@ public class AdminController extends MechanicController {
 			return "employee-form";
 		}
 
-		if (empservice.checkEmployeeNameExist(employee)) 
-		{
-			Employee emp = empservice.findByName(employee.getUsername());
-			emp.setStatus(employee.getStatus());
-			emp.setEPassword(employee.getEPassword());
-			emp.setRole(employee.getRole());
-			emp.setName(employee.getName());
-			empservice.saveEmployee(emp);
-			return "forward:/admin/list";
-			
-		}
 		
-		empservice.saveEmployee(employee);
+		Employee emp = empservice.findById(employee.getID());
+		emp.setUsername(employee.getUsername());
+		emp.setStatus(employee.getStatus());
+		emp.setEPassword(employee.getEPassword());
+		emp.setRole(employee.getRole());
+		emp.setName(employee.getName());
+		empservice.saveEmployee(emp);
 		return "forward:/admin/list";
+
 	}
 	
 	@RequestMapping(value="/list")
@@ -80,6 +76,8 @@ public class AdminController extends MechanicController {
 	public String authenticate (@ModelAttribute("employee") Employee employee, 
 			BindingResult bindingResult, Model model, HttpSession session, Errors errors) 
 	{
+		
+		
 		if (empservice.findByName(employee.getUsername()) == null)
 		{
 			errors.rejectValue("username", "wrong username", "username not found in system");
@@ -87,6 +85,9 @@ public class AdminController extends MechanicController {
 		else if (!empservice.authenticateEmployee(employee))
 		{
 			errors.rejectValue("epassword", "wrong password", "username/ password is incorrect");
+		}
+		else if (!empservice.checkEmployeeStatus(employee)) {
+			errors.rejectValue("username", "invalid user", "Sorry, this user is deactivated from system");
 		}
 		
 		if (bindingResult.hasErrors()) {
@@ -104,15 +105,15 @@ public class AdminController extends MechanicController {
 		return "forward:/admin/login";
 	}
 	
-	@RequestMapping(value = "/edit/{name}")
-	public String editForm(@PathVariable("name") String name, Model model) {
-		model.addAttribute("employee", empservice.findByName(name));
+	@RequestMapping(value = "/edit/{id}")
+	public String editForm(@PathVariable("id") int id, Model model) {
+		model.addAttribute("employee", empservice.findById(id));
 		return "editEmployee";
 	}
 	
-	@RequestMapping(value = "/delete/{name}")
-	public String deactivateEmployee(@PathVariable("name") String name) {
-		Employee emp = empservice.findByName(name);
+	@RequestMapping(value = "/delete/{id}")
+	public String deactivateEmployee(@PathVariable("id") int id) {
+		Employee emp = empservice.findById(id);
 		emp.setStatus(Status.INACTIVE);
 		empservice.saveEmployee(emp);
 		return "forward:/admin/list";
