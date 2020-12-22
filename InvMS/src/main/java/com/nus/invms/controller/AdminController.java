@@ -58,7 +58,7 @@ public class AdminController extends MechanicController {
 		// when first create user, ID is empty
 		if (employee.getID() == 0) {
 			emp = new Employee();
-			
+ 
 		}
 		else // for edit user
 		{

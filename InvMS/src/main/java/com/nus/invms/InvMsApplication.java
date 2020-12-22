@@ -171,7 +171,7 @@ public class InvMsApplication {
 			 Product prod4 = new Product (1004, 1, 1,"motor engine", "motor engine replacement", "silver", "12kg", "engine centre", "middle", 70.0, Status.ACTIVE); 
 			 prepo.save(prod1);
 			 prepo.save(prod2);
-			 prepo.save(prod3);
+			 prepo.save(prod3);   
 			 prepo.save(prod4);
 			  
 			 Part p1 = new Part (prod1, 4);
