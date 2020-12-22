@@ -12,6 +12,7 @@ public interface EmployeeInterface {
 	public boolean authenticateEmployee(Employee employee);
 	public Employee findByName(String name);
 	public Employee findById(int id);
+	public boolean checkEmployeeStatus(Employee employee);
 	
 
 }

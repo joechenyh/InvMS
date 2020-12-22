@@ -85,7 +85,7 @@ public class Employee{
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		this.ID = iD;
 	}
 
 	public String getEpassword() {
