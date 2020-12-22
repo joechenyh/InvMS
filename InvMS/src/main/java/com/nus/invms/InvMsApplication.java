@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.nus.invms.domain.Employee;
 import com.nus.invms.domain.Fixset;
+import com.nus.invms.domain.Inventory;
 import com.nus.invms.domain.Part;
 import com.nus.invms.domain.Product;
 import com.nus.invms.domain.RoleType;
@@ -207,6 +208,15 @@ public class InvMsApplication {
 			              
 			 fixrepo.save(fixset3);
 			 
+			
+			 Product prod5 = new Product (1005, 12, 12, "SB Nike", "Sports Shoe", "black", "Huge", "Alibaba", "bottom", 20.0, Status.ACTIVE);
+			 Inventory i1 = new Inventory("Nike", "Small", "Shoe", "Sports", "Sports Shoe", 99.00, 200.00, 300.00, 50.00, "SB Nike", 100, prod5,s1, "Nestle");
+			 prepo.save(prod5);
+			 irepo.save(i1);
+			 Product prod6 = new Product (1006, 20, 100, "Cyclo", "Car gear", "oily", "Small", "Emart", "bottom", 20.0, Status.ACTIVE);
+			 Inventory i2 = new Inventory("Toyota", "Hard", "Accessory", "Hardware", "Gears", 50.00, 250.00, 370.00, 51.00, "Cyclo", 100, prod6,s2, "Gogo");
+			 prepo.save(prod6);
+			 irepo.save(i2);
 			 
 			 
 			 

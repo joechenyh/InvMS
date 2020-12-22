@@ -67,7 +67,8 @@ public class Order {
 
 
 	public Order(LocalDate orderDate, LocalDate dateReceivedReturned, int quantityOrdered, int quantityReceived, 
-			OrderStatus status, OrderType type, Employee employee, Supplier supplier, Product product, int pOnum) {
+			OrderStatus status, OrderType type, Employee employee, Supplier supplier, Product product, int pOnum) 
+	{
 
 	
 		this.orderDate = orderDate;
