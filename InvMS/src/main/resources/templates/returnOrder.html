@@ -8,21 +8,21 @@
  window.onload=function(){
 //     alert();
 
-	 	var e = document.getElementById("order_type");
-	 	var selection = e.value;
-		var order = document.getElementById("order_status");
+	    var e = document.getElementById("order_type");
+	    var selection = e.value;
+	    var order = document.getElementById("order_status");
 	    	
-		/* if (selection === "RETURN"){
+	   /*  if (selection === "RETURN"){
 	    	order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option> <option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
 	    } */
-		if (selection === "RETURN"){
-	    	order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option>";
+	    if (selection === "RETURN"){
+	    	order.innerHTML ="<option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
 	    }
 	    /* if (selection === "ORDER") {
 	        order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option> <option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
 	    } */
 	    if (selection === "ORDER") {
-	        order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option>";
+	        order.innerHTML = "<option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
 	    }
 
     document.getElementById("order_type").onchange = function(){
@@ -34,13 +34,13 @@
     		order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option> <option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
         } */
     	if (selection === "RETURN"){
-    		order.innerHTML ="<option th:value='order.status.OrderStatus.NotYetReturned'>NotYetReturned</option>";
+    		order.innerHTML ="<option th:value='order.status.OrderStatus.ReturnedToSupplier'>ReturnedToSupplier</option>";
         }
     	/* if (selection === "ORDER") {
             order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option> <option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
     	} */
     	if (selection === "ORDER") {
-            order.innerHTML = "<option th:value='order.status.OrderStatus.OrderNotYetReceived'>OrderNotYetReceived</option>";
+            order.innerHTML = "<option th:value='order.status.OrderStatus.OrderReceived'>OrderReceived</option>";
     	}
     }
 }; 
@@ -53,63 +53,55 @@
 	<div th:replace="fragments/general.html :: menu"></div>
 
 	<h1>Order Form</h1>
-	<form action="#" th:object="${order}" th:action="@{/order/save}"
+	<form action="#" th:object="${order}" th:action="@{/order/confirmReturn}"
 		method="post">
 		<fieldset>
 			<input type="hidden" th:field="*{orderId}">
 		</fieldset>
 		
 		<fieldset>
-			PO Number <input type="number" th:field="${order.pOnum}">
+			PO Number <input type="number" th:field="${order.pOnum}" readonly="readonly">
 			<p style="color:red" th:if="${#fields.hasErrors('pOnum')}" th:errors="*{pOnum}"></p>
 		</fieldset>
 		
 		<fieldset>
-			Employee ID <input type="number" th:field="${order.employee.ID}">
+			Employee ID <input type="number" th:field="*{employee.ID}" th:value="*{employee.ID}" readonly="readonly">
 			<p style="color:red" th:if="${#fields.hasErrors('employee.ID')}" th:errors="*{employee.ID}"></p>
 		</fieldset>
 
 		<fieldset>
-			Order Date/Return Date <input type="date" th:field="*{orderDate}">
+			Return Date<input type="date" th:field="*{orderDate}" th:value="*{orderDate}" readonly="readonly">
 			<p style="color:red" th:if="${#fields.hasErrors('orderDate')}" th:errors="*{orderDate}"></p>
 		</fieldset>
 		
-		<!-- <fieldset>
-			Date Received/Returned <input type="date" th:field="*{dateReceivedReturned}" th:if="${not #lists.isEmpty(order)}">
+		<fieldset>
+			Supplier Received Date<input type="date" th:field="*{dateReceivedReturned}" th:value="*{dateReceivedReturned}">
 			<p style="color:red" th:if="${#fields.hasErrors('dateReceivedReturned')}" th:errors="*{dateReceivedReturned}"></p>
-		</fieldset> -->
+		</fieldset>
 		
 		<fieldset>
-			Order Quantity/Return Quantity <input type="number" th:field="*{quantityOrdered}">
+			Return Quantity<input type="number" th:field="*{quantityOrdered}" th:value="*{quantityReceived}" readonly="readonly">
 			<p style="color:red" th:if="${#fields.hasErrors('quantityOrdered')}" th:errors="*{quantityOrdered}"></p>
 		</fieldset>
 		
-		<!-- <fieldset>
-			Receive Quantity <input type="number" th:field="*{quantityReceived}" >
+		<fieldset>
+			Supplier Received<input type="number" th:field="*{quantityReceived}" th:value="*{quantityReceived}">
 			<p style="color:red" th:if="${#fields.hasErrors('quantityReceived')}" th:errors="*{quantityReceived}"></p>
-		</fieldset> -->
+		</fieldset>
 
 		<fieldset>
-			Product Number <select th:field="*{product.partNumber}">
+			Product Number <select th:field="*{product.partNumber}" readonly="readonly">
 				<option th:each="product:${products}" th:value="${product.partNumber}"
 					th:text="${product.partNumber}"></option>
 			</select>
 		</fieldset>
 		
-		<fieldset>
-			Supplier Name <select th:field="*{supplier.supplierId}">
-				<option th:each="supplier:${suppliers}" th:value="${supplier.supplierId}"
-					th:text="${supplier.supplierName}"></option>
-			</select>
-		</fieldset>
-		
-		<fieldset>
+		 <fieldset>
 			Type <select th:field="*{type}" id="order_type">	
-				<option value="" selected>---Please select---</option>
-				<option th:each="typeOpt : ${T(com.nus.invms.domain.OrderType).values()}" 
+				<option th:each="typeOpt : ${T(com.nus.invms.domain.OrderType).RETURN}" 
         th:value="${typeOpt}" th:text="${typeOpt}"></option>
 			</select>
-		</fieldset>
+		</fieldset> 
 		
 		<fieldset>
 			Status <select th:field="*{status}" id="order_status">
@@ -117,11 +109,12 @@
 		</fieldset>
 		
 		<fieldset>
-			<input type="submit" value="Save" /> &nbsp; &nbsp; 
-			<input type="button" value="Reset" onclick="window.location.href='/order/add'; return false" />
+			<input type="submit" value="Goods Returned" /> &nbsp; &nbsp; 
+			<!-- <input type="button" value="Close Order" onclick="window.location.href='/order/add'; return false" /> -->
 		</fieldset>
 
 	</form>
+	<h1 style="color:red" th:text=${message}></h1>
 	<br />
 	<div th:replace="fragments/general.html :: footer"></div>
 

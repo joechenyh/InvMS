@@ -21,7 +21,7 @@ private JavaMailSender javaMailSender;
 		mail.setTo("rahmatkhairi91@gmail.com");
 		mail.setFrom("rahmatkhairi91@gmail.com");
 		mail.setSubject("Reminder");
-		mail.setText("Product Id: " + msg + " need to be replenish.");
+		mail.setText(msg);
 		
 		
 		javaMailSender.send(mail);

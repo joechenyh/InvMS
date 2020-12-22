@@ -23,6 +23,8 @@
 			<th>Phone Number</th>
 			<th>Address</th>
 			<th>Email Address</th>
+			<th>Edit</th>
+			<th>Deactivate</th>
 
 		</tr>
 		<tr th:each="supplier:${supplierList}" >
@@ -35,7 +37,7 @@
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
 				<a href="EditSupplier.html" th:href="@{/supplier/edit/}+${supplier.supplierId}">Edit</a></td>
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="DeleteSupplier.html" th:href="@{/supplier/delete/}+${supplier.supplierId}">Delete</a></td>
+				<a href="DeleteSupplier.html" th:href="@{/supplier/delete/}+${supplier.supplierId}">Deactivate</a></td>
 		</tr>
 	</table>
     <br/>

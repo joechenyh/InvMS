@@ -24,7 +24,7 @@
 			<th>Role</th>
 			<th>Status</th>
 			<th>Edit User</th>
-			<th>Delete User</th>
+			<th>Deactivate User</th>
 
 		</tr>
 		<tr th:each="employee:${employeeList}" >
@@ -37,7 +37,7 @@
 			<td><a href="EditEmployee.html"
 				th:href="@{/admin/edit/}+${employee.username}">Edit</a></td>
 			<td><a href="DeleteEmployee.html"
-				th:href="@{/admin/delete/}+${employee.username}">Delete</a></td>
+				th:href="@{/admin/delete/}+${employee.username}">Deactivate</a></td>
 		</tr>
 	</table>
     <br/>

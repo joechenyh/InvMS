@@ -29,7 +29,7 @@
 			<th>Reorder Level</th>
 			<th>Minimum Reorder Quantity</th>
 			<th >Edit Product</th>
-			<th >Delete Product</th>
+			<th >Deactivate Product</th>
 
 		</tr>
 		<tr th:each="product:${productList}" >
@@ -47,7 +47,7 @@
 			<td><a href="EditProduct.html"
 				th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
 			<td><a href="DeleteProduct.html"
-				th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td>	
+				th:href="@{/product/delete/}+${product.partNumber}">Deactivate</a></td>	
 			<!-- <td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
 				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">

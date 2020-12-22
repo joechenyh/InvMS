@@ -150,7 +150,7 @@ public class PartUsageController {
 				if(newQuantity==0) 
 				{
 					invservice.deactivateInventory(inventory);
-					String mail = "reach 0";
+					String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach 0. Time to replenish.";
 					//nservice.sendNotification(mail);
 				}
 				else 
@@ -158,7 +158,7 @@ public class PartUsageController {
 					//Product product = pdtservice.findProductById(partNum);
 					//int reorderlvl = product.getReorderLevel();
 					if(newQuantity<reorderLvl) {
-						String mail = "reorder";
+						String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach below reorder level. Time to replenish.";
 						//nservice.sendNotification(msg);
 					}
 					inventory.setUnits(newQuantity);

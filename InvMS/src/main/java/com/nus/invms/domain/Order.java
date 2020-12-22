@@ -55,13 +55,16 @@ public class Order {
 	
 	@OneToOne
 	private Product product;
+	
+	private int pOnum;
+	
 
 
 	
 
 
 	public Order(LocalDate orderDate, LocalDate dateReceivedReturned, int quantityOrdered, int quantityReceived, 
-			OrderStatus status, OrderType type, Employee employee, Supplier supplier, Product product) {
+			OrderStatus status, OrderType type, Employee employee, Supplier supplier, Product product, int pOnum) {
 
 	
 		this.orderDate = orderDate;
@@ -76,9 +79,23 @@ public class Order {
 
 		this.status = status;
 		this.type = type;
+		
+		this.pOnum = pOnum;
 	}
 
 	
+
+	public int getpOnum() {
+		return pOnum;
+	}
+
+
+
+	public void setpOnum(int pOnum) {
+		this.pOnum = pOnum;
+	}
+
+
 
 	public Order() {
 		super();

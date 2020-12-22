@@ -14,10 +14,10 @@
 	<!-- Add Hyperlink -->
 	<a href="AddOrder.html" th:href="@{/order/add}">New Order</a>
 
-	<h2 th:if="${not #lists.isEmpty(orderList)}">Order List</h2>
-	<table th:if="${not #lists.isEmpty(orderList)}"  class="table">
+	<h2 >Order List</h2>
+	<table   class="table">
 		<tr>
-			<th>Order Id</th>
+			<th>PO Number</th>
 			<th>Employee Id</th>
 			<th>Order Date</th>
 			<th>Date Received</th>
@@ -26,10 +26,14 @@
 			<th>Part Number</th>
 			<th>Order Type</th>
 			<th>Status</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			Edit</th>
+			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			Action</th>
 
 		</tr>
 		<tr th:each="order:${orderList}" >
-			<td th:text=${order.orderId}>Order Id</td>
+			<td th:text=${order.pOnum}>PO Number</td>
 			<td th:text=${order.employee.ID}>Employee Id</td>
 			<td th:text=${order.orderDate}> Order Date</td>
 			<td th:text=${order.dateReceivedReturned}> Date Received/Returned</td>
@@ -38,8 +42,15 @@
 			<td th:text=${order.product.partNumber}> Part Number</td>
 			<td th:text=${order.type}> Order Type</td>
 			<td th:text="${order.status}"> Status</td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)
+			and ((order.status == T(com.nus.invms.domain.OrderStatus).NotYetReturned) or (order.status == T(com.nus.invms.domain.OrderStatus).OrderNotYetReceived))}">
 				<a href="EditOrder.html" th:href="@{/order/edit/}+${order.orderId}">Edit</a></td>
+			<td th:if="${(order.type == T(com.nus.invms.domain.OrderType).ORDER) and (order.status == T(com.nus.invms.domain.OrderStatus).OrderNotYetReceived)}">
+				<a href="EditOrder.html" th:href="@{/order/arrive/}+${order.orderId}">Order Arrive</a></td>
+			<td th:if="${(order.type == T(com.nus.invms.domain.OrderType).RETURN) and (order.status == T(com.nus.invms.domain.OrderStatus).NotYetReturned)}">
+				<a href="EditOrder.html" th:href="@{/order/return/}+${order.orderId}">Return Goods</a></td>
+			<td th:if="${(order.status == T(com.nus.invms.domain.OrderStatus).ReturnedToSupplier) or (order.status == T(com.nus.invms.domain.OrderStatus).OrderReceived)}">
+				CLOSED ORDER</td>
 <!-- 			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
 				<a href="DeleteOrder.html" th:href="@{/order/delete/}+${order.orderId}">Delete</a></td> -->
 		</tr>
