@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.lang.Nullable;
@@ -25,19 +26,21 @@ import org.springframework.lang.Nullable;
 @Table(name="order_list")
 public class Order {
 	
-	@Id
+	@Id    
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int orderId;
 	//@FutureOrPresent
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate orderDate;
 	//@FutureOrPresent
+	@PastOrPresent
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	@Nullable
 	private LocalDate dateReceivedReturned;
 	
 	@NotNull
 	private int quantityOrdered;
+	
 	@Nullable
 	private int quantityReceived;
 //	@NotEmpty
