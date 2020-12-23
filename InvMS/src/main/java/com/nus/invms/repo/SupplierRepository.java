@@ -7,5 +7,7 @@ import com.nus.invms.domain.Supplier;
 public interface SupplierRepository extends JpaRepository<Supplier, Integer>{
 	
 	public Supplier findSupplierBysupplierName(String name);
+	
+	
 
 }

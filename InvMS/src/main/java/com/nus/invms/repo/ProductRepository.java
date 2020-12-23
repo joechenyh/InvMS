@@ -50,6 +50,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	
 //	@Query("Select p FROM Product p WHERE p.shelfLocation = :shelfLocation")
 //		public ArrayList<Product> findAllActiveProduct();
+	
+	 @Query("Select p FROM Product p WHERE p.partNumber = :partNumber")
+		public Product findProductByPartNumber(@Param("partNumber") int partNumber);
 		
 
 }

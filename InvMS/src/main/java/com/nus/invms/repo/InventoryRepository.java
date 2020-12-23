@@ -47,6 +47,9 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 		public List<Inventory> findInventoryItem(@Param("keyword") String keyword);
 	 //I used product.partNumber because theres OneToOne r/s with product so the product object is in the table instead of just productId
 	 
+	 @Query("Select i from Inventory i where i.supplier.supplierId = :supplierId")
+	 public List<Inventory> findInventoryBySupplier(int supplierId);
+	 
 	 @Query(value = "SELECT * FROM Inventory i "
 		 		+ "WHERE i.product_part_number LIKE %:keyword% "
 		 		+ "OR i.supplier_name LIKE %:keyword% "
