@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Usages List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<header th:insert="fragments/general.html :: header"> </header>
+	<div th:replace="fragments/general.html :: menu"></div>
+
+	<h1>Part Usage Management</h1>
+	<!-- Add Hyperlink -->
+	<a href="list.html" th:href="@{/partusage/list}">Back to Part Usage
+		Transaction List</a> &nbsp; &nbsp;
+	
+	<a href="PartNumberFilter.html" th:href="@{/partusage/partnumberfilter}">Search by Part Number</a>
+	&nbsp;&nbsp;
+	<a href="DateFilter.html" th:href="@{/partusage/datefilter}">Search
+		by Date</a>
+
+	<h2>Part Usage Transaction History Report</h2>
+	<form th:action="@{/partusage/usagereport}" method="get">
+		<fieldset>
+			Part number: <input type="number" name="pnumber" id="pnumber"
+				th:value="${pnumber}" required /> &nbsp;&nbsp;
+
+			From: <input type="date" name="fromDate" id="fromDate"
+				th:value="${fromDate}" required /> &nbsp;&nbsp;
+
+			To: <input type="date" name="toDate" id="toDate" th:value="${toDate}"
+				required /> &nbsp;
+		</fieldset>
+		<fieldset>
+			<button type="submit">Generate report</button>
+			&nbsp;
+			<input type="button" value="Clear" onclick="clearReport()" />
+		</fieldset>
+	</form>
+
+
+	<h2>Part Usage Transaction History Report</h2>
+	<table class="table">
+		<tr>
+			<th>Transaction Id</th>
+			<th>Employee ID</th>
+			<th>Part Number</th>
+			<th>Quantity Used</th>
+			<th>Date of Use</th>
+			<th>Carplate</th>
+<!-- 			<th colspan="2">Manage Transaction</th> -->
+		</tr>
+		<tr th:each="usage:${report}">
+			<td th:text=${usage.transactionId}>Transaction Id</td>
+			<td th:text="${usage.employee.ID}">Employee ID</td>
+			<td th:text=${usage.product.partNumber}>Part Number</td>
+			<td th:text=${usage.quantity}>Quantity</td>
+			<td th:text=${usage.usagedate}>Date</td>
+			<td th:text=${usage.carplate}>Carplate</td>
+<!-- 			<td><a href="EditPartUsage.html" -->
+<!-- 				th:href="@{/partusage/edit/}+${usage.transactionId}">Edit</a></td> -->
+<!-- 			<td><a href="DeletePartUsage.html" -->
+<!-- 				th:href="@{/partusage/delete/}+${usage.transactionId}">Delete</a></td> -->
+		</tr>
+	</table>
+	<br />
+	<div th:replace="fragments/general.html :: footer"></div>
+	<script type="text/javascript">
+		function clearReport() {
+			window.location = '/partusage/usagereport';
+		}
+	</script>
+</body>
+</html>
