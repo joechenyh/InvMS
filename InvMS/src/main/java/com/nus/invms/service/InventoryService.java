@@ -1,7 +1,8 @@
 package com.nus.invms.service;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import org.springframework.data.domain.Page;
 
 import com.nus.invms.domain.Inventory;
 
@@ -11,25 +12,21 @@ public interface InventoryService {
 	public Inventory getInventory(int id); //R
 	public void deactivateInventory(Inventory inventory); //D
 	public Inventory editInventory(Inventory inventory); //U
-//	public List<Inventory> listInventory();
-//	public List<Inventory> search(String keyword);
-	
+
 	public ArrayList<Inventory> findAllInventories(); //Rahmat
 	
-	public List<Inventory> searchAllInventories(String keyword);
+//	public List<Inventory> searchAllInventories(String keyword);
+	public Page<Inventory> searchInventory(int pageNumber, String keyword);
 	
 	public void createInventory(Inventory inventory);
-	//public List<Inventory> listCompleteInventory();
+
 	public void updateInventory(Inventory inventory);
-//	public Inventory findByInventoryId(Integer keyword);
-	
-	//public Inventory findByProductId(Integer id);
+
 	public Inventory findByInventoryId(Integer id);
 	public ArrayList<Inventory> findBySupplierNameLike(String name);
 	public Inventory findByBrandId(Integer bid);
 	public ArrayList<Inventory>	findByBrandNameLike(String bname);
-//	public ArrayList<Inventory> findByItemNameLike(String s);
-//	public ArrayList<Inventory> findByTypeLike(String s);
+
 	public Inventory findInventoryByPartNumber(int partNum);
 
 }
