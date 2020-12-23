@@ -35,9 +35,7 @@ import com.nus.invms.repo.SupplierRepository;
 @SpringBootApplication
 public class InvMsApplication {
 
-	// test
-
-	// testtt
+	//Java CA
 
 	@Autowired
 	EmployeeRepository erepo;
