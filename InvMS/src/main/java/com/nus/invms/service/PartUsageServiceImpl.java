@@ -65,12 +65,11 @@ public class PartUsageServiceImpl implements PartUsageService {
 		return purepo.findUsageByCarplate(carplate);
 	}
 
-//	@Override
-//	@Transactional
-//	public List<PartUsage> findByUsagedateBetween(LocalDate fromDate, LocalDate toDate) {
-//		// TODO Auto-generated method stub
-//		return purepo.findByUsagedateBetween(fromDate, toDate);
-//	}
+	@Override
+	@Transactional
+	public List<PartUsage> findByDateAndPartNumber(String d1, String d2, Integer pnum){
+		return purepo.findByDateAndPartNumber(d1, d2, pnum);
+	}
 
 	@Override
 	@Transactional
@@ -79,6 +78,7 @@ public class PartUsageServiceImpl implements PartUsageService {
 		return purepo.findByUsagedateBetween(fromDate, toDate);
 	}
 	
+
 	@Override
 	@Transactional
 	public PartUsage findByTransactionId(Integer tid) {
