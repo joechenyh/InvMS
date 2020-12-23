@@ -49,8 +49,7 @@ public class InventoryController {
 	@Autowired
 	private SupplierInterface supservice;
 	
-	//@Autowired
-	//private EmployeeService eservice; 
+
 
 	@Autowired
 	public void setInvService(InventoryServiceImpl invserviceimpl) {
@@ -93,16 +92,7 @@ public class InventoryController {
 		return "inventories";
 	}
 	
-//	@GetMapping("/search")
-//	public String searchlist(Model model, @Param("keyword") String keyword) {
-//		List<Inventory> inventories = invservice.searchAllInventories(keyword);
-//		model.addAttribute("inventories", inventories);
-//		model.addAttribute("keyword", keyword);
-//		return "searchinventories";
-//	}
-	
-	
-//	------------
+
 	
 	@GetMapping("/search")
 	public String listPage(Model model, @Param("keyword") String keyword) {
@@ -117,7 +107,7 @@ public class InventoryController {
 		long totalElements = page.getTotalElements();
 		int totalPages = page.getTotalPages();
 		
-//		System.out.println("#2: " + totalElements + "; " + totalPages);
+
 		List<Inventory> invList = page.getContent();
 		
 		model.addAttribute("currentPage", currentPage);
@@ -129,7 +119,7 @@ public class InventoryController {
 		return "searchinventories";
 	}
 	
-//	------------
+
 	
 	
 	@RequestMapping(value = "/add")
@@ -197,13 +187,8 @@ public class InventoryController {
 		if (bindingResult.hasErrors()) 
 			 
 		{
-			
-				
-			//model.addAttribute("message",msg);
 			ArrayList<Product> plist = pservice.findAllProducts();
 			model.addAttribute("products",plist);
-			//model.addAttribute("inventory", new Inventory());
-			//System.out.println("!!!" + msg);
 			model.addAttribute("inventory", inventory);
 			ArrayList<Product> pList = new ArrayList<Product>();
 			ArrayList<Product> pList2 = new ArrayList<Product>();
@@ -241,11 +226,8 @@ public class InventoryController {
 			for (Iterator<Inventory> iterator = iList.iterator(); iterator.hasNext();) {
 				Inventory inventory2 = iterator.next();
 				if (inventory2.getProduct().getPartNumber()==inventory.getProduct().getPartNumber()) {
-					//model.addAttribute("message",msg);
 					ArrayList<Product> plist = pservice.findAllProducts();
 					model.addAttribute("products",plist);
-					//model.addAttribute("inventory", new Inventory());
-					//System.out.println("!!!" + msg);
 					model.addAttribute("inventory", inventory);
 					ArrayList<Product> pList = new ArrayList<Product>();
 					ArrayList<Product> pList2 = new ArrayList<Product>();
@@ -305,15 +287,11 @@ public class InventoryController {
 	@ResponseBody
 	public ArrayList<String> getProductById(@PathVariable("id") String keyword, Model model) {
 		model.addAttribute("inventory", new Inventory());
-		//Product result = pservice.findProductById(id);
 		Product result = pservice.findProductByName(keyword);
 		ArrayList<String> productInfo = new ArrayList<String>();
 		productInfo.add(result.getUnitPrice().toString());
-		//System.out.println(productInfo.get(0));
-		//System.out.println("!!!"+result.getPartNumber());
 		String partNum = String.valueOf(result.getPartNumber());
 		productInfo.add(partNum);
-		//System.out.println(productInfo.get(1));
 		return productInfo;
 	}
 	
@@ -337,11 +315,6 @@ public class InventoryController {
 		ArrayList<String> supplierInfo = new ArrayList<String>();
 		String supId = String.valueOf(result.getSupplierId());
 		supplierInfo.add(supId);
-		//System.out.println(productInfo.get(0));
-		//System.out.println("!!!"+result.getPartNumber());
-		//String partNum = String.valueOf(result.getPartNumber());
-		//supplierInfo.add(result.getSupplierName().toString());
-		//System.out.println(productInfo.get(1));
 		return supplierInfo;
 	}
 	
@@ -355,11 +328,8 @@ public class InventoryController {
 		if (bindingResult.hasErrors()) 
 			 
 		{	
-			//model.addAttribute("message",msg);
 			ArrayList<Product> plist = pservice.findAllProducts();
 			model.addAttribute("products",plist);
-			//model.addAttribute("inventory", new Inventory());
-			//System.out.println("!!!" + msg);
 			model.addAttribute("inventory", inventory);
 			ArrayList<Product> pList = new ArrayList<Product>();
 			ArrayList<Product> pList2 = new ArrayList<Product>();

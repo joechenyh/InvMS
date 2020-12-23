@@ -108,9 +108,7 @@ public class RestFixsetController {
 			
 			partrepo.deleteById(id);
 			return new ResponseEntity<>(HttpStatus.OK);
-//		} catch (Exception e) {
-//			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-//		}
+
 	}
 	
 	@DeleteMapping("/parts/delete")
@@ -188,7 +186,7 @@ public class RestFixsetController {
 	
 	@DeleteMapping("/fixsets/delete/{id}/{id2}")
 	public ResponseEntity<HttpStatus> deleteFixsetPart(@PathVariable("id") int id,@PathVariable("id2") int id2) {
-//		try {
+
 			
 			Fixset fixset = fixrepo.findById(id).get();
 			
@@ -197,9 +195,7 @@ public class RestFixsetController {
 			
 			return new ResponseEntity<>(HttpStatus.OK);
 			
-/*		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
-		}*/
+
 	}
 	
 	@DeleteMapping("/fixsets/delete")

@@ -23,10 +23,7 @@ public class Inventory {
 	
 	
 	
-	//private int productId; // this is the Product Part Number
 
-//	@OneToMany(mapped by "supplier")
-	//private String supplierName;
 	@NotEmpty
 	String brandName, invdescription, invtype, category, subCategory;
 	@NotNull
@@ -42,69 +39,13 @@ public class Inventory {
 	Supplier supplier;
 	
 	String supplierName;
-//	@Column
-//	private int brandId;
-//
-//	@Column
-//	private String brandName;
-//
-//	@Column
-//	private String itemName;
-//
-//	@Column
-//	private String invdescription;
-//
-//	@Column
-//	private String invtype;
-//
-//	@Column
-//	private String category, subCategory;
-//
-//	@Column
-//	private Double originalPrice, wholesalePrice, retailPrice, partnerPrice;
-//
-//	@Column
-//	private int units;
 
-//	@Override
-//	public String toString() {
-//		return "Inventory [productId=" + productId + ", supplierName=" + supplierName + ", brandId=" + brandId
-//				+ ", brandName=" + brandName + ", itemName=" + itemName + ", invdescription=" + invdescription + ", invtype="
-//				+ invtype + ", category=" + category + ", subCategory=" + subCategory + ", originalPrice=" + originalPrice
-//				+ ", wholesalePrice=" + wholesalePrice + ", retailPrice=" + retailPrice + ", partnerPrice="
-//				+ partnerPrice + ", units=" + units + "]";
-//	}
-//
-//	public Inventory(String supplierName, int brandId, String brandName, String itemName, String invdescription,
-//			String invtype, String category, String subCategory, Double originalPrice, Double wholesalePrice,
-//			Double retailPrice, Double partnerPrice, int units) {
-//		super();
-//		this.supplierName = supplierName;
-//		this.brandId = brandId;
-//		this.brandName = brandName;
-//		this.itemName = itemName;
-//		this.invdescription = invdescription;
-//		this.invtype = invtype;
-//		this.category = category;
-//		this.subCategory = subCategory;
-//		this.originalPrice = originalPrice;
-//		this.wholesalePrice = wholesalePrice;
-//		this.retailPrice = retailPrice;
-//		this.partnerPrice = partnerPrice;
-//		this.units = units;
-//	}
 
 	public Inventory() {
 		super();
 	}
 
-//	public int getProductId() {
-//		return productId;
-//	}
-//
-//	public void setProductId(int productId) {
-//		this.productId = productId;
-//	}
+
 
 	public String getSupplierName() {
 		return supplierName;
@@ -158,23 +99,6 @@ public class Inventory {
 
 	
 
-//	public Inventory(@NotNull int brandId, @NotEmpty String brandName, @NotEmpty String invdescription,
-//			@NotEmpty String invtype, @NotEmpty String category, @NotEmpty String subCategory, String itemName,
-//			int units, Product product, Supplier supplier, String supplierName) {
-//		super();
-//		this.brandId = brandId;
-//		this.brandName = brandName;
-//		this.invdescription = invdescription;
-//		this.invtype = invtype;
-//		this.category = category;
-//		this.subCategory = subCategory;
-//		this.itemName = itemName;
-//		this.units = units;
-//		this.product = product;
-//		this.supplier = supplier;
-//		this.supplierName = supplierName;
-//	}
-//
 	public Inventory(String brandName, String invdescription,
 			String invtype, String category, String subCategory,
 			Double originalPrice, Double wholesalePrice, Double retailPrice,
@@ -224,21 +148,7 @@ public class Inventory {
 		this.inventoryId = inventoryId;
 	}
 
-//	public String getDescription() {
-//		return description;
-//	}
-//
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
 
-//	public String getType() {
-//		return type;
-//	}
-//
-//	public void setType(String type) {
-//		this.type = type;
-//	}
 
 	public Product getProduct() {
 		return product;

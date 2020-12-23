@@ -50,31 +50,7 @@ public class Product {
 	} 
 	
 	
-/*
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	int partNumber;
-	
-	int reorderLevel, minReorderQty; 
-	String productName, description, colour, dimension, manufacturer, shelfLocation;
-	Double unitPrice; 
-	
-	
 
-	public Product(int reorderLevel, int minReorderQty, String productName, String description, String colour,
-			String dimension, String manufacturer, String shelfLocation, Double unitPrice) {
-		super();
-		this.reorderLevel = reorderLevel;
-		this.minReorderQty = minReorderQty;
-		this.productName = productName;
-		this.description = description;
-		this.colour = colour;
-		this.dimension = dimension;
-		this.manufacturer = manufacturer;
-		this.shelfLocation = shelfLocation;
-		this.unitPrice = unitPrice;
-	}
-	
-	*/
 	
 	
 

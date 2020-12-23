@@ -140,12 +140,6 @@ public class OrderController {
 			}
 		}
 		
-//		if (order.getDateReceivedReturned() != null) {
-//			if (order.getDateReceivedReturned().isBefore(order.getOrderDate()))
-//			{
-//				errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
-//			}
-//		}
 		
 		if (bindingResult.hasErrors()) {
 			return "order-form";
@@ -216,7 +210,6 @@ public class OrderController {
 				int quantity = order.getQuantityReceived();
 				int partNum = order.getProduct().getPartNumber();
 				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
-				//System.out.println("!!!" + inventory.getUnits());
 				if (inventory.getUnits()>quantity||inventory.getUnits()==quantity) 
 				{
 					int newQuantity = inventory.getUnits() - quantity;
@@ -265,15 +258,6 @@ public class OrderController {
 		return "order";
 	}
 	
-//	@RequestMapping(value = "/edit/{orderId}")
-//	public String editForm(@PathVariable("orderId") int number, Model model) {
-//		model.addAttribute("order", oservice.findById(number));
-//		ArrayList<Product> plist = pdtservice.findAllProducts();
-//		model.addAttribute("products",plist);
-//		ArrayList<Supplier> slist = supservice.listAllSuppliers();
-//		model.addAttribute("suppliers",slist);
-//		return "editOrder";
-//	}
 	
 	@RequestMapping(value = "/edit/{orderId}")
 	public String add1(@PathVariable("orderId") int number, Model model, HttpSession session) 
@@ -310,12 +294,6 @@ public class OrderController {
 		}
 		return "editOrder";
 	}
-	
-	/*
-	 * @RequestMapping(value = "/delete/{orderId}") public String
-	 * deleteProduct(@PathVariable("orderId") int number) {
-	 * oservice.deleteProduct(number); return "forward:/order/list"; }
-	 */
 	
 	@RequestMapping(value = "/arrive/{orderId}")
 	public String editForm(@PathVariable("orderId") int number, Model model) {
@@ -357,12 +335,7 @@ public class OrderController {
 			}
 		}
 		
-//		if (order.getDateReceivedReturned() != null) {
-//			if (order.getDateReceivedReturned().isBefore(order.getOrderDate()))
-//			{
-//				errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
-//			}
-//		}
+
 		
 		if (bindingResult.hasErrors()||order.getDateReceivedReturned()==null||order.getQuantityReceived()==0) {
 			model.addAttribute("order", order);
@@ -679,12 +652,7 @@ public class OrderController {
 			}
 		}
 		
-//		if (order.getDateReceivedReturned() != null) {
-//			if (order.getDateReceivedReturned().isBefore(order.getOrderDate()))
-//			{
-//				errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
-//			}
-//		}
+
 		
 		if (bindingResult.hasErrors()) {
 			return "order-form";

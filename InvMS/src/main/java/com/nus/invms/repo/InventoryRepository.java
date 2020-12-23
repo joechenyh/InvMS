@@ -26,19 +26,7 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 				 nativeQuery = true)
 			public Page<Inventory> searchInventoryItem(@Param("keyword") String keyword, Pageable pageable);
 	 
-//	 @Query(value = "SELECT * FROM Inventory i "
-//		 		+ "WHERE i.product_part_number LIKE %:keyword% "
-//		 		+ "OR i.supplier_name LIKE %:keyword% "
-//
-//		 		+ "OR i.brand_name LIKE %:keyword% "
-//		 		+ "OR CONCAT(i.item_name, '') LIKE %:keyword% "
-//		 		+ "OR CONCAT(i.invdescription, '') LIKE %:keyword% "
-//		 		+ "OR i.invType LIKE %:keyword% "
-//		 		+ "OR i.category LIKE %:keyword% "
-//		 		+ "OR i.sub_category LIKE %:keyword% "
-//		 		+ "OR CONCAT(i.units, '') LIKE %:keyword%",
-//				 nativeQuery = true)
-//			public List<Inventory> searchInventoryItem(@Param("keyword") String keyword);
+
 
 	
 }

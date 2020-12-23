@@ -30,13 +30,7 @@ public class InventoryServiceImpl implements InventoryService {
 
 		}
 	
-//	@Transactional
-//	public List<Inventory> searchAllInventories(String keyword){
-//		if(keyword !=null) {
-//			return irepo.searchInventoryItem(keyword);
-//		}
-//		return (ArrayList<Inventory>) irepo.findAll();
-//	}
+
 	@Transactional
 	public Page<Inventory> searchInventory(int pageNumber, String keyword) {
 		int pageElements = 5;

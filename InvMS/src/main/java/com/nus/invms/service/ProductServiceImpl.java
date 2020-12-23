@@ -20,53 +20,7 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	ProductRepository prepo;
 	
-//	@Override
-//	public void saveProduct(Product product) {
-//		// TODO Auto-generated method stub
-//		prorepo.save(product);
-//
-//	}
-//
-//	@Override
-//	public ArrayList<Product> listAllProducts() {
-//		// TODO Auto-generated method stub
-//		return (ArrayList<Product>) prorepo.findAll();
-//	}
-//
-//
-//	@Override
-//	public boolean checkProductNameExist(Product product) {
-//		// TODO Auto-generated method stub
-//		
-//		ArrayList<Product> plist = listAllProducts();
-//		for (Iterator<Product> iterator = plist.iterator(); iterator.hasNext();) {
-//			Product prod = (Product) iterator.next();
-//			if (prod.getProductName().equals(product.getProductName())) {
-//		    	return true;
-//		    }
-//		}
-//		
-//		return false;
-//	}
-//
-//	@Override
-//	public Product findByName(String name) {
-//		// TODO Auto-generated method stub
-//		Product product = prorepo.findProductByName(name);
-//		return product;
-//	}
-//
-//	@Override
-//	public void deleteProduct(Product product) {
-//		// TODO Auto-generated method stub
-//		prorepo.delete(product);
-//	}
-//
-//	@Override
-//	public Optional<Product> findById(int id) {
-//		// TODO Auto-generated method stub
-//		return prorepo.findById(id);
-//	}
+
 	
 	@Transactional
 	public boolean saveProduct(Product product) {

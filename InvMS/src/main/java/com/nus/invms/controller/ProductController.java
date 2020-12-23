@@ -21,9 +21,7 @@ import com.nus.invms.service.ProductService;
 @RequestMapping("/product")
 public class ProductController {
 
-//	public ProductController() {
-//		// TODO Auto-generated constructor stub
-//	}
+
 	
 	@Autowired
 	ProductService proservice;
@@ -46,10 +44,7 @@ public class ProductController {
 			return "product-form";
 		}
 
-//		if (proservice.checkProductNameExist(product)) 
-//		{
-//			return "product-form";
-//		}
+
 		
 		proservice.saveProduct(product);
 		return "forward:/product/list";
@@ -58,21 +53,21 @@ public class ProductController {
 	@RequestMapping(value="/list")
 	public String list(Model model)
 	{
-		//model.addAttribute("productList", proservice.listAllProducts());
-		model.addAttribute("productList", proservice.findAllProducts()); //I used the build in JPA repo
+	
+		model.addAttribute("productList", proservice.findAllProducts());
 		return "product";
 	}
 	
 	@RequestMapping(value = "/edit/{id}")
 	public String editForm(@PathVariable("id") Integer id, Model model) {
-		//model.addAttribute("product", proservice.findById(number).get());
+		
 		model.addAttribute("product", proservice.findProductById(id));
 		return "editProduct";
 	}
 	
 	@RequestMapping(value = "/delete/{id}")
 	public String deleteProduct(@PathVariable("id") Integer id) {
-		//Product product = proservice.findById(number).get();
+		
 		Product product = proservice.findProductById(id);
 		product.setStatus(Status.INACTIVE);
 		proservice.saveProduct(product);
@@ -97,7 +92,7 @@ public class ProductController {
 		String msg = null;
 		ArrayList<Product> flist = new ArrayList<Product>();
 		flist = (ArrayList<Product>) proservice.findAllProducts();
-		//Product lastProduct = flist.get(flist.size()-1);
+		
 		for (Iterator <Product> iterator = flist.iterator(); iterator.hasNext();) {
 			Product product2 = iterator.next();
 			if(product.getPartNumber() == product2.getPartNumber()) {

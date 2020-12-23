@@ -17,7 +17,7 @@
 			<input type="hidden" th:field="*{partNumber}">
 		</fieldset> -->
 		<fieldset>
-			Part Number <input type="text" th:field="*{partNumber}">
+			Part Number <input type="text" th:field="*{partNumber}" readonly="readonly">
 			<p style="color:red" th:if="${#fields.hasErrors('partNumber')}" th:errors="*{partNumber}"></p>
 		</fieldset>
 

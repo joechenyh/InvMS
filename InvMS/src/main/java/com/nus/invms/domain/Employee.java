@@ -51,28 +51,7 @@ public class Employee{
 		this.role = role;
 	}
 
-/*
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	int ID;
-	String username;
-	String epassword;
-	String status;
-	String position;
-	String name;
 
-	
-	
-
-	public Employee(String username, String epassword, String status, String position, String name) {
-		super();
-		this.username = username;
-		this.epassword = epassword;
-		this.status = status;
-		this.position = position;
-		this.name = name;
-	}
-
-*/
 
 	public String getUsername() {
 		return username;

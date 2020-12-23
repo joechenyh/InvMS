@@ -40,10 +40,7 @@ public class SupplierController {
 			return "supplier-form";
 		}
 
-//		if (supservice.checkSupplierNameExist(supplier)) 
-//		{
-//			return "supplier-form";
-//		}
+
 		
 		supservice.saveSupplier(supplier);
 		return "forward:/supplier/list";

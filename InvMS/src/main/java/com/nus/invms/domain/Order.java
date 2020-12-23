@@ -29,10 +29,10 @@ public class Order {
 	@Id    
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int orderId;
-	//@FutureOrPresent
+	
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate orderDate;
-	//@FutureOrPresent
+
 	@PastOrPresent
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	@Nullable
@@ -43,8 +43,7 @@ public class Order {
 	
 	@Nullable
 	private int quantityReceived;
-//	@NotEmpty
-//	private String partNumber; 
+
 
 	private OrderType type;
 	private OrderStatus status;
@@ -156,14 +155,7 @@ public class Order {
 	}
 
 
-//	public String getPartNumber() {
-//		return partNumber;
-//	}
-//
-//
-//	public void setPartNumber(String partNumber) {
-//		this.partNumber = partNumber;
-//	}
+
 
 
 	public OrderType getType() {

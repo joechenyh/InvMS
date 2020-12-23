@@ -39,10 +39,7 @@ public class Part {
 			this.fixsets = fixsets;
 		}
 		
-		
-//		private String partName;
-		
-//		private String partName;
+
 		private Integer quantity;
 		
 		public Part() {
@@ -96,14 +93,6 @@ public class Part {
 
 		
 
-		/*
-		 * public String getPartName() { return partName; }
-		 * 
-		 * 
-		 * 
-		 * 
-		 * public void setPartName(String partName) { this.partName = partName; }
-		 */
 
 
 

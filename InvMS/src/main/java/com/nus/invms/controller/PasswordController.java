@@ -26,10 +26,7 @@ public class PasswordController {
 	@Autowired
 	EmployeeInterface empservice;
 	
-//	@Autowired
-//	public void setUserImplementation (EmployeeImplementation empimpl) {
-//		this.empservice = empimpl;
-//	}
+
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {

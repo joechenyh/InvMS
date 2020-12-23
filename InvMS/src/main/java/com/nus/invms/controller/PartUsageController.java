@@ -83,16 +83,6 @@ public class PartUsageController {
 		return "usageByPartNumber";
 	}
 
-//	@GetMapping("/datefilter")
-//	public String ListByDate(Model model, @Param("fromDate") LocalDate fromDate, @Param("toDate") LocalDate toDate) {
-//		System.out.println("#1 :" + fromDate + "-" + toDate);
-//		List<PartUsage> usages = puservice.findByUsagedateBetween(fromDate, toDate);
-//		System.out.println("#2");
-//		model.addAttribute("usages", usages);
-//		model.addAttribute("fromDate", fromDate);
-//		model.addAttribute("toDate", toDate);
-//		return "usageByDate";
-//	}
 
 	@GetMapping("/datefilter")
 	public String ListByDate(Model model, @Param("fromDate") String fromDate, @Param("toDate") String toDate) {
@@ -171,8 +161,7 @@ public class PartUsageController {
 				}
 				else 
 				{
-					//Product product = pdtservice.findProductById(partNum);
-					//int reorderlvl = product.getReorderLevel();
+		
 					if(newQuantity<reorderLvl) {
 						String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach below reorder level. Time to replenish.";
 						nservice.sendNotification(mail);
