@@ -36,7 +36,7 @@ import com.nus.invms.repo.SupplierRepository;
 public class InvMsApplication {
 
 	// test
-	//testing
+
 	// testtt
 
 	@Autowired
