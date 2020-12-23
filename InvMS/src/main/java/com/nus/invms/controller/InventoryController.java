@@ -8,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,13 +75,6 @@ public class InventoryController {
 		this.supservice = supserviceImpl;
 	}
 	
-	
-/*	//1. Manage Inventory
-	@RequestMapping(value = "/inventorydashboard")
-	public String Viewdashboard(){
-		return "inventorydashboard";
-	}*/
-
 
 	@RequestMapping(value = "/list")
 	public String list(Model model) {
@@ -99,13 +93,44 @@ public class InventoryController {
 		return "inventories";
 	}
 	
+//	@GetMapping("/search")
+//	public String searchlist(Model model, @Param("keyword") String keyword) {
+//		List<Inventory> inventories = invservice.searchAllInventories(keyword);
+//		model.addAttribute("inventories", inventories);
+//		model.addAttribute("keyword", keyword);
+//		return "searchinventories";
+//	}
+	
+	
+//	------------
+	
 	@GetMapping("/search")
-	public String searchlist(Model model, @Param("keyword") String keyword) {
-		List<Inventory> inventories = invservice.searchAllInventories(keyword);
-		model.addAttribute("inventories", inventories);
+	public String listPage(Model model, @Param("keyword") String keyword) {
+		return searchList(model, 1, keyword);
+	}
+	
+	@GetMapping("/search/page/{pageNumber}")
+	public String searchList(Model model, @PathVariable("pageNumber") int currentPage, @Param("keyword") String keyword) {
+		
+
+		Page<Inventory> page = invservice.searchInventory(currentPage, keyword);
+		long totalElements = page.getTotalElements();
+		int totalPages = page.getTotalPages();
+		
+//		System.out.println("#2: " + totalElements + "; " + totalPages);
+		List<Inventory> invList = page.getContent();
+		
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("totalElements", totalElements);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("invList", invList);
 		model.addAttribute("keyword", keyword);
+
 		return "searchinventories";
 	}
+	
+//	------------
+	
 	
 	@RequestMapping(value = "/add")
 	public String addForm(Model model) 

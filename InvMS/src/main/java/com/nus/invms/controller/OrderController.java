@@ -152,7 +152,8 @@ public class OrderController {
 		}
 		ArrayList<Order> oList = new ArrayList<Order>();
 		oList = (ArrayList<Order>) oservice.listAllOrders();
-		for (Iterator <Order> iterator = oList.iterator(); iterator.hasNext();) {
+		for (Iterator <Order> iterator = oList.iterator(); iterator.hasNext();) 
+		{
 			Order order2 = iterator.next();
 			if(order2.getpOnum()==order.getpOnum()) {
 				model.addAttribute("order", order);
@@ -307,7 +308,7 @@ public class OrderController {
 			model.addAttribute("suppliers",sList2);
 			
 		}
-		return "order-form";
+		return "editOrder";
 	}
 	
 	/*
@@ -617,7 +618,7 @@ public class OrderController {
 						iservice.deactivateInventory(inventory);
 						Product product = pdtservice.findProductById(partNum);
 						String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach 0. Time to replenish.";
-						//nservice.sendNotification(msg);
+						nservice.sendNotification(mail);
 						
 					}
 					else 
@@ -626,7 +627,7 @@ public class OrderController {
 						int reorderlvl = product.getReorderLevel();
 						if(newQuantity<reorderlvl) {
 							String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach below reorder level. Time to replenish.";
-							//nservice.sendNotification(msg);
+							nservice.sendNotification(mail);
 						}
 						inventory.setUnits(newQuantity);
 						iservice.updateInventory(inventory);
@@ -646,6 +647,110 @@ public class OrderController {
 	public String deleteOrder(@PathVariable("id") Integer id) {
 		oservice.deleteById(id);
 		return "forward:/order/list";
+	}
+	
+	@RequestMapping(value = "/editsave")
+	public String editSaveOrder(@ModelAttribute("order") @Valid Order order, 
+			BindingResult bindingResult,  Model model, Errors errors, HttpSession session) 
+	{
+		
+		Employee emp = (Employee) session.getAttribute("empsession");
+		System.out.println("Save order");
+		if (order.getEmployee().getID() != emp.getID())
+		{
+			if (emp.getRole() != RoleType.ADMIN)
+			{
+				errors.rejectValue("employee.ID", "not right", "You do not have the right to input for other employee");
+			}
+			else
+			{
+				boolean testing = false;
+				ArrayList<Employee> employees = empservice.listAllEmployees();
+				for (Iterator<Employee> iterator = employees.iterator(); iterator.hasNext();) {
+					Employee employee1 = (Employee) iterator.next();
+					if (employee1.getID() == (order.getEmployee().getID())) {
+				    	testing = true;
+				    }
+				}
+				
+				if (!testing){
+					errors.rejectValue("employee.ID", "invalid Id", "Id cannot be found in system");
+				}
+			}
+		}
+		
+//		if (order.getDateReceivedReturned() != null) {
+//			if (order.getDateReceivedReturned().isBefore(order.getOrderDate()))
+//			{
+//				errors.rejectValue("dateReceived", "invalid date", "Please select receive date same as or later than order date");
+//			}
+//		}
+		
+		if (bindingResult.hasErrors()) {
+			return "order-form";
+		}
+		
+		 {
+			if(order.getStatus().toString()=="OrderReceived") 
+			{
+				int quantityReceive = order.getQuantityReceived();
+				int partNum = order.getProduct().getPartNumber();
+				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
+				if (inventory==null) {
+					
+					return "forward:/inventory/add";
+				}
+				else {
+					int newQuantity = inventory.getUnits() + quantityReceive;
+					inventory.setUnits(newQuantity);
+					iservice.updateInventory(inventory);
+					oservice.saveOrder(order);
+					return "forward:/order/list";
+				}
+				
+			}
+			
+			if(order.getStatus().toString()=="ReturnedToSupplier") 
+			{
+				int quantity = order.getQuantityReceived();
+				int partNum = order.getProduct().getPartNumber();
+				Inventory inventory = iservice.findInventoryByPartNumber(partNum);
+				//System.out.println("!!!" + inventory.getUnits());
+				if (inventory.getUnits()>quantity||inventory.getUnits()==quantity) 
+				{
+					int newQuantity = inventory.getUnits() - quantity;
+					System.out.println("test!!!!!!" + newQuantity);
+					if(newQuantity==0) 
+					{
+						Product product = pdtservice.findProductById(partNum);
+						iservice.deactivateInventory(inventory);
+						String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach 0. This product will be removed from the inventory list.";
+						nservice.sendNotification(mail);
+						
+					}
+					else 
+					{
+						Product product = pdtservice.findProductById(partNum);
+						int reorderlvl = product.getReorderLevel();
+						if(newQuantity<reorderlvl) {
+							String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach below reorder level. Time to replenish.";
+							nservice.sendNotification(mail);
+						}
+						inventory.setUnits(newQuantity);
+						iservice.updateInventory(inventory);
+					}
+					oservice.saveOrder(order);
+					return "forward:/order/list";
+				}
+				
+				
+			}
+			if(order.getType()==OrderType.RETURN) {
+				order.setQuantityReceived(order.getQuantityOrdered());
+			}
+			oservice.saveOrder(order);
+			return "forward:/order/list";
+		}
 	}
 
 }

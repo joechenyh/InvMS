@@ -14,64 +14,115 @@
 	<!-- Add Hyperlink -->
 	<a href="AddInventory.html" th:href="@{/inventory/list}">Back to Inventory Management</a>
 	
-	<a href="AddInventory.html" th:href="@{/inventory/add}">New Inventory</a>
+	<a th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}" href="AddInventory.html" th:href="@{/inventory/add}">New Inventory</a>
 	
 	<h2>Find an item:</h2>
-	<form th:action="@{/inventory/search/}" method="get">
-		<input type="text" name="keyword" id="keyword" th:value="${keyword}"
-			size="50" required /> &nbsp;
-		<button type="submit">Search</button>
-		&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
-	</form>
+	<div>
+		<form th:action="@{/inventory/search/}" method="get">
+			<input type="text" name="keyword" id="keyword" th:value="${keyword}"
+				size="50" required /> &nbsp;
+			<button type="submit">Search</button>
+			&nbsp; <input type="button" value="Clear" onclick="clearSearch()" />
+		</form>
+	</div>
+
+<!-- ----------- -->
+	<div>
+	Items in Inventory: [[${totalElements}]] - Page
+		[[${currentPage}]] of [[${totalPages}]] &nbsp;
+	</div>
+<!-- ----------- -->
+
+	<div>
+		<table class="table">
+			<tr>
+				<th>S/No.</th>
+				<th>Part Number</th>
+				<th>Supplier Name</th>
+				<!-- <th>Brand Id</th> -->
+				<th>Brand Name</th>
+				<th>Item Name</th>
+				<th>Description</th>
+				<th>Type</th>
+				<th>Category</th>
+				<th>Sub-Category</th>
+				<th>Original Price</th>
+				<th>Wholesale Price</th>
+				<th>Retail Price</th>
+				<th>Partner Price</th>
+				<th>Units</th>
+				<th
+					th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+					Edit Inventory</th>
+				<th
+					th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+					Delete Inventory</th>
+			</tr>
+			<tr th:each="inventory:${invList}" class="table-row">
+					<td th:text=${inventory.inventoryId}>Part Num</td>
+					<td th:text=${inventory.product.partNumber}>Product Id</td>
+					<td th:text=${inventory.supplierName}>Supplier name</td>
+					<!-- <td th:text=${inventory.brandId}>Brand Id</td> -->
+					<td th:text=${inventory.brandName}>Brand Name</td>
+					<td th:text=${inventory.itemName}>Item name</td>
+					<td th:text=${inventory.invdescription}>Description</td>
+					<td th:text=${inventory.invtype}>Type</td>
+					<td th:text=${inventory.category}>Category</td>
+					<td th:text=${inventory.subCategory}>Subcategory</td>
+					<td th:text=${inventory.originalPrice}>Original price</td>
+					<td th:text=${inventory.wholesalePrice}>Wholesale price</td>
+					<td th:text=${inventory.retailPrice}>Retail price</td>
+					<td th:text=${inventory.partnerPrice}>Partner price</td>
+					<td th:text=${inventory.units}>Units</td>
+					<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+						<a href="EditProduct.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
+					<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+						<a href="DeleteProduct.html" th:href="@{/inventory/delete/}+${inventory.inventoryId}">Delete</a></td>
+					<!-- <td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+						<a href="EditProduct.html" th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
+					<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
+						<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td> -->
+				</tr>
+			</table>
+	</div>
 	
-	<table class="table">
-		<tr>
-			<th>S/No.</th>
-			<th>Part Number</th>
-			<th>Supplier Name</th>
-			<!-- <th>Brand Id</th> -->
-			<th>Brand Name</th>
-			<th>Item Name</th>
-			<th>Description</th>
-			<th>Type</th>
-			<th>Category</th>
-			<th>Sub-Category</th>
-			<th>Original Price</th>
-			<th>Wholesale Price</th>
-			<th>Retail Price</th>
-			<th>Partner Price</th>
-			<th>Units</th>
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-			Edit Inventory</th>
-			<th th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-			Delete Inventory</th>
-		</tr>
-		<tr th:each="inventory:${inventories}" class="table-row">
-			<td th:text=${inventory.inventoryId}>Part Num</td>
-			<td th:text=${inventory.product.partNumber}>Product Id</td>
-			<td th:text=${inventory.supplierName}>Supplier name</td>
-			<!-- <td th:text=${inventory.brandId}>Brand Id</td> -->
-			<td th:text=${inventory.brandName}>Brand Name</td>
-			<td th:text=${inventory.itemName}>Item name</td>
-			<td th:text=${inventory.invdescription}>Description</td>
-			<td th:text=${inventory.invtype}>Type</td>
-			<td th:text=${inventory.category}>Category</td>
-			<td th:text=${inventory.subCategory}>Subcategory</td>
-			<td th:text=${inventory.originalPrice}>Original price</td>
-			<td th:text=${inventory.wholesalePrice}>Wholesale price</td>
-			<td th:text=${inventory.retailPrice}>Retail price</td>
-			<td th:text=${inventory.partnerPrice}>Partner price</td>
-			<td th:text=${inventory.units}>Units</td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="EditProduct.html" th:href="@{/inventory/edit/}+${inventory.inventoryId}">Edit</a></td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="DeleteProduct.html" th:href="@{/inventory/delete/}+${inventory.inventoryId}">Delete</a></td>
-			<!-- <td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="EditProduct.html" th:href="@{/product/edit/}+${product.partNumber}">Edit</a></td>
-			<td th:if="${not #lists.isEmpty(session.empsession) and (session.empsession.role == T(com.nus.invms.domain.RoleType).ADMIN)}">
-				<a href="DeleteProduct.html" th:href="@{/product/delete/}+${product.partNumber}">Delete</a></td> -->
-		</tr>
-	</table>
+	<!-- ----------- -->
+	
+	<div>&nbsp;</div>
+	<div>
+		<a th:if="${currentPage > 1}"
+			th:href="@{'/inventory/search/page/1' + ${keyword != null ? '?keyword=' + keyword : ''}}">First</a> <span th:unless="${currentPage > 1}">First</span>
+		&nbsp; &nbsp; 
+		<a th:if="${currentPage > 1}"
+			th:href="@{'/inventory/search/page/' + ${currentPage - 1} + ${keyword != null ? '?keyword=' + keyword : ''}}">Previous</a> <span th:unless="${currentPage > 1}">Previous</span>
+		&nbsp; &nbsp;
+
+		<!-- 		--- page number --- -->
+		<span th:each="i: ${#numbers.sequence(1, totalPages)}"> <a
+			th:if="${i != currentPage}"
+			th:href="@{'/inventory/search/page/' + ${i}} 
+			+ ${keyword != null ? '?keyword=' + keyword : ''}">[[${i}]]</a>
+			<!-- so that current page shown won't have hyperlink --> <span
+			th:unless="${i != currentPage}">[[${i}]]</span> 
+			&nbsp; &nbsp;
+		</span>
+		 &nbsp; &nbsp; 
+		 <a
+			th:if="${currentPage < totalPages}"
+			th:href="@{'/inventory/search/page/' + ${currentPage + 1}
+			+ ${keyword != null ? '?keyword=' + keyword : ''}}">Next</a> 
+			<span
+				th:unless="${currentPage < totalPages}">Next</span> 
+				&nbsp; &nbsp;
+		<a th:if="${currentPage < totalPages}"
+			th:href="@{'/inventory/search/page/' + ${totalPages}
+			+ ${keyword != null ? '?keyword=' + keyword : ''}}">Last</a> 
+			<span
+			th:unless="${currentPage < totalPages}">Last</span>
+
+	</div>
+	
+	<!-- ----------- -->
     <br/>
 	<div th:replace="fragments/general.html :: footer"></div>
 	<script type="text/javascript">

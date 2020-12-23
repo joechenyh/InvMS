@@ -2,14 +2,15 @@ package com.nus.invms.service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nus.invms.domain.Inventory;
-import com.nus.invms.domain.PartUsage;
 import com.nus.invms.repo.InventoryRepository;
 
 @Service
@@ -29,14 +30,22 @@ public class InventoryServiceImpl implements InventoryService {
 
 		}
 	
+//	@Transactional
+//	public List<Inventory> searchAllInventories(String keyword){
+//		if(keyword !=null) {
+//			return irepo.searchInventoryItem(keyword);
+//		}
+//		return (ArrayList<Inventory>) irepo.findAll();
+//	}
 	@Transactional
-	public List<Inventory> searchAllInventories(String keyword){
-		if(keyword !=null) {
-			return irepo.searchInventoryItem(keyword);
+	public Page<Inventory> searchInventory(int pageNumber, String keyword) {
+		int pageElements = 5;
+		Pageable pageable = PageRequest.of(pageNumber - 1, pageElements);
+		if (keyword != null) {
+			return irepo.searchInventoryItem(keyword, pageable);
 		}
-		return (ArrayList<Inventory>) irepo.findAll();
+		return irepo.findAll(pageable);
 	}
-	
 
 	@Override
 	@Transactional
@@ -61,11 +70,7 @@ public class InventoryServiceImpl implements InventoryService {
 		return currentinventory;
 	}
 
-//	@Override
-//	@Transactional
-//	public List<Inventory> listInventory() {
-//		return irepo.findAll();
-//	}
+
 	
 	@Transactional
 	public ArrayList<Inventory> findAllInventories() {
@@ -77,10 +82,6 @@ public class InventoryServiceImpl implements InventoryService {
 		irepo.save(inventory);
 	}
 
-//	@Override
-//	public List<Inventory> listCompleteInventory() {
-//		return irepo.findAll();
-//	}
 
 	@Override
 	public void updateInventory(Inventory inventory) {
@@ -124,23 +125,6 @@ public class InventoryServiceImpl implements InventoryService {
 		}
 		return isearch;
 	}
-	
-//	Bottom part to create? 
-
-/*	public ArrayList<Inventory> findBySupplierNameLike(String name) {
-		return (ArrayList<Inventory>) irepo.findBySupplierName(name);
-	}
-
-	public Inventory findByBrandId(Integer bid) {
-		return irepo.findByBrandId(bid);
-	}
-
-	public ArrayList<Inventory> findByBrandNameLike(String bname) {
-		ArrayList<Inventory> bnlist = (ArrayList<Inventory>) irepo.findByBrandNameLike(bname);
-		return bnlist;
-	}
-
-*/
 
 
 }
