@@ -109,11 +109,13 @@
 				<option th:each="typeOpt : ${T(com.nus.invms.domain.OrderType).values()}" 
         th:value="${typeOpt}" th:text="${typeOpt}"></option>
 			</select>
+			<p style="color:red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
 		</fieldset>
 		
 		<fieldset>
 			Status <select th:field="*{status}" id="order_status">
 			</select> 
+			<p style="color:red" th:if="${#fields.hasErrors('status')}" th:errors="*{status}"></p>
 		</fieldset>
 		
 		<fieldset>

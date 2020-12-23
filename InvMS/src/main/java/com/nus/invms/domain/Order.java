@@ -29,7 +29,7 @@ public class Order {
 	@Id    
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int orderId;
-	
+	@NotNull
 	@DateTimeFormat (pattern="yyyy-MM-dd")
 	private LocalDate orderDate;
 
@@ -44,8 +44,9 @@ public class Order {
 	@Nullable
 	private int quantityReceived;
 
-
+	@NotNull
 	private OrderType type;
+	@NotNull
 	private OrderStatus status;
 
 	
