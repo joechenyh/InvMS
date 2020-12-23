@@ -103,6 +103,18 @@ public class PartUsageController {
 		return "usageByDate";
 	}
 	
+	
+	@GetMapping("/usagereport")
+	public String report(Model model, @Param("fromDate") String fromDate, @Param("toDate") String toDate, @Param("pnumber") Integer pnumber) {
+		List<PartUsage> report = puservice.findByDateAndPartNumber(fromDate, toDate, pnumber);
+		model.addAttribute("report", report);
+		model.addAttribute("fromDate", fromDate);
+		model.addAttribute("toDate", toDate);
+		model.addAttribute("pnumber", pnumber);
+		return "usagereport";
+	}
+	
+	
 	@RequestMapping(value = "/add")
 	public String addForm(Model model) {
 		model.addAttribute("usage", new PartUsage());

@@ -1,6 +1,5 @@
 package com.nus.invms.service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import com.nus.invms.domain.PartUsage;
@@ -17,6 +16,6 @@ public interface PartUsageService {
 //	public List<PartUsage> findByUsagedateBetween(LocalDate d1, LocalDate d2);
 	public List<PartUsage> findByUsagedateBetween(String d1, String d2);
 	public PartUsage findByTransactionId(Integer tid);
-
+	public List<PartUsage> findByDateAndPartNumber(String d1, String d2, Integer pnum);
 
 }

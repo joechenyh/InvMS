@@ -16,24 +16,22 @@
 	<a href="list.html" th:href="@{/partusage/list}">Back to Part Usage Transaction List</a>
 	&nbsp;&nbsp;
 	<a href="PartNumberFilter.html" th:href="@{/partusage/partnumberfilter}">Search by Part Number</a>
+	&nbsp;&nbsp;
+	<a href="usagereport.html" th:href="@{/partusage/usagereport}">Generate Usage History Report</a>
 	
 
 	<h2>Filter by:</h2>
 	<form th:action="@{/partusage/datefilter}" method="get">
 		<fieldset>
-			<p>From:</p>
-			<input type="date" name="fromDate" id="fromDate"
+			From: <input type="date" name="fromDate" id="fromDate"
 				th:value="${fromDate}" required /> &nbsp;&nbsp;
-			<p>To:</p>
-			<input type="date" name="toDate" id="toDate" th:value="${toDate}"
+							To: <input type="date" name="toDate" id="toDate" th:value="${toDate}"
 				required /> &nbsp;
 		</fieldset>
 		<fieldset>
 			<button type="submit">Filter by date</button>
+			&nbsp; <input type="button" value="Clear" onclick="clearFilter()" />
 		</fieldset>
-		<fieldset>
-				&nbsp; <input type="button" value="Clear" onclick="clearFilter()" />
-				</fieldset>
 	</form>
 
 
