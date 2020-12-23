@@ -17,7 +17,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class PartUsage {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotNull
 	private Integer transactionId;
 
 	@OneToOne
