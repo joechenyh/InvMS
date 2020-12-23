@@ -617,7 +617,7 @@ public class OrderController {
 						iservice.deactivateInventory(inventory);
 						Product product = pdtservice.findProductById(partNum);
 						String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach 0. Time to replenish.";
-						//nservice.sendNotification(msg);
+						nservice.sendNotification(mail);
 						
 					}
 					else 
@@ -626,7 +626,7 @@ public class OrderController {
 						int reorderlvl = product.getReorderLevel();
 						if(newQuantity<reorderlvl) {
 							String mail = "Product " + product.getProductName() + " Part Number: " + product.getPartNumber() + " has reach below reorder level. Time to replenish.";
-							//nservice.sendNotification(msg);
+							nservice.sendNotification(mail);
 						}
 						inventory.setUnits(newQuantity);
 						iservice.updateInventory(inventory);
