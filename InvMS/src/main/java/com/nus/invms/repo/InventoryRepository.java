@@ -61,6 +61,10 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 				 nativeQuery = true)
 			public List<Inventory> searchInventoryItem(@Param("keyword") String keyword);
 	
+	 @Query("Select i from Inventory i where i.supplier.supplierId = :supplierId")
+	 public List<Inventory> findInventoryBySupplier(int supplierId);
+	 
 }
+
 
 

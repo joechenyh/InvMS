@@ -24,8 +24,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 //		public Product findProductByName(@Param("productName") String productName);
 //		
 //		//2. Find Inventory by partNumber
-//		 @Query("Select p FROM Product p WHERE p.partNumber = :partNumber")
-//	public Product findProductByPartNumber(@Param("partNumber") int partNumber);
+		 @Query("Select p FROM Product p WHERE p.partNumber = :partNumber")
+	public Product findProductByPartNumber(@Param("partNumber") int partNumber);
 //		
 //		 //3. Find Inventory by Manufacturer
 //		 @Query("Select p FROM Product p WHERE p.manufacturer = :manufacturer")
