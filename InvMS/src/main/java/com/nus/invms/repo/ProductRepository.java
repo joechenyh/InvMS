@@ -48,8 +48,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 			 nativeQuery = true)
 		public Product findProductByName(@Param("keyword") String keyword);
 	
-	 @Query("Select p FROM Product p WHERE p.partNumber = :partNumber")
-		public Product findProductByPartNumber(@Param("partNumber") int partNumber);
+//	@Query("Select p FROM Product p WHERE p.shelfLocation = :shelfLocation")
+//		public ArrayList<Product> findAllActiveProduct();
 		
 
 }
