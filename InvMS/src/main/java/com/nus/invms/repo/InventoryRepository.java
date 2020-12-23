@@ -1,5 +1,7 @@
 package com.nus.invms.repo;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -40,6 +42,8 @@ public interface InventoryRepository extends JpaRepository<Inventory, Integer>
 //				 nativeQuery = true)
 //			public List<Inventory> searchInventoryItem(@Param("keyword") String keyword);
 
+	 @Query("Select i from Inventory i where i.supplier.supplierId = :supplierId")
+	 public List<Inventory> findInventoryBySupplier(int supplierId);
 	
 }
 
