@@ -344,5 +344,66 @@ public class InventoryController {
 		//System.out.println(productInfo.get(1));
 		return supplierInfo;
 	}
+	
+	@RequestMapping(value = "/confirmedit")
+	public String confirmEditInventory(@ModelAttribute("inventory") @Valid Inventory inventory, 
+		BindingResult bindingResult,  Model model) {
+		
+		String msg;
+		
+
+		if (bindingResult.hasErrors()) 
+			 
+		{	
+			//model.addAttribute("message",msg);
+			ArrayList<Product> plist = pservice.findAllProducts();
+			model.addAttribute("products",plist);
+			//model.addAttribute("inventory", new Inventory());
+			//System.out.println("!!!" + msg);
+			model.addAttribute("inventory", inventory);
+			ArrayList<Product> pList = new ArrayList<Product>();
+			ArrayList<Product> pList2 = new ArrayList<Product>();
+			pList = (ArrayList<Product>) pservice.findAllProducts();
+			for (Iterator<Product> iterator = pList.iterator(); iterator.hasNext();) {
+				Product product = iterator.next();
+				if(product.getStatus().toString()=="ACTIVE") {
+					System.out.println("!!!!" + product);
+					pList2.add(product);
+				}
+				
+			}
+			model.addAttribute("products",pList2);
+			ArrayList<Supplier> sList = new ArrayList<Supplier>();
+			ArrayList<Supplier> sList2 = new ArrayList<Supplier>();
+			sList = (ArrayList<Supplier>) supservice.listAllSuppliers();
+			System.out.println("!!!!" + "supplier");
+			for (Iterator<Supplier> iterator = sList.iterator(); iterator.hasNext();) 
+			{
+				Supplier supplier = iterator.next();
+				if(supplier.getStatus().toString()=="ACTIVE") 
+				{
+					System.out.println("!!!!" + supplier);
+					sList2.add(supplier);
+				}
+				model.addAttribute("suppliers",sList2);
+			}
+			
+			return "editInventory";
+		}
+		else 
+		{
+			
+			int pdtPartNum = inventory.getProduct().getPartNumber();
+			int supId = inventory.getSupplier().getSupplierId();
+			Product product = pservice.findProductById(pdtPartNum);
+			inventory.setItemName(product.getProductName());
+			Supplier supplier = supservice.findById(supId);
+			inventory.setSupplierName(supplier.getSupplierName());
+			invservice.addInventory(inventory);
+			return "forward:/inventory/list";
+		}
+		
+		
+	}
 }
 
